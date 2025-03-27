@@ -1,0 +1,36 @@
+<mujoco model="monoped">
+    <compiler angle="degree" coordinate="global" inertiafromgeom="true"/>
+    <default>
+        <joint armature="0.01" damping="1"/>
+        <geom conaffinity="1" condim="1" contype="1" margin="0.001" rgba="0.8 0.6 .4 1"/>
+    </default>
+    <option integrator="RK4" timestep="0.002"/>
+
+    <worldbody>
+        <!-- Torso of the monoped (box-shaped) -->
+        <body name="torso" pos="0 0 1.25">
+            <!-- Root joint of the torso (the base of the monoped) -->
+            <joint name="rootx" axis="1 0 0" type="slide" pos="0 0 0"/>
+            <joint name="rooty" axis="0 1 0" type="hinge" pos="0 0 0"/>
+            <joint name="rootz" axis="0 0 1" type="slide" pos="0 0 0"/>
+            <!-- Torso as a box -->
+            <geom name="torso_geom" size="0.1 0.2 0.05" type="box"/>
+
+            <!-- Leg of the monoped (cylinder-shaped) -->
+            <body name="leg" pos="0 0 -0.25"> <!-- Position relative to the torso -->
+                <!-- Joint at the hip connecting torso and leg -->
+                <joint name="hip" axis="0 1 0" type="hinge" pos="0 0 0"/> 
+                <!-- Leg as a cylinder, the base is at (0,0,0) and extends downwards -->
+                <geom name="leg_geom" size="0.05" type="cylinder" fromto="0 0 0 0 0 -0.5"/>
+
+                <!-- Foot part of the leg (cylinder-shaped) -->
+                <body name="foot" pos="0 0 -0.5"> <!-- Position relative to the leg -->
+                    <!-- Joint at the foot connecting foot and leg -->
+                    <joint name="foot_joint" axis="0 1 0" type="hinge" pos="0 0 0"/>
+                    <!-- Foot as a cylinder, extends downward from the leg -->
+                    <geom name="foot_geom" size="0.05" type="cylinder" fromto="0 0 0 0 0 -0.25"/>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+</mujoco>

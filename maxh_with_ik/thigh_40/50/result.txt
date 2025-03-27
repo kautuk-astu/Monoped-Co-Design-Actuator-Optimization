@@ -1,0 +1,5 @@
+termination on maxiter=40 (Thu Feb 27 17:22:02 2025)
+final/bestever f-value = 4.389457e+01 3.158691e+01 after 361/176 evaluations
+incumbent solution: [np.float64(56.93426700514064), np.float64(0.5142548557070528), np.float64(0.6849962679223622), np.float64(4.108258598898098), np.float64(9.995733949986038), np.float64(0.9685717755815962)]
+std deviation: [np.float64(1.4256701797483937), np.float64(0.1363846510927265), np.float64(0.691285712132961), np.float64(3.256856910387269), np.float64(1.1293024446444375), np.float64(0.18774929502240953)]
+max height - 0.91m, very reproducible 

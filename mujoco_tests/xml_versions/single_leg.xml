@@ -1,0 +1,117 @@
+<mujoco model="stoch25_description">
+    <compiler angle="radian" meshdir="meshes" eulerseq="xyz" balanceinertia="true" />
+    <option solver="Newton" integrator="RK4" gravity="0 0 -9.81" timestep="0.0001" cone="elliptic" iterations="50" impratio="2" tolerance="1e-10" />
+    
+    <size njmax="500" nconmax="100" />
+
+    <equality>
+        <weld body1="slot" />
+        <!-- <weld body2="base" /> -->
+    </equality>
+
+    <asset>
+        <material name="collision" rgba="0.1 0.5 0.9 0" />           
+        <material name="obstacle" rgba="0.2 0.6 0.2 1" />   
+
+        <mesh name="slot" file="/home/stochlab/Aastha_pybullet/test_pb/meshes/meshes/slot_link.STL" scale="1 1 1" />        
+        <mesh name="base" file="/home/stochlab/Aastha_pybullet/test_pb/meshes/meshes/base_Link.STL" scale="1 1 1" />
+        <mesh name="flh" file="/home/stochlab/Aastha_pybullet/test_pb/meshes/meshes/hip_Link.STL" scale="1 1 1" />
+        <mesh name="flk" file="/home/stochlab/Aastha_pybullet/test_pb/meshes/meshes/knee_Link.STL" scale="1 1 1" />
+        <mesh name="flf" file="/home/stochlab/Aastha_pybullet/test_pb/meshes/meshes/slider_foot_Link.STL" scale="1 1 1" />       
+        <mesh name="flfix" file="/home/stochlab/Aastha_pybullet/test_pb/meshes/meshes/fix_foot_Link.STL" scale="1 1 1" />
+
+       
+ 	    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512" />
+        <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512" mark="cross" markrgb=".8 .8 .8" />
+        <texture name="texgeom" type="cube" builtin="flat" mark="cross" width="127" height="1278" rgb1="0.8 0.6 0.4" rgb2="0.8 0.6 0.4" markrgb="1 1 1" random="0.01" />
+        <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true" />
+        <material name="matgeom" texture="texgeom" texuniform="true" rgba="0.8 0.6 .4 1" />
+    </asset>
+
+    <actuator>
+        <position name="base_joint" kp="0" joint="base_joint" />
+        <motor name="FL_hip_joint" gear="1" joint="FL_hip_joint" ctrllimited="true" ctrlrange="-6 6" forcelimited="true" forcerange="-6 6"/>
+        <motor name="FL_knee_joint" gear="1" joint="FL_knee_joint" ctrllimited="true" ctrlrange="-6 6" forcelimited="true" forcerange="-6 6"/>
+<!-- 
+        <position name="FL_foot_joint" kp="3000" joint="FL_foot_joint" forcelimited="true" forcerange="-600 600" ctrllimited="true" ctrlrange="-600 600" />
+
+        <position name="FL_foot_joint" kp="1000" joint="FL_foot_joint" forcelimited="true" forcerange="-600 600" ctrllimited="true" ctrlrange="-600 600" /> -->
+
+        
+        <motor name="FL_foot_joint" gear="1" joint="FL_foot_joint" />
+
+
+    </actuator>
+
+    <default>
+        <joint limited="true" damping="1" />
+        <geom contype="0" conaffinity="0" condim="1" solref="0.005 1" />
+        <!-- <motor forcelimited="true" forcerange="-6 6" ctrllimited="true" ctrlrange="-6 6" gear="1" />         -->
+        <equality solref="0.005 1" />
+        <default class="collision">
+            <geom material="collision" contype="1" user="2" />
+            <default class="collision-left">
+                <geom contype="2" conaffinity="4" />
+            </default>
+            <default class="collision-right">
+                <geom contype="4" conaffinity="2" />
+            </default>
+        </default>
+        <default class="obstacle">
+            <geom material="obstacle" condim="3" contype="8" conaffinity="15" user="1" />
+        </default>
+    </default>
+ 
+    <worldbody>
+	<geom name="floor" pos="0 0 0" size="0 0 .25" type="plane" material="matplane" condim="3" conaffinity="15" friction="1 1 1" />
+	<light directional="false" diffuse=".2 .2 .2" specular="0 0 0" pos="0 0 5" dir="0 0 -1" castshadow="false" />       
+        
+        <light mode="targetbodycom" target="slot" directional="false" diffuse=".8 .8 .8" specular="0.3 0.3 0.3" pos="0 0 4.0" dir="0 0 -1" />
+        <body name="slot" pos="0 0 0.34" euler="0 0 0">
+		<freejoint name="root" />
+            <inertial pos="1.4485E-05 0 0.16127" quat="0 0 0 1" mass="3.00" diaginertia="0.044062 0.044343 0.00032708" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="1 0.423529 0.0392157 1" mesh="slot" quat="0 0 0 1" />
+            <geom class="collision" size="0.105 0.195 0.035" pos="0 -0.005 0" type="box" rgba="1 0.423529 0.0392157 0" group="2" />            
+
+            <body name="base" pos="0 -0.108 0.054" euler="0 0 3.14">
+                <inertial pos="-1.9883E-05 -0.056007 -0.027565" quat="0 0 0 1" mass="0.800" diaginertia="0.00035155 0.0016709 0.0013474" />
+                <joint name="base_joint" pos="0 0 0" type="slide" axis="0 0 1" limited="true" range="-0.35 0.05" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.0 0.0 0.0 1" mesh="base" />
+                <geom class="collision" size="0.0235 0.082 0.022" pos="0.025 -0.072 0" quat="0 0 0 1" type="box" rgba="0.2 0 0 0" group="2" />
+
+                <body name="FL_hip" pos="0 -0.031 -0.054" euler="0 0 0">
+                    <inertial pos="-2.498E-14 -0.070952 -0.079802" quat="0 0 0 1" mass="0.080" diaginertia="7.7478E-05 7.7478E-05 4.3389E-06" />
+                    <joint name="FL_hip_joint" pos="0 0 0" axis="0 1 0" limited="true" range="0 1.57" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="1.0 0.27 0.0 1" mesh="flh" />
+                    <geom class="collision" size="0.0235 0.082 0.172" pos="0.025 -0.072 0" quat="0 0 0 0.5" type="box" rgba="0.2 0 0 0" group="2" />
+                    
+                    <body name="FL_knee" pos="0 -0.08725 -0.17" euler="0 0 0">
+                        <inertial pos="0.00081796 0.016214 -0.064659" quat="0 0 0 1" mass="0.046" diaginertia="7.7478E-05 7.7478E-05 4.3389E-06" />
+                        <joint name="FL_knee_joint" pos="0 0 0" axis="0 1 0" limited="true" range="-3.14 0" />
+                        <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.0 0.0 0.0 1" mesh="flk" />
+                        <geom class="collision-right" size="0.013 0.03 0.1248" pos="0 0 -0.0525" quat="0 0 0 0.5" type="box" rgba="0.2 0 0 1" group="2" />
+                    
+                        <body name="FL_foot" pos="0 0.01625 -0.142" euler="0 0 0">
+                            <inertial pos="-2.7756E-17 0 -0.013823" quat="0 0 0 1" mass=".015" diaginertia="7.1163E-07 7.5201E-07 8.6006E-07" />
+                            <!-- <joint name="FL_foot_joint" type="slide" pos="0 0 0" axis="0 0 1" limited="true" range="0 0.012" damping="2" /> -->
+                            <joint name="FL_foot_joint" type="slide" pos="0 0 0" axis="0 0 1" limited="true" range="0 0.012"  />
+                            <geom name="FL_foot_geom" contype="0" conaffinity="0" group="1" rgba="1.0 1.0 1.0 1" type="mesh" mesh="flf" />
+                            <geom class="collision" size="0.005 0.027" pos="0 0 0" quat="0 0 0 1" type="cylinder" rgba="0.2 0 0 0" group="2" condim="3" />
+
+                            <body name="FL_fix" pos="0 0 -0.013" euler="0 0 0">
+                                <inertial pos="-9.992E-15 7.8826E-15 -0.0076264" quat="0 0 0 1" mass="0.006" diaginertia="7.0839E-08 7.0839E-08 1.1334E-07" />
+                                <geom name="FL_fix_geom" contype="0" conaffinity="0" group="1" rgba="0.913725 0.913725 0.847059 1" type="mesh" mesh="flfix" />
+                                <geom class="collision-left" size="0.016" pos="0 0 0" quat="0 0 0 1" type="sphere" rgba="0.2 0 0 0" group="2" condim="3" />
+                            </body>
+                        </body>                    
+                    </body>
+                </body> 
+            </body>
+        </body>
+    </worldbody> 
+
+
+    <keyframe>
+        
+    </keyframe>
+</mujoco>

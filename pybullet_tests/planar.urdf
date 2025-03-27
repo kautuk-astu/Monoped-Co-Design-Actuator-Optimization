@@ -1,0 +1,103 @@
+<?xml version="1.0"?> <!--All distances in m-->
+<robot name="single_legged_robot">
+
+
+  <link name = "world"/>
+
+  <!-- Base (top part of the robot) -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0.05 0.05 0.025" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.10 0.10 0.05"/> <!-- A box-shaped base -->
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <origin xyz="0.05 0.05 0.025" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.10 0.10 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.05 0.05 0.025" rpy="0 0 0"/>  <!--WRT the link origin-->
+      <mass value="2"/> <!--kg-->
+      <inertia ixx="0.0008333" ixy="0.0" ixz="0.0" iyy="0.0008333" iyz="0.0" izz="0.0000011"/>
+    </inertial>
+  </link>
+
+  <link name="thigh_link">
+    <visual>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.025"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 0.8 .8 1"/>   <!--changed from blue in calf trial to green-->
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.2"/>  <!--modified from cylinder shape-->
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <mass value="0.8"/>  <!--taken from Pramod's xml-->
+      <inertia ixx="0.0000005" ixy="0.0" ixz="0.0" iyy="0.0000005" iyz="0.0" izz="0.000025"/>
+    </inertial>
+  </link>
+
+  <link name="calf_link">
+    <visual>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.025"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 .8 1"/>    <!--changed from blue in calf trial to green-->
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.2"/>  <!--modified from cylinder shape-->
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+      <mass value="0.8"/>  <!--taken from Pramod's xml-->
+      <inertia ixx="0.0000005" ixy="0.0" ixz="0.0" iyy="0.0000005" iyz="0.0" izz="0.000025"/>
+    </inertial>
+  </link>
+
+  
+  <joint name="planar_joint" type="planar">
+    <parent link="world"/> <!-- The robot's base is attached to the world -->
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/> <!-- Movement along Z-axis (up-down) -->
+    <limit lower="0.0" upper="10.0" effort="0.0" velocity="1.0"/> 
+    <dynamics damping="0.0" friction="0.0"/><!-- Limits for the jumping action -->
+  </joint>
+
+  
+  <joint name="hip_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="thigh_link"/>
+    <origin xyz="0.05 0.05 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.57" upper="1.57" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <joint name="knee_joint" type="revolute">
+    <parent link="thigh_link"/>
+    <child link="calf_link"/>
+    <origin xyz="0 0 -0.2" rpy="0 0 0"/>  <!-- WRT the link frame of thigh link -->
+    <axis xyz="1 0 0"/>
+    <limit lower="-1.57" upper="1.57" effort="10.0" velocity="1.0"/>
+  </joint>
+
+
+</robot>
