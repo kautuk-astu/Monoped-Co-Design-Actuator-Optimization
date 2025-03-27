@@ -105,7 +105,7 @@ def get_reward(action, log_file, mode_data_file):
     action = denormalize(action)
     action = np.round(action, 2)
     for run_id in range(num_runs):  
-        base_height_store, height_reward, te, he, ke = rcp.run("modified_robot.xml", action,mass,ik_value)
+        base_height_store, height_reward, te, he, ke = rcp.run("modified_robot.xml", action,mass,ik_value) #add
         base_max = np.round(np.max(base_height_store), 1)
         te = int(round(te))
 
