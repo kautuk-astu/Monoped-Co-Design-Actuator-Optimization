@@ -137,10 +137,10 @@ def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modifie
     height_counter = Counter(height_values)
     mode_height = max(height_counter, key=lambda x: (height_counter[x], x))
     mode_energy_values = [energy for height, energy in zip(height_values, energy_values) if height == mode_height]
-    avg_energy = int(np.mean(mode_energy_values)) if mode_energy_values else 0
+    avg_energy = np.mean(mode_energy_values) if mode_energy_values else 0
     # Compute final cost
-    height_cost = 100 * np.exp(-mode_height)
-    final_cost = int(height_cost + (1/2) * avg_energy)
+    height_cost = 5* np.exp(-mode_height)
+    final_cost = np.round((height_cost + (1/2) * avg_energy),1)
     # print(f"Running for Thigh Length: {thigh_length}, Calf Length: {calf_length}")
     # print(f"Using XML: {modified_xml}, Mass: {mass}, IK Value: {ik_value}")
 
@@ -171,7 +171,7 @@ def optimize_for_design(thigh_length, calf_length):
     sigma0 = 0.2
     opts = cma.CMAOptions()
     opts.set({
-        'tolfun': 2, 'tolx': 0.001, 'maxiter': 10, 'popsize': 6, 'seed': 42,
+        'tolfun': 0.005, 'tolx': 0.001, 'maxiter': 10, 'popsize': 5, 'seed': 42,
         'bounds': [([0,0,0,0,0,0]), ([1,1,1,1,1,1])]
     })
     opts.set({'verb_disp': 1000})
