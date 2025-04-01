@@ -94,6 +94,25 @@ def modify_link_length(xml_file, link_name, new_length, axis='z', output_file="m
     tree.write(output_file)
     print(f"Modified XML saved: {output_file}")
 
+def process_action(action):
+    """Applies selective rounding to an action before passing it to get_reward."""
+    action = action.copy()  # Ensure the original action is not modified
+    # Convert selected parameters to integers
+    #action[0] = round(action[0])  # First parameter
+    action[2] = round(action[2])  # Third parameter
+    action[3] = round(action[3])  # Fourth parameter
+    action[4] = round(action[4])  # Fifth parameter
+
+    # Round the rest to one decimal place
+    for i in range(len(action)):
+        if i not in [2, 3, 4]:  # Skip integer indices
+            action[i] = np.round(action[i], 1)
+
+    # Convert integer values explicitly to int type
+    return [int(p) if i in [2, 3, 4] else p for i, p in enumerate(action)]
+
+
+
 # Function to compute cost (Runs controller 5 times per action)
 def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modified_xml):     
     num_runs = 5
@@ -104,13 +123,13 @@ def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modifie
     mass, ik_value = mass_ik_dict[(round(thigh_length, 3), round(calf_length, 3))]
     action = denormalize(action)
     #action = np.round(action, 2)
-    action = np.round(action).astype(int)
+    action = process_action(action)  # Process the action for selective rounding
     for run_id in range(num_runs):  
         #base_height_store, height_reward, te, he, ke,max_height_after_control = rcp.run(modified_xml, action,mass,ik_value)
         max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy = rcp.run(modified_xml, action, mass, ik_value)
         #base_max = np.round(np.max(base_height_store), 1)
         base_max = np.round(max_height_after_control,1)
-        te = int(round(max_jump_energy))
+        te = np.round((max_jump_energy),1)
         height_values.append(base_max)
         energy_values.append(te)
         run_entries.append([run_id + 1, base_max, te] + list(action))
@@ -119,7 +138,7 @@ def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modifie
     height_counter = Counter(height_values)
     mode_height = max(height_counter, key=lambda x: (height_counter[x], x))
     mode_energy_values = [energy for height, energy in zip(height_values, energy_values) if height == mode_height]
-    avg_energy = np.mean(mode_energy_values) if mode_energy_values else 0
+    avg_energy = int(np.mean(mode_energy_values)) if mode_energy_values else 0
     # Compute final cost
     height_cost = 100 * np.exp(-mode_height)
     final_cost = int(height_cost + (1/2) * avg_energy)
@@ -175,7 +194,8 @@ def optimize_for_design(thigh_length, calf_length):
 
     while not es.stop():
         solutions = es.ask()
-        rounded_solutions = [np.round(sol).astype(int) for sol in solutions]  # Convert to integers
+        #rounded_solutions = [np.round(sol).astype(int) for sol in solutions]  # Convert to integers
+        rounded_solutions = [process_action(sol) for sol in solutions]
         rewards = [get_reward(action, log_file, mode_data_file, thigh_length, calf_length, modified_xml) for action in rounded_solutions]
         #es.tell(rounded_solutions, rewards)
         best_index = np.argmin(rewards)  
@@ -186,7 +206,7 @@ def optimize_for_design(thigh_length, calf_length):
             writer.writerow([es.countiter, best_cost] + list(best_params))
         print("Iteration", es.countiter, "Best Cost =", best_cost)
 
-    best_params = np.round(es.result.xbest).astype(int)  # Ensure best actions are integers
+    best_params = es.result.xbest.copy() # Process the best parameters for selective rounding
     best_cost = get_reward(best_params, log_file, mode_data_file, thigh_length, calf_length, modified_xml)
 
     with open(best_results_file, "a", newline="") as file:
