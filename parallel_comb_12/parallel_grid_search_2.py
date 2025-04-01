@@ -99,17 +99,16 @@ def process_action(action):
     action = action.copy()  # Ensure the original action is not modified
     # Convert selected parameters to integers
     #action[0] = round(action[0])  # First parameter
-    action[2] = round(action[2])  # Third parameter
-    action[3] = round(action[3])  # Fourth parameter
-    action[4] = round(action[4])  # Fifth parameter
+    # action[2] = round(action[2])  # Third parameter
+    # action[3] = round(action[3])  # Fourth parameter
+    # action[4] = round(action[4])  # Fifth parameter
 
     # Round the rest to one decimal place
-    for i in range(len(action)):
-        if i not in [2, 3, 4]:  # Skip integer indices
+    for i in range(len(action)):  # Skip integer indices
             action[i] = np.round(action[i], 1)
 
     # Convert integer values explicitly to int type
-    return [int(p) if i in [2, 3, 4] else p for i, p in enumerate(action)]
+    return action
 
 
 
