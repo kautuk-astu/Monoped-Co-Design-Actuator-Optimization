@@ -6,66 +6,10 @@ import rcp
 import csv
 from collections import Counter
 import multiprocessing
-remaining_combinations = [
-    (0.400, 0.425),
-    (0.400, 0.450),
-    (0.400, 0.500),
-    (0.400, 0.525),
-    (0.400, 0.575),
-    (0.400, 0.600),
-    (0.425, 0.425),
-    (0.425, 0.450),
-    (0.425, 0.500),
-    (0.425, 0.525),
-    (0.425, 0.575),
-    (0.425, 0.600),
-    (0.450, 0.425),
-    (0.450, 0.450),
-    (0.450, 0.500),
-    (0.450, 0.525),
-    (0.450, 0.575),
-    (0.450, 0.600),
-    (0.475, 0.425),
-    (0.475, 0.450),
-    (0.475, 0.500),
-    (0.475, 0.525),
-    (0.475, 0.575),
-    (0.475, 0.600),
-    (0.500, 0.425),
-    (0.500, 0.450),
-    (0.500, 0.500),
-    (0.500, 0.525),
-    (0.500, 0.575),
-    (0.500, 0.600),
-    (0.525, 0.425),
-    (0.525, 0.450), 
-    (0.525, 0.500),
-    (0.525, 0.525),
-    (0.525, 0.575),
-    (0.525, 0.600),
-    (0.550, 0.425),
-    (0.550, 0.450),
-    (0.550, 0.500),
-    (0.550, 0.525),
-    (0.550, 0.575),
-    (0.550, 0.600),
-    (0.575, 0.425),
-    (0.575, 0.450),
-    (0.575, 0.500),
-    (0.575, 0.525),
-    (0.575, 0.575),
-    (0.575, 0.600),
-    (0.600, 0.425),
-    (0.600, 0.450),
-    (0.600, 0.500),
-    (0.600, 0.525),
-    (0.600, 0.575),
-    (0.600, 0.600)
-
-]
-
-
-remaining_combinations = list(remaining_combinations)
+thigh_lengths = np.linspace(0.400, 0.600, 9)  #both inclusive
+calf_lengths = np.linspace(0.400, 0.600, 9)
+print(thigh_lengths)
+print(calf_lengths)
 
 
 xml_template = "template_robot.xml"
@@ -159,15 +103,17 @@ def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modifie
     mass_ik_dict = load_mass_ik_values("mass_ik_values.csv")
     mass, ik_value = mass_ik_dict[(round(thigh_length, 3), round(calf_length, 3))]
     action = denormalize(action)
-    action = np.round(action, 2)
+    #action = np.round(action, 2)
+    action = np.round(action).astype(int)
     for run_id in range(num_runs):  
-        base_height_store, height_reward, te, he, ke,max_height_after_control = rcp.run(modified_xml, action,mass,ik_value)
+        #base_height_store, height_reward, te, he, ke,max_height_after_control = rcp.run(modified_xml, action,mass,ik_value)
+        max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy = rcp.run(modified_xml, action, mass, ik_value)
         #base_max = np.round(np.max(base_height_store), 1)
         base_max = np.round(max_height_after_control,1)
-        te = int(round(te))
+        te = int(round(max_jump_energy))
         height_values.append(base_max)
         energy_values.append(te)
-        run_entries.append([run_id + 1, base_max, te, he, ke] + list(action))
+        run_entries.append([run_id + 1, base_max, te] + list(action))
 
     # Compute mode height & average energy
     height_counter = Counter(height_values)
@@ -176,9 +122,9 @@ def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modifie
     avg_energy = np.mean(mode_energy_values) if mode_energy_values else 0
     # Compute final cost
     height_cost = 100 * np.exp(-mode_height)
-    final_cost = height_cost + (1/3) * avg_energy
-    print(f"Running for Thigh Length: {thigh_length}, Calf Length: {calf_length}")
-    print(f"Using XML: {modified_xml}, Mass: {mass}, IK Value: {ik_value}")
+    final_cost = int(height_cost + (1/2) * avg_energy)
+    # print(f"Running for Thigh Length: {thigh_length}, Calf Length: {calf_length}")
+    # print(f"Using XML: {modified_xml}, Mass: {mass}, IK Value: {ik_value}")
 
     # Log individual runs in separate file
     with open(log_file, "a", newline="") as file:
@@ -207,7 +153,7 @@ def optimize_for_design(thigh_length, calf_length):
     sigma0 = 0.2
     opts = cma.CMAOptions()
     opts.set({
-        'tolfun': 2, 'tolx': 0.001, 'maxiter': 20, 'popsize': 9, 'seed': 42,
+        'tolfun': 2, 'tolx': 0.001, 'maxiter': 10, 'popsize': 6, 'seed': 42,
         'bounds': [([0,0,0,0,0,0]), ([1,1,1,1,1,1])]
     })
     opts.set({'verb_disp': 1000})
@@ -228,22 +174,21 @@ def optimize_for_design(thigh_length, calf_length):
         writer.writerow(["Mode Height", "Avg Energy", "Final Cost"] + [f"ac{i+1}" for i in range(len(x0))])
 
     while not es.stop():
-        solutions = es.ask()  
-        rewards = []
-        for action in solutions:
-            cost = get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modified_xml)
-            rewards.append(cost)
-        es.tell(solutions, rewards)  
-        # Store best value for each iteration
+        solutions = es.ask()
+        rounded_solutions = [np.round(sol).astype(int) for sol in solutions]  # Convert to integers
+        rewards = [get_reward(action, log_file, mode_data_file, thigh_length, calf_length, modified_xml) for action in rounded_solutions]
+        #es.tell(rounded_solutions, rewards)
         best_index = np.argmin(rewards)  
         best_cost = rewards[best_index]
-        best_params = solutions[best_index]
+        best_params = rounded_solutions[best_index]         
         with open(progress_file, "a", newline="") as file:
             writer = csv.writer(file)
             writer.writerow([es.countiter, best_cost] + list(best_params))
         print("Iteration", es.countiter, "Best Cost =", best_cost)
-    best_params = es.result.xbest
-    best_cost = get_reward(best_params, log_file, mode_data_file, thigh_length,calf_length,modified_xml)
+
+    best_params = np.round(es.result.xbest).astype(int)  # Ensure best actions are integers
+    best_cost = get_reward(best_params, log_file, mode_data_file, thigh_length, calf_length, modified_xml)
+
     with open(best_results_file, "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow([thigh_length, calf_length, best_cost] + list(best_params))
@@ -252,9 +197,9 @@ def optimize_for_design(thigh_length, calf_length):
 # Run Grid Search
 def parallel_grid_search():
     
-    link_combinations = remaining_combinations
+    link_combinations = [(t, c) for t in thigh_lengths for c in calf_lengths]
     # Use multiprocessing to run optimizations in parallel
-    with multiprocessing.Pool(processes=7) as pool:  # Adjust based on available cores
+    with multiprocessing.Pool(processes=8) as pool:  # Adjust based on available cores
         results = pool.starmap(optimize_for_design, link_combinations)
 
     print("Parallel Grid Search and Optimization Completed")

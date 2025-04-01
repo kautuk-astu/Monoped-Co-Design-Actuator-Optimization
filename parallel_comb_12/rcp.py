@@ -34,6 +34,8 @@ def run(xml_path, action, mass, ik_value):
     max_height_after_control = float('-inf')
     jump_count = 0
     in_air = False  
+    hip_actuator_id = m.actuator('torque1').id    
+    knee_actuator_id = m.actuator('torque2').id
     
     # Initialize Controller
     controller = vmc_ra.Controller(xml_path, m, d)
@@ -100,8 +102,8 @@ def run(xml_path, action, mass, ik_value):
                 knee_torque = np.clip(joint_torque[1], -50, 50)
         
         # Apply Control Torques
-        d.ctrl[1] = hip_torque
-        d.ctrl[2] = knee_torque
+        d.ctrl[hip_actuator_id] = hip_torque
+        d.ctrl[knee_actuator_id] = knee_torque
         
         # Calculate energy only after 3 sec
         if t_elapsed >= 3:
