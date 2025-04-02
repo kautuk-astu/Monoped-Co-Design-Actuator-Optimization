@@ -190,7 +190,8 @@ def optimize_for_design(thigh_length, calf_length):
     with open(mode_data_file, "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(["Mode Height", "Avg Energy", "Final Cost"] + [f"ac{i+1}" for i in range(len(x0))])
-
+    total_best_cost = float("inf")  # Initialize to a very high value
+    total_best_params = None
     while not es.stop():
         solutions = es.ask()
         #rounded_solutions = [np.round(sol).astype(int) for sol in solutions]  # Convert to integers
@@ -209,15 +210,20 @@ def optimize_for_design(thigh_length, calf_length):
         with open(progress_file, "a", newline="") as file:
             writer = csv.writer(file)
             writer.writerow([es.countiter, best_cost] + list(best_params))
+    # Store the best cost and parameters
+        min_index = np.argmin(rewards)  # Index of the best reward in this iteration
+        if rewards[min_index] < total_best_cost:
+            total_best_cost = rewards[min_index]
+            total_best_params = rounded_solutions[min_index]
         print("Iteration", es.countiter, "Best Cost =", best_cost)
 
-    best_params = es.result.xbest # Process the best parameters for selective rounding
-    best_cost = get_reward(best_params, log_file, mode_data_file, thigh_length, calf_length, modified_xml)
+    #best_params = es.result.xbest # Process the best parameters for selective rounding
+    #best_cost = get_reward(best_params, log_file, mode_data_file, thigh_length, calf_length, modified_xml)
 
     with open(best_results_file, "a", newline="") as file:
         writer = csv.writer(file)
-        writer.writerow([thigh_length, calf_length, best_cost] + list(best_params))
-    return best_params, best_cost
+        writer.writerow([thigh_length, calf_length, total_best_cost] + list(total_best_params))
+    return total_best_params, total_best_cost
 
 # Run Grid Search
 def parallel_grid_search():

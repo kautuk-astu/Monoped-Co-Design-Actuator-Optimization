@@ -169,7 +169,8 @@ def optimize_for_design(thigh_length, calf_length):
     with open(mode_data_file, "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(["Mode Height", "Avg Energy", "Final Cost"] + [f"ac{i+1}" for i in range(len(x0))])
-
+    best_cost = float("inf")  # Initialize to a very high value
+    best_params = None
     while not es.stop():
         solutions = es.ask()  
         rewards = []
