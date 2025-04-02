@@ -139,8 +139,8 @@ def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modifie
     mode_energy_values = [energy for height, energy in zip(height_values, energy_values) if height == mode_height]
     avg_energy = np.mean(mode_energy_values) if mode_energy_values else 0
     # Compute final cost
-    height_cost = 5* np.exp(-mode_height)
-    final_cost = np.round((height_cost + (1/2) * avg_energy),1)
+    height_cost = 10* np.exp(-mode_height)
+    final_cost = np.round(((3/5)*height_cost + (2/5) * avg_energy),1)
     # print(f"Running for Thigh Length: {thigh_length}, Calf Length: {calf_length}")
     # print(f"Using XML: {modified_xml}, Mass: {mass}, IK Value: {ik_value}")
 
@@ -171,12 +171,12 @@ def optimize_for_design(thigh_length, calf_length):
     sigma0 = 0.2
     opts = cma.CMAOptions()
     opts.set({
-        'tolfun': 0.005, 'tolx': 0.001, 'maxiter': 10, 'popsize': 5, 'seed': 42,
+        'tolfun': 0.05, 'tolx': 0.001, 'maxiter': 10, 'popsize': 6, 'seed': 42,
         'bounds': [([0,0,0,0,0,0]), ([1,1,1,1,1,1])]
     })
     opts.set({'verb_disp': 1000})
     opts.set({'verb_log': 1})
-    print(f"cma_{int(thigh_length * 1000)}_{int(calf_length * 1000)}")
+    #print(f"cma_{int(thigh_length * 1000)}_{int(calf_length * 1000)}")
     opts.set({'verb_filenameprefix': f"cma_{int(thigh_length * 1000)}_{int(calf_length * 1000)}"}, force=True)
 
     es = cma.CMAEvolutionStrategy(x0, sigma0, opts)
@@ -194,9 +194,15 @@ def optimize_for_design(thigh_length, calf_length):
     while not es.stop():
         solutions = es.ask()
         #rounded_solutions = [np.round(sol).astype(int) for sol in solutions]  # Convert to integers
+        
         rounded_solutions = [process_action(sol) for sol in solutions]
-        rewards = [get_reward(action, log_file, mode_data_file, thigh_length, calf_length, modified_xml) for action in rounded_solutions]
-        #es.tell(rounded_solutions, rewards)
+        rewards=[]
+        #rewards = [get_reward(action, log_file, mode_data_file, thigh_length, calf_length, modified_xml) for action in rounded_solutions]
+        for action in solutions:
+            cost = get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modified_xml)
+            rewards.append(cost)
+        es.tell(rounded_solutions, rewards)
+        print("Iteration", es.countiter)
         best_index = np.argmin(rewards)  
         best_cost = rewards[best_index]
         best_params = rounded_solutions[best_index]         
@@ -205,7 +211,7 @@ def optimize_for_design(thigh_length, calf_length):
             writer.writerow([es.countiter, best_cost] + list(best_params))
         print("Iteration", es.countiter, "Best Cost =", best_cost)
 
-    best_params = es.result.xbest.copy() # Process the best parameters for selective rounding
+    best_params = es.result.xbest # Process the best parameters for selective rounding
     best_cost = get_reward(best_params, log_file, mode_data_file, thigh_length, calf_length, modified_xml)
 
     with open(best_results_file, "a", newline="") as file:
