@@ -10,7 +10,25 @@ thigh_lengths = np.linspace(0.400, 0.600, 9)  #both inclusive
 calf_lengths = np.linspace(0.400, 0.600, 9)
 print(thigh_lengths)
 print(calf_lengths)
-
+remaining_combinations = [
+    (0.55,0.475),
+    (0.55,0.5),
+    (0.55,0.525),
+    (0.525,0.45),
+    (0.525,0.475),
+    (0.525,0.5),
+    (0.525,0.525),
+    (0.525,0.55),
+    (0.525,0.575),
+    (0.525,0.6),
+    (0.5,0.45),
+    (0.5,0.525),
+    (0.5,0.575),
+    (0.5,0.6),
+    (0.45,0.575),
+    (0.45,0.6)
+]
+remaining_combinations = list(remaining_combinations)
 
 xml_template = "template_robot.xml"
 best_results_file = "best_results.csv"
@@ -228,7 +246,8 @@ def optimize_for_design(thigh_length, calf_length):
 # Run Grid Search
 def parallel_grid_search():
     
-    link_combinations = [(t, c) for t in thigh_lengths for c in calf_lengths]
+    #link_combinations = [(t, c) for t in thigh_lengths for c in calf_lengths]
+    link_combinations = remaining_combinations
     # Use multiprocessing to run optimizations in parallel
     with multiprocessing.Pool(processes=8) as pool:  # Adjust based on available cores
         results = pool.starmap(optimize_for_design, link_combinations)
