@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load the final results file
-final_results_file = "final_results.csv"
+final_results_file = "sorted_final_results.csv"
 df = pd.read_csv(final_results_file)
 
 # Get all unique heights (convert to integers if they are rounded values like 0.4, 0.5, etc.)

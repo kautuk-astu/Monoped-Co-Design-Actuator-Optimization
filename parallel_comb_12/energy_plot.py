@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from collections import Counter
 
 # Load the final results
-final_results_file = "final_results.csv"
+final_results_file = "sorted_final_results.csv"
 df = pd.read_csv(final_results_file)
 
 # Find the mode (most frequent) height
