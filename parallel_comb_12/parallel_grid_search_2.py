@@ -11,22 +11,15 @@ calf_lengths = np.linspace(0.400, 0.600, 9)
 print(thigh_lengths)
 print(calf_lengths)
 remaining_combinations = [
-    (0.55,0.475),
     (0.55,0.5),
-    (0.55,0.525),
     (0.525,0.45),
-    (0.525,0.475),
     (0.525,0.5),
     (0.525,0.525),
     (0.525,0.55),
     (0.525,0.575),
-    (0.525,0.6),
     (0.5,0.45),
     (0.5,0.525),
-    (0.5,0.575),
-    (0.5,0.6),
-    (0.45,0.575),
-    (0.45,0.6)
+    (0.5,0.575)
 ]
 remaining_combinations = list(remaining_combinations)
 
