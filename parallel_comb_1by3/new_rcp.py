@@ -142,15 +142,15 @@ def run(xml_path, action, mass, ik_value):
     return max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy
 
 # Define Action & XML Path
-action = np.array([12.4,0.2,1.5,10.9,1.0,0.3])
-xml_path = 'modified_robot_425_600.xml'
+action = np.array([10.2,0.0,1.3,2.2,1.6,0.0])
+xml_path = 'modified_robot_575_475.xml'
 
 # Load MuJoCo Model
 
 #d.rng = np.random.default_rng(0)
 
 # Run Simulation
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy = run(xml_path, action,3.125,0.585)
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy = run(xml_path, action,3.15,0.625)
 # Print Results
 #print(max_jump_height, np.round(((3/5)*10* np.exp(-np.round(max_jump_height,1)) + (2/5)*(1/3)*np.round(max_jump_energy,1)),1))
 print(max_jump_height, max_jump_energy)

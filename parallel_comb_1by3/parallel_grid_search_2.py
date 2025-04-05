@@ -121,8 +121,6 @@ def process_action(action):
     # Convert integer values explicitly to int type
     return action
 
-
-
 # Function to compute cost (Runs controller 5 times per action)
 def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modified_xml):     
     num_runs = 1
