@@ -17,7 +17,7 @@ for index, row in best_results_df.iterrows():
     best_cost = row["best_cost"]  # No rounding applied
 
     # Define corresponding mode height file
-    mode_height_file = f"mode_height_data_{int(thigh_length * 1000)}_{int(calf_length * 1000)}.csv"
+    mode_height_file = f"height_error_data_{int(thigh_length * 1000)}_{int(calf_length * 1000)}.csv"
 
     if not os.path.exists(mode_height_file):
         print(f"Warning: File {mode_height_file} not found. Skipping.")
@@ -34,7 +34,7 @@ for index, row in best_results_df.iterrows():
         continue
 
     # Extract mode height & avg energy (take first match if multiple)
-    mode_height = matched_row.iloc[0]["Mode Height"]
+    mode_height = matched_row.iloc[0]["Mode height"]
     avg_energy = matched_row.iloc[0]["Avg Energy"]
 
     # Store the results

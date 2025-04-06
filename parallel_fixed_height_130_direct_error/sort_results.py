@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the CSV file
-csv_file = "best_results.csv"  # Replace with your actual file name
+csv_file = "final_results.csv"  # Replace with your actual file name
 df = pd.read_csv(csv_file)
 
 # Sort by 'thigh_length' first, then by 'calf_length'
