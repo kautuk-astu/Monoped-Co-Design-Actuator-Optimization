@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Load and clean data
 df = pd.read_csv("final_results.csv")
-df = df.dropna(subset=['thigh_length', 'calf_length', 'mode_height', 'energy'])
+df = df.dropna(subset=['thigh_length', 'calf_length', 'mode_height', 'avg_energy'])
 
 # Compute total leg length
 df['total_leg_length'] = df['thigh_length'] + df['calf_length']

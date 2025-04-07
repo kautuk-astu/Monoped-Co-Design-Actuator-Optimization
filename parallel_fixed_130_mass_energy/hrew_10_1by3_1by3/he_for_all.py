@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # File paths
-best_results_file = "best_results.csv"
+best_results_file = "sorted_best_results.csv"
 final_results_file = "final_results.csv"
 
 # Load the best results file
