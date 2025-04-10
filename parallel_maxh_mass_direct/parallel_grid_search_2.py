@@ -151,7 +151,7 @@ def get_reward(action, log_file, mode_data_file,thigh_length,calf_length,modifie
     avg_energy = np.mean(mode_energy_values) if mode_energy_values else 0
     # Compute final cost
     height_cost = 10* np.exp(-mode_height)
-    final_cost = np.round(height_cost,1) + 10*abs(mass - 3.0)
+    final_cost = np.round(height_cost,1) + mass
     # print(f"Running for Thigh Length: {thigh_length}, Calf Length: {calf_length}")
     # print(f"Using XML: {modified_xml}, Mass: {mass}, IK Value: {ik_value}")
 
