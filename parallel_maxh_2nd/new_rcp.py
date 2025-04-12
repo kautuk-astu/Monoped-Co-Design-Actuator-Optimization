@@ -142,7 +142,7 @@ def run(xml_path, action, mass, ik_value):
     return max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy
 
 # Define Action & XML Path
-action = np.array([196.4,0.2,4.3,3.8,6.7,0.6])
+action = np.array([196.0,0.6,0.1,8.9,4.6,0.4])
 xml_path = 'modified_robot_600_400.xml'
 
 # Load MuJoCo Model
