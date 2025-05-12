@@ -119,7 +119,7 @@ def get_cost(params):
     return final_cost
 
 # CMA-ES Optimization
-x0 = normalize(np.array([0.45,0.45,31.9,0.4,2.2,12.8,2.9,0.4]))
+x0 = normalize(np.array([0.45,0.45,]))
 sigma0 = 0.2
 opts = cma.CMAOptions()
 opts.set({
@@ -152,3 +152,4 @@ while not es.stop():
 
 print("Joint optimization complete.")
 
+#28/04/2025 - 1 hr 55 mins for 50 iterations
