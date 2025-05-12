@@ -104,8 +104,8 @@ def run(xml_path, action, mass, ik_value):
                 controller.fx_by_ee(action)
                 controller.force_applied_ground(action)
                 joint_torque = controller.joint_torque(action)
-                hip_torque = np.clip(joint_torque[0], -50, 50)
-                knee_torque = np.clip(joint_torque[1], -50, 50)
+                hip_torque = np.clip(joint_torque[0], -34.1, 34.1)
+                knee_torque = np.clip(joint_torque[1], -50.998639999999995, 50.998639999999995)
         
         # Apply Control Torques
         d.ctrl[hip_actuator_id] = hip_torque
@@ -155,24 +155,27 @@ def run(xml_path, action, mass, ik_value):
     return max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy,torque1_store,torque2_store
 
 # Define Action & XML Path
-action = np.array([38.2,1.8])
+action = np.array([11.0,3.7,0.9])
 #xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/full_cma_03_05/modified_robot_500_500.xml'
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_with_gear_fixed_sprocket/modified_robot_410_340_71_71_6b4f4bbf.xml'
+xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_gear_fixed_sprocket_p3/modified_robot_490_405_62_68_af28870c.xml'
 
 # Run Simulation
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy,torque1_store,torque2_store = run(xml_path, action, 4.5118, 0.6)
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy,torque1_store,torque2_store = run(xml_path, action, 4.6479, 0.6)
 
 # Print Results
 print(max_jump_height, max_jump_energy)
-import matplotlib.pyplot as plt
-import numpy as np
-#plot torque1 and torque2
-plt.plot(torque1_store, label='Torque 1')
-plt.plot(torque2_store, label='Torque 2')
-plt.xlabel('Time Step')
-plt.ylabel('Torque')
-plt.title('Torque over Time')
-plt.legend()
-plt.show()
+height_cost = 3 * np.exp(-max_jump_height)
+final_cost = 0.5*(np.round(height_cost,2)) + 0.5*(np.round(max_jump_energy, 2))
+print(final_cost)
+# import matplotlib.pyplot as plt
+# import numpy as np
+# #plot torque1 and torque2
+# plt.plot(torque1_store, label='Torque 1')
+# plt.plot(torque2_store, label='Torque 2')
+# plt.xlabel('Time Step')
+# plt.ylabel('Torque')
+# plt.title('Torque over Time')
+# plt.legend()
+# plt.show()
 
 
