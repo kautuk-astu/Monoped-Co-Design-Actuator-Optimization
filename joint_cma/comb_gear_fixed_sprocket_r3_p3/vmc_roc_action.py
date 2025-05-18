@@ -120,7 +120,7 @@ class Controller:
         # get the index of thigh joint
         thigh_joint_id = self.thigh_joint_id
         # get the position of thigh joint
-        thigh_joint_position = self.d.qpos[thigh_joint_id]
+        thigh_joint_position = self.d.qpos[thigh_joint_id] 
         return thigh_joint_position
     
     def rotmat_thigh(self):

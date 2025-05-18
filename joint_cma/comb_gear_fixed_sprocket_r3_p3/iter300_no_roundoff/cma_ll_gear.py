@@ -155,9 +155,9 @@ def get_cost(params):
     hip_mass, hip_peak_torque = get_mass_and_torque(hip_gear_ratio, "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_gear_fixed_sprocket_r3_p3/comb_mass_torque.csv")
     knee_mass, knee_peak_torque = get_mass_and_torque(knee_gear_ratio, "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_gear_fixed_sprocket_r3_p3/comb_mass_torque.csv")
     mass = mass_wo_g + hip_mass + knee_mass
-    #unique_id = uuid.uuid4().hex[:8]
-    #modified_xml = f"modified_robot_{int(thigh_length * 1000)}_{int(calf_length * 1000)}_{int(hip_gear_ratio*10)}_{int(knee_gear_ratio*10)}_{unique_id}.xml"
-    modified_xml = f"modified_robot_{int(thigh_length * 1000)}_{int(calf_length * 1000)}_{int(hip_gear_ratio*10)}_{int(knee_gear_ratio*10)}.xml"
+    unique_id = uuid.uuid4().hex[:8]
+    modified_xml = f"modified_robot_{int(thigh_length * 1000)}_{int(calf_length * 1000)}_{int(hip_gear_ratio*10)}_{int(knee_gear_ratio*10)}_{unique_id}.xml"
+    #modified_xml = f"modified_robot_{int(thigh_length * 1000)}_{int(calf_length * 1000)}_{int(hip_gear_ratio*10)}_{int(knee_gear_ratio*10)}.xml"
     modify_link_length(xml_template, "link1", thigh_length, output_file=modified_xml, hip_peak_torque=hip_peak_torque, knee_peak_torque=knee_peak_torque*1.3636)
     modify_link_length(modified_xml, "link2", calf_length, output_file=modified_xml, hip_peak_torque=hip_peak_torque, knee_peak_torque=knee_peak_torque*1.3636)
     #mass, ik_value = mass_ik_dict[(thigh_length, calf_length)]    

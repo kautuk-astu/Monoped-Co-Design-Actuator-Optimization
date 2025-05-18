@@ -1,4 +1,5 @@
 #NOTE: joint names chosen on the basis of hopper_roc.xml 
+#NOTE: joint names chosen on the basis of hopper_roc.xml 
 import mujoco as mj
 import numpy as np
 import xml.etree.ElementTree as ET
@@ -111,11 +112,11 @@ class len_rad_id:
     def thigh_total_length(self):
         thigh_length = self.thigh_length_xml()
         thigh_radius = self.thigh_radius_xml()
-        total_length = thigh_length + 2*thigh_radius
+        total_length = thigh_length 
         return total_length
 
     def calf_total_length(self):
         calf_length = self.calf_length_xml()
         calf_radius = self.calf_radius_xml()
-        total_length = calf_length + calf_radius
+        total_length = calf_length 
         return total_length

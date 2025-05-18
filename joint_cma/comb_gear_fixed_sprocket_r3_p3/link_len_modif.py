@@ -42,10 +42,10 @@ def modify_link_length(xml_file, link_name, new_length, axis='z', output_file=No
         print(f"Modified URDF saved to '{output_file}'")
 
 # Base XML path
-base_xml = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/full_cma_02_04/modified_robot.xml'
+base_xml = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_gear_fixed_sprocket_r3_p3/modified_robot_361_363_63_84.xml'
 
 # Output directory
-output_dir = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/full_cma_02_04/'
+output_dir = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_gear_fixed_sprocket_r3_p3/nominal_design_xml'
 
 # Loop through desired link lengths
 # for thigh in [round(0.30 + 0.01 * i, 2) for i in range(21)]:  # 0.30 to 0.40
@@ -55,8 +55,8 @@ output_dir = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/full
 #         modify_link_length(temp_file, 'link2', calf, axis='z', output_file=temp_file)
 
 for thigh in [0.4]:  # 0.30 to 0.40
-    for calf in [0.4]:
-        temp_file = f"modified_robot_{int(thigh * 1000)}_{int(calf * 1000)}.xml"
+    for calf in [0.45]:
+        temp_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_gear_fixed_sprocket_r3_p3/nominal_design_xml/modified_robot_{int(thigh * 1000)}_{int(calf * 1000)}.xml"
         modify_link_length(base_xml, 'link1', thigh, axis='z', output_file=temp_file)
         modify_link_length(temp_file, 'link2', calf, axis='z', output_file=temp_file)
 
