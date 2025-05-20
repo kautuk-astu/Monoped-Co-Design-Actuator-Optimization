@@ -9,7 +9,7 @@ axis_label_fontsize = 15
 tick_fontsize = 10
 title_fontsize = 14
 legend_fontsize = 10
-filename = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/caseB_jump.csv'
+filename = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/caseA_jump.csv'
 time_offset = 0
 x0_shift = 0.5
 
@@ -18,7 +18,7 @@ df = pd.read_csv(filename)
 
 # === Select rows ===
 # Example: use rows 300 to 600 (modify this range as needed)
-df = df.iloc[2:].copy()
+df = df.iloc[2:356].copy()
 
 # === Adjust time and x0 ===
 df['time_store'] = df['time_store'] - time_offset
@@ -114,7 +114,7 @@ ax3.legend(loc='best', fontsize=legend_fontsize)
 
 # === Final layout ===
 fig.tight_layout()
-plt.savefig('jump_logs_plot_caseB.png', dpi=300)  # Save the figure
+plt.savefig('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/jump_logs_plot_caseA.png', dpi=300)  # Save the figure
 plt.show()
 
 # 9.197008848190308,-0.3853235349440201,2.7421321450463414,-0.5003204881324271,1.4043031882828818,2.4702906358937655,3.5429505235604015,-35.542930629109584,-5.803955859915504

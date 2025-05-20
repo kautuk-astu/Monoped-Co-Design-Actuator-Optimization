@@ -52,8 +52,8 @@ def run(xml_path, action, mass, ik_value, hip_peak_torque, knee_peak_torque):
 #     # Increase solver precision for more stable results
     # l1n = lp.thigh_total_length()
     # l2n = lp.calf_total_length()
-    l1n = 0.4
-    l2n = 0.4
+    l1n = 0.499
+    l2n = 0.346
     #print(f"l1n: {l1n}, l2n: {l2n}")
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, l1n, l2n)
     controller = vmc_ra_angle.Controller(xml_path, m, d, theta1, theta2)
@@ -84,131 +84,131 @@ def run(xml_path, action, mass, ik_value, hip_peak_torque, knee_peak_torque):
     
     # Start Simulation
     start = time.time()
-    with mj.viewer.launch_passive(m, d) as viewer:
+    #with mj.viewer.launch_passive(m, d) as viewer:
        
-        cam_id = m.camera('cam0').id
-        viewer.cam.type = mj.mjtCamera.mjCAMERA_FIXED  # ✅ Correct enum
-        viewer.cam.fixedcamid = cam_id
+        # cam_id = m.camera('cam0').id
+        # viewer.cam.type = mj.mjtCamera.mjCAMERA_FIXED  # ✅ Correct enum
+        # viewer.cam.fixedcamid = cam_id
       
 
 
-        while viewer.is_running() and time.time() - start < 8:
-            step_start = time.time()
-            t_elapsed = time.time() - start
+    while time.time() - start < 8:
+        step_start = time.time()
+        t_elapsed = time.time() - start
+        
+        # Compute Torques
+        if t_elapsed < 0.3:
+            hip_error = 0 - d.qpos[1]
+            knee_error = 0 - d.qpos[2]
+            hip_torque = 100 * hip_error - 10 * d.qvel[1]
+            knee_torque = 100 * knee_error - 10 * d.qvel[2]
+        else:
+            contact_force = controller.get_ground_contact_forces()
+            forces = np.array([0, 0, 0])  
+            if len(contact_force) > 0:
+                forces = contact_force[0][0]
             
-            # Compute Torques
-            if t_elapsed < 0:
+            if np.all(forces == 0):
                 hip_error = 0 - d.qpos[1]
                 knee_error = 0 - d.qpos[2]
                 hip_torque = 100 * hip_error - 10 * d.qvel[1]
                 knee_torque = 100 * knee_error - 10 * d.qvel[2]
-            else:
-                contact_force = controller.get_ground_contact_forces()
-                forces = np.array([0, 0, 0])  
-                if len(contact_force) > 0:
-                    forces = contact_force[0][0]
                 
-                if np.all(forces == 0):
-                    hip_error = 0 - d.qpos[1]
-                    knee_error = 0 - d.qpos[2]
-                    hip_torque = 100 * hip_error - 10 * d.qvel[1]
-                    knee_torque = 100 * knee_error - 10 * d.qvel[2]
-                    
-                    if not in_air:
-                        in_air = True
-                        current_jump_max = d.qpos[0]
-                        #jump_energy = 0
-                else:
-                    if in_air:
-                        in_air = False
-                        jump_count += 1
-                        jump_results.append((current_jump_max, jump_energy))
-                        max_height_after_control = max(max_height_after_control, current_jump_max)
-                        current_jump_max = d.qpos[0]
-                        jump_energy = 0
-                        if jump_count > 1:
-                            break
-                    
-                    controller.lin_sd_var(action)
-                    controller.rot_sd_var(action)
-                    controller.linear_spring_force(action)
-                    controller.linear_damper_force(action)
-                    controller.torsional_spring_force(action)
-                    controller.total_linear_force(action)
-                    controller.fz_by_ee(action)
-                    controller.fx_by_ee(action)
-                    controller.force_applied_ground(action)
-                    joint_torque = controller.joint_torque(action)
-                    hip_torque = np.clip(joint_torque[0], -hip_peak_torque, hip_peak_torque)
-                    knee_torque = np.clip(joint_torque[1], -knee_peak_torque, knee_peak_torque)
-            
-            # Apply Control Torques
-            hip_torque = np.clip(hip_torque, -hip_peak_torque, hip_peak_torque)
-            knee_torque = np.clip(knee_torque, -knee_peak_torque, knee_peak_torque)
-            
-            d.ctrl[hip_actuator_id] = hip_torque
-            d.ctrl[knee_actuator_id] = knee_torque
+                if not in_air:
+                    in_air = True
+                    current_jump_max = d.qpos[0]
+                    #jump_energy = 0
+            else:
+                if in_air:
+                    in_air = False
+                    jump_count += 1
+                    jump_results.append((current_jump_max, jump_energy))
+                    max_height_after_control = max(max_height_after_control, current_jump_max)
+                    current_jump_max = d.qpos[0]
+                    jump_energy = 0
+                    if jump_count > 1:
+                        break
+                
+                controller.lin_sd_var(action)
+                controller.rot_sd_var(action)
+                controller.linear_spring_force(action)
+                controller.linear_damper_force(action)
+                controller.torsional_spring_force(action)
+                controller.total_linear_force(action)
+                controller.fz_by_ee(action)
+                controller.fx_by_ee(action)
+                controller.force_applied_ground(action)
+                joint_torque = controller.joint_torque(action)
+                hip_torque = np.clip(joint_torque[0], -hip_peak_torque, hip_peak_torque)
+                knee_torque = np.clip(joint_torque[1], -knee_peak_torque, knee_peak_torque)
+        
+        # Apply Control Torques
+        hip_torque = np.clip(hip_torque, -hip_peak_torque, hip_peak_torque)
+        knee_torque = np.clip(knee_torque, -knee_peak_torque, knee_peak_torque)
+        
+        d.ctrl[hip_actuator_id] = hip_torque
+        d.ctrl[knee_actuator_id] = knee_torque
 
-            
-            # Calculate energy only after 3 sec
-            if t_elapsed >= 0:
-                ha = m.opt.timestep * hip_torque * d.qvel[1]            
-                ka = m.opt.timestep * knee_torque * d.qvel[2]
-                if ha > 0:
-                    hip_energy += ha
-                    #print(ha, in_air)
-                    
-                    total_energy += ha
-                    jump_energy += ha
-                if ka > 0:
-                    knee_energy += ka
-                    #print(ka, in_air)
-                    #print(d.qpos[0])
-                    total_energy += ka
-                    jump_energy += ka
-            
-            # Step simulation
-            omega1_store.append(d.qvel[1])
-            #print(d.qvel[1], d.qvel[2],d.qvel[0])
-            #print(d.qpos[0], d.qpos[1], d.qpos[2])
-            base_store.append(d.qpos[0])
-            torque1_store.append(hip_torque)
-            torque2_store.append(knee_torque)
-            theta1_store.append(d.qpos[1])
-            theta2_store.append(d.qpos[2])
-            omega2_store.append(d.qvel[2])
-            v0_store.append(d.qvel[0])
-            time_store.append(t_elapsed)
-            mj.mj_step(m, d)
-            
-            #print("angles", np.rad2deg(d.qpos[1]+theta1), np.rad2deg(d.qpos[2]+theta2))
-            #print("knee angle", np.rad2deg(d.qpos[2]))
-            viewer.sync()
-            #print(d.qpos[0], d.qpos[1], d.qpos[2])
-            
-            # Update current jump max height if in air
-            if t_elapsed >= 0 and in_air:
-                current_jump_max = max(current_jump_max, d.qpos[0])
-            
-            # Respect simulation timestep
-            time_until_next_step = m.opt.timestep - (time.time() - step_start)
-            if time_until_next_step > 0:
-                time.sleep(time_until_next_step)
+        
+        # Calculate energy only after 3 sec
+        if t_elapsed >= 0:
+            ha = m.opt.timestep * hip_torque * d.qvel[1]            
+            ka = m.opt.timestep * knee_torque * d.qvel[2]
+            if ha > 0:
+                hip_energy += ha
+                #print(ha, in_air)
+                
+                total_energy += ha
+                jump_energy += ha
+            if ka > 0:
+                knee_energy += ka
+                #print(ka, in_air)
+                #print(d.qpos[0])
+                total_energy += ka
+                jump_energy += ka
+        
+        # Step simulation
+        omega1_store.append(d.qvel[1])
+        #print(d.qvel[1], d.qvel[2],d.qvel[0])
+        #print(d.qpos[0], d.qpos[1], d.qpos[2])
+        base_store.append(d.qpos[0])
+        torque1_store.append(hip_torque)
+        torque2_store.append(knee_torque)
+        theta1_store.append(d.qpos[1])
+        theta2_store.append(d.qpos[2])
+        omega2_store.append(d.qvel[2])
+        v0_store.append(d.qvel[0])
+        time_store.append(t_elapsed)
+        mj.mj_step(m, d)
+        
+        #print("angles", np.rad2deg(d.qpos[1]+theta1), np.rad2deg(d.qpos[2]+theta2))
+        #print("knee angle", np.rad2deg(d.qpos[2]))
+        #viewer.sync()
+        #print(d.qpos[0], d.qpos[1], d.qpos[2])
+        
+        # Update current jump max height if in air
+        if t_elapsed >= 0 and in_air:
+            current_jump_max = max(current_jump_max, d.qpos[0])
+        
+        # Respect simulation timestep
+        time_until_next_step = m.opt.timestep - (time.time() - step_start)
+        if time_until_next_step > 0:
+            time.sleep(time_until_next_step)
 
-        # In case the simulation ends while still in air, record the last jump.
-        if in_air:
-            jump_results.append((current_jump_max, jump_energy))
-            max_height_after_control = max(max_height_after_control, current_jump_max)
+    # In case the simulation ends while still in air, record the last jump.
+    if in_air:
+        jump_results.append((current_jump_max, jump_energy))
+        max_height_after_control = max(max_height_after_control, current_jump_max)
 
-        # Obtain the jump with max height and its energy
-        max_jump = max(jump_results, key=lambda x: x[0], default=(-0.8,1e6))
-        max_jump_height, max_jump_energy = max_jump
+    # Obtain the jump with max height and its energy
+    max_jump = max(jump_results, key=lambda x: x[0], default=(-0.8,1e6))
+    max_jump_height, max_jump_energy = max_jump
 
     return max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store,time_store
 
 
 # Define Action & XML Path
-action = np.array([50,2.5,10])
+action = np.array([3.4,-35.867,100])
 #9,2.2,8.4
 #7.9,2.2,8.4
 #14.1,6.0,8.2
@@ -223,8 +223,8 @@ action = np.array([50,2.5,10])
 #xml_path = 'modified_robot_configured_400_400.xml', 4.0844, -0.5, 33,33*1.3636,50,2.5,10, 0.3866466870185899 31.501544647902673
 #0.65,0.35xml_path = 'modified_robot_configured_500_307.xml', 4.464600000000001,-0.5,22.0,58.498439999999995, 14.0,6.1,8.1, 0.3507568921776634 22.421980943135672
 #0.65,0.35xml_path = 'modified_robot_configured_499_360.xml', 4.239,-0.5, 22.0,44.998799999999996, 0.33096132335302103 16.94609371751552, 34.247102520884766 - works fine with 49,36 l1l2,4.2107
-xml_path = 'modified_robot_configured_400_400_nominal.xml'
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action, 4.0844,-0.5, 6*5.5,6*5.5*1.3636)
+xml_path = 'modified_robot_configured_499_346_caseB.xml'
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action, 4.3417,-0.5, 6*5.5,6*5.5*1.3636)
 data = {
     "omega2_store": omega2_store,
     "omega1_store": omega1_store,
@@ -239,7 +239,7 @@ data = {
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("nominal_jump.csv", index=False)
+df.to_csv("caseB_jump.csv", index=False)
 
 # Print Results
 print(max_jump_height, max_jump_energy)
