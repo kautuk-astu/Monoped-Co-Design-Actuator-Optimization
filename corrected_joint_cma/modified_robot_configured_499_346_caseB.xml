@@ -40,7 +40,7 @@
 				
 				<body name="link2" pos="0.499 0 0" euler="0 1.9217572535723573 0">
 					<joint type="hinge" axis="0 -1 0" pos="0 0 0" name="hinge2" limited="true" range="-3.14 3.14" />
-					
+					<site name="foot" pos="0.346 0 0" size="0.01" />					
 					<geom name="shank" type="capsule" fromto="0 0 0 0.346 0 0" size="0.025" mass="1.6457" />
 				</body>
 			</body>
