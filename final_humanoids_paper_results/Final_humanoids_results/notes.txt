@@ -1,0 +1,14 @@
+#9,2.2,8.4
+#7.9,2.2,8.4
+#14.1,6.0,8.2
+#xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/full_cma_03_05/modified_robot_500_500.xml'
+#xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_gear_fixed_sprocket_r3_p3/modified_robot_437_346_55_86.xml'
+#xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/comb_gear_fixed_sprocket_r3_p3/nominal_design_xml/modified_robot_400_400.xml'
+#xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/design_xmls/modified_robot_399_357_52_42_fa9103fe.xml' 
+#xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/design_xmls/modified_robot_407_411_51_58_0dbfb0db.xml'
+#0.9,0.1xml_path='modified_robot_configured_497_346.xml', 4.646125,-0.5,28.05,65.24826,23.7,9.9,44.4,0.659984392339849 51.3004994444009 - works with even lesser cost
+# Run Simulation
+#0.7,0.3xml_path = 'modified_robot_configured_498_446.xml', 4.337833333333333,-0.5, 26.4,44.24882,7.9,6.1,20.4, 0.3824350736897383 31.75053451604305 - works with same height diff energy
+#xml_path = 'modified_robot_configured_400_400.xml', 4.0844, -0.5, 33,33*1.3636,50,2.5,10, 0.3866466870185899 31.501544647902673
+#0.65,0.35xml_path = 'modified_robot_configured_500_307.xml', 4.464600000000001,-0.5,22.0,58.498439999999995, 14.0,6.1,8.1, 0.3507568921776634 22.421980943135672
+#0.65,0.35xml_path = 'modified_robot_configured_499_360.xml', 4.239,-0.5, 22.0,44.998799999999996, 0.33096132335302103 16.94609371751552, 34.247102520884766 - works fine with 49,36 l1l2,4.2107
