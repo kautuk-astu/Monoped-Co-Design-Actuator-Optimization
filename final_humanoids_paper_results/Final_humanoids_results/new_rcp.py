@@ -33,7 +33,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     knee_actuator_id = m.actuator('torque2').id    
     #mj.mj_resetData(m, d)
     l1n = 0.225
-    l2n = 0.3
+    l2n = 0.225
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, l1n, l2n)
     #controller = vmc_ra_angle.Controller(xml_path, m, d, theta1, theta2)
     omega1_store = []
@@ -169,7 +169,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
 # Define Action & XML Path
 action = np.array([100,5,10])
 
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_225_300_60_60.xml'
+xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_225_225_60_60.xml'
 #xml_path = 'modified_robot_400_400_60_60.xml'
 max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.25, 6*5.5,6*5.5*1.3636)
 data = {
