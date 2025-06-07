@@ -17,8 +17,8 @@ from scipy.interpolate import interp1d
 
 
 # Constants
-xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Final_humanoids_results/modified_robot_400_400_60_60.xml"
-mass_ik_values_file = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/final_links_with_mass.csv"  
+xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml"
+mass_ik_values_file = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/final_links_with_mass.csv"  
 date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 best_results_file = f"results/best_results_gear_065_035_{date_str}.csv"
 all_samples_file = f"results/all_gear_065_035_{date_str}.csv"
