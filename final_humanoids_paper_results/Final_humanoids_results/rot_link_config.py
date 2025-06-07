@@ -144,11 +144,11 @@ def modify_link_length_and_angle(xml_file, output_file,
     tree.write(output_file)
 
 
-l1n = 0.225
+l1n = 0.297
 l2n = 0.3
 gt = 6
 gk = 6
 print(f"l1n: {l1n}, l2n: {l2n}")   
 modify_link_length_and_angle(
-    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml", output_file= "modified_robot_225_300_60_60.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
+    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml", output_file= "modified_robot_stoch3_60_60.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
 
