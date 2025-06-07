@@ -32,8 +32,8 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     hip_actuator_id = m.actuator('torque1').id    
     knee_actuator_id = m.actuator('torque2').id    
     #mj.mj_resetData(m, d)
-    l1n = 0.4999537350332066
-    l2n = 0.3835145315010532
+    l1n = 0.225
+    l2n = 0.3
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, l1n, l2n)
     #controller = vmc_ra_angle.Controller(xml_path, m, d, theta1, theta2)
     omega1_store = []
@@ -167,11 +167,11 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
 
 
 # Define Action & XML Path
-action = np.array([15.8,0.9,0.0])
+action = np.array([100,5,10])
 
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/design_xmls/49995_38351_400_730_5abdb11c.xml'
+xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_225_300_60_60.xml'
 #xml_path = 'modified_robot_400_400_60_60.xml'
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.5, 4.000000049827097*5.5,7.304219058519497*5.5*1.3636)
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.25, 6*5.5,6*5.5*1.3636)
 data = {
     "omega2_store": omega2_store,
     "omega1_store": omega1_store,
@@ -186,11 +186,11 @@ data = {
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("optimized_2000_jump.csv", index=False)
+df.to_csv("new_nominal_jump.csv", index=False)
 
 # Print Results
 print(max_jump_height, max_jump_energy)
-height_cost = 100*np.exp(-(0.5+max_height_after_control))
+height_cost = 100*np.exp(-(0.25+max_height_after_control))
 final_cost = 0.65*(height_cost) + 0.35*(max_jump_energy)
 print(final_cost)
 

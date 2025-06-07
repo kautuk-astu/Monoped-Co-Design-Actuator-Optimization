@@ -263,7 +263,7 @@ def get_cost(params):
     mode_energy_values = [energy for height, energy in zip(height_values, energy_values) if height == mode_height]
     avg_energy = np.mean(mode_energy_values) if mode_energy_values else 0
     jump_results = [result for height, result in zip(height_values, jump_results) if height == mode_height]
-    height_cost = 100 * np.exp(-(0.5+mode_height))
+    height_cost = 100 * np.exp(-(0.25+mode_height))
     #final_cost = 0.85*(np.round(height_cost,3)) + 0.15*(np.round(avg_energy, 5))
     final_cost = (0.65*(height_cost) + 0.35*(avg_energy))
     # if mode_height > 0.1:
@@ -281,7 +281,7 @@ x0 = normalize(np.array([0.225,0.225,6.0,6.0,100,5,10]))
 sigma0 = 0.1
 opts = cma.CMAOptions()
 opts.set({
-    'maxiter': 700, 'popsize': 8, 'seed': 42,
+    'maxiter': 100, 'popsize': 8, 'seed': 42,
     'bounds': [np.zeros(7), np.ones(7)], 'verb_disp': 1000
 })
 
