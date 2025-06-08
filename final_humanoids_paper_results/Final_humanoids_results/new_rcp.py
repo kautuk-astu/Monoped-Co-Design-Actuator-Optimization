@@ -32,8 +32,8 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     hip_actuator_id = m.actuator('torque1').id    
     knee_actuator_id = m.actuator('torque2').id    
     #mj.mj_resetData(m, d)
-    l1n = 0.2992328741027178
-    l2n = 0.233702166220841
+    l1n = 0.225
+    l2n = 0.225
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, l1n, l2n)
     #controller = vmc_ra_angle.Controller(xml_path, m, d, theta1, theta2)
     omega1_store = []
@@ -167,11 +167,11 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
 
 
 # Define Action & XML Path
-action = np.array([86.0,7.1,12.6])
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/humanoids_and_before/corrected_joint_cma/design_xmls/29923_23370_512_597_32ac7b59.xml'
+action = np.array([100,5,10])
+#xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/humanoids_and_before/corrected_joint_cma/design_xmls/29923_23370_512_597_32ac7b59.xml'
 #xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_stoch3_60_60.xml'
-#xml_path = 'modified_robot_400_400_60_60.xml'
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.25, 5.121351177727*5.5,5.9789880267088735*5.5*1.3636)
+xml_path = 'modified_robot_225_225_60_60.xml'
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.25, 6*5.5,6*5.5*1.3636)
 data = {
     "omega2_store": omega2_store,
     "omega1_store": omega1_store,
@@ -186,7 +186,7 @@ data = {
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("optimised_jump.csv", index=False)
+df.to_csv("new_nominal_jump.csv", index=False)
 
 # Print Results
 print(max_jump_height, max_jump_energy)

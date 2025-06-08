@@ -277,7 +277,7 @@ def get_cost(params):
     return final_cost 
 
 # CMA-ES Optimization
-x0 = normalize(np.array([0.297,0.3,6.0,6.0,100,5,10]))
+x0 = normalize(np.array([0.225,0.225,6.0,6.0,100,5,10]))
 sigma0 = 0.1
 opts = cma.CMAOptions()
 opts.set({
