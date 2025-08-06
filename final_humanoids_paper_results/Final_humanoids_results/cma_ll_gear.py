@@ -17,21 +17,21 @@ from scipy.interpolate import interp1d
 xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml"
 mass_ik_values_file = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/final_links_with_mass.csv"  
 date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-best_results_file = f"results/best_comb_065_035_{date_str}.csv"
-all_samples_file = f"results/all_comb_065_035_{date_str}.csv"
-all_runs_file = f"all_runs_{date_str}.csv"
+best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/best_comb_065_035_{date_str}.csv"
+all_samples_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_comb_065_035_{date_str}.csv"
+all_runs_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_runs_{date_str}.csv"
 original_bounds = np.array([
-    [0.15, 0.35],  # Thigh length
-    [0.15, 0.35],  # Calf length
+    [0.3, 0.5],  # Thigh length
+    [0.3, 0.5],  # Calf length
     [4, 8.7], 
     [4, 8.7],
-    [0, 200],        # Controller Param 1
+    [0, 200],    # Controller Param 1
     [0, 10], 
-    [0, 20]     # Controller Param            # Controller Param 6
+    [0, 20]     # Controller Param        # Controller Param 6
 ])
 
 # Helper Functions
-dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/thigh_15_35.csv')
+dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/thigh_03_05.csv')
 
 # Sort by gear ratio to avoid interpolation issues
 dft = dft.sort_values(by='Link Length (mm)')
@@ -49,7 +49,7 @@ thigh_interp_func = interp1d(
 )
 
 
-dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/calf_15_35.csv')
+dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/calf_03_05.csv')
 
 # Sort by gear ratio to avoid interpolation issues
 dfc = dfc.sort_values(by='Link Length (mm)')
@@ -109,7 +109,7 @@ def inverse_kinematics(x, z, l1, l2, branch=1):
 def modify_link_length_and_angle(xml_file, output_file, 
                                  thigh_length, calf_length,
                                 thigh_gear_ratio, knee_gear_ratio,
-                                 target_base_height=-0.3):
+                                 target_base_height=-0.5):
     
     # Compute joint angles
     l1, l2 = thigh_length, calf_length
@@ -240,13 +240,12 @@ def get_cost(params):
     controller_params = other_params   
     unique_id = uuid.uuid4().hex[:8]
     
-    modified_xml = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/humanoids_and_before/corrected_joint_cma/design_xmls/{int(thigh_length * 100000)}_{int(calf_length * 100000)}_{int(hip_gear_ratio*100)}_{int(knee_gear_ratio*100)}_{unique_id}.xml"
-    modify_link_length_and_angle(xml_template, modified_xml, thigh_length,calf_length, hip_gear_ratio, knee_gear_ratio)
-        
+    modified_xml = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/design_xmls/{int(thigh_length * 100000)}_{int(calf_length * 100000)}_{int(hip_gear_ratio*100)}_{int(knee_gear_ratio*100)}_{unique_id}.xml"
+    modify_link_length_and_angle(xml_template, modified_xml, thigh_length,calf_length, hip_gear_ratio, knee_gear_ratio)        
     height_values = []
     energy_values = []
     run_entries = []
-    ik_value = -0.3
+    ik_value = -0.5
     hip_peak_torque = hip_gear_ratio * 5.5
     knee_peak_torque = knee_gear_ratio * 5.5 * 1.3636
     for i in range(1):
@@ -263,9 +262,9 @@ def get_cost(params):
     mode_energy_values = [energy for height, energy in zip(height_values, energy_values) if height == mode_height]
     avg_energy = np.mean(mode_energy_values) if mode_energy_values else 0
     jump_results = [result for height, result in zip(height_values, jump_results) if height == mode_height]
-    height_cost = 100 * np.exp(-(0.3+mode_height))
+    height_cost = 100 * np.exp(-(0.5+mode_height))
     #final_cost = 0.85*(np.round(height_cost,3)) + 0.15*(np.round(avg_energy, 5))
-    final_cost = (0.6*(height_cost) + 0.4*(avg_energy))
+    final_cost = (0.65*(height_cost) + 0.35*(avg_energy))
     # if mode_height > 0.1:
     #     height_cost = -(0.5+ mode_height)*300
     # else:
@@ -277,11 +276,11 @@ def get_cost(params):
     return final_cost 
 
 # CMA-ES Optimization
-x0 = normalize(np.array([0.25,0.25,6.0,6.0,100,5,10]))
+x0 = normalize(np.array([0.4,0.4,6.0,6.0,100,5,10]))
 sigma0 = 0.1
 opts = cma.CMAOptions()
 opts.set({
-    'maxiter': 500, 'popsize': 8, 'seed': 42,
+    'maxiter': 1000, 'popsize': 8, 'seed': 100,
     'bounds': [np.zeros(7), np.ones(7)], 'verb_disp': 1000
 })
 

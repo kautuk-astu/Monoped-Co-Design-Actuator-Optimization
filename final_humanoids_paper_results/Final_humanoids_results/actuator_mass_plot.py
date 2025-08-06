@@ -4,37 +4,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import matplotlib.ticker as ticker
-
-# # Load the CSV file
-# csv_file = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/comb_mass_torque.csv"
-# csv_2 = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/isspg_interpolated.csv"
-# csv_3 = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/corrected_joint_cma/sspg_interpolated.csv"
-# df = pd.read_csv(csv_file)
-# # Extract actuator gear ratio and mass
-# actuator_gear_ratio = df["gear_ratio"]
-# actuator_mass = df["mass"]
-# # Extract actuator gear ratio and mass
-# # actuator_gear_ratio = df["actuator_gear_ratio"]
-# # actuator_mass = df["actuator_mass"]
-
-# # Create a line plot
-# #make a vertical line after gear value 6, and make the rght side of diff colour than left side'
-# plt.figure(figsize=(10, 6))
-# plt.plot(actuator_gear_ratio, actuator_mass, marker='o', linestyle='-', color='blue', label='Actuator Mass')
-# plt.axvline(x=6, color='red', linestyle='--', label='Gear Ratio = 6')
-# plt.fill_betweenx(y=[1, 2], x1=6, x2=10, color='orange', alpha=0.3)
-# plt.fill_betweenx(y=[1, 2], x1=0, x2=6, color='green', alpha=0.3)
-# plt.xlim(3, 9)
-# plt.ylim(1, 1.6)
-# plt.xlabel('Actuator Gear Ratio')
-# plt.ylabel('Actuator Mass')
-# plt.title('Actuator Gear Ratio vs Mass')
-# plt.legend()
-# plt.grid()
-# plt.savefig('actuator_gear_ratio_vs_mass.png', dpi=300)
-# plt.show()
-
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec

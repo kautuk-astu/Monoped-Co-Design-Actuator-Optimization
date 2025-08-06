@@ -99,9 +99,7 @@ def run(xml_path, action, thigh_length, calf_length, ik_value, hip_peak_torque, 
         hip_torque = np.clip(hip_torque, -hip_peak_torque, hip_peak_torque)
         knee_torque = np.clip(knee_torque, -knee_peak_torque, knee_peak_torque)            
         d.ctrl[hip_actuator_id] = hip_torque
-        d.ctrl[knee_actuator_id] = knee_torque
-
-        
+        d.ctrl[knee_actuator_id] = knee_torque        
         # Calculate energy only after 3 sec
         if t_elapsed >= 0:
             ha = m.opt.timestep * hip_torque * d.qvel[1]            
