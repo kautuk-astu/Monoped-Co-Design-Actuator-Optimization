@@ -39,7 +39,7 @@ def inverse_kinematics(x, z, l1, l2, branch=1):
     B = l2 * np.sin(theta2)
     theta1 = np.arctan2(A*x + B*z, x*B - A*z)
 
-    print(f"theta1: {theta1}, theta2: {theta2}, theta1n: {theta1}")
+    #print(f"theta1: {theta1}, theta2: {theta2}, theta1n: {theta1}")
     return theta1, theta2
 
 # Example usage

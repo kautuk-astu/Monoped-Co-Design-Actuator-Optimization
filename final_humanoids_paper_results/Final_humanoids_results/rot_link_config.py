@@ -22,7 +22,7 @@ def inverse_kinematics(x, z, l1, l2, branch=1):
     print(f"theta1: {theta1}, theta2: {theta2}, theta1n: {theta1}")
     return theta1, theta2
 
-dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/thigh_15_35.csv')
+dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/thigh_03_05.csv')
 
 # Sort by gear ratio to avoid interpolation issues
 dft = dft.sort_values(by='Link Length (mm)')
@@ -40,7 +40,7 @@ thigh_interp_func = interp1d(
 )
 
 
-dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/calf_15_35.csv')
+dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/calf_03_05.csv')
 
 # Sort by gear ratio to avoid interpolation issues
 dfc = dfc.sort_values(by='Link Length (mm)')
@@ -78,7 +78,7 @@ act_interp_func = interp1d(
 def modify_link_length_and_angle(xml_file, output_file, 
                                  thigh_length, calf_length,
                                 thigh_gear_ratio, knee_gear_ratio,
-                                 target_base_height=-0.3):
+                                 target_base_height=-0.5):
     
     # Compute joint angles
     l1, l2 = thigh_length, calf_length
@@ -144,11 +144,11 @@ def modify_link_length_and_angle(xml_file, output_file,
     tree.write(output_file)
 
 
-l1n = 0.25
-l2n = 0.25
-gt = 6
-gk = 6
+l1n = 0.4959028110627651
+l2n = 0.3603846109198206
+gt = 4.00010843314604
+gk = 6.000917414728314
 print(f"l1n: {l1n}, l2n: {l2n}")   
 modify_link_length_and_angle(
-    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml", output_file= "modified_robot_250_250_30.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
+    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml", output_file= "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/seed_40_comb.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
 
