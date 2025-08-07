@@ -280,7 +280,7 @@ x0 = normalize(np.array([0.4,0.4,6.0,6.0,100,5,10]))
 sigma0 = 0.1
 opts = cma.CMAOptions()
 opts.set({
-    'maxiter': 1000, 'popsize': 8, 'seed': 100,
+    'maxiter': 1000, 'popsize': 8, 'seed': 40,
     'bounds': [np.zeros(7), np.ones(7)], 'verb_disp': 1000
 })
 
