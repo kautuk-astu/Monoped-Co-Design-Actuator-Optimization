@@ -1,8 +1,8 @@
 import pandas as pd
 
 # File paths
-primary_csv ='/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/best_comb_065_035_2025-08-07_01-20-21.csv'        # CSV with 'Best Cost' column
-secondary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_comb_065_035_2025-08-07_01-20-21.csv'    # CSV to match joint/gear values
+primary_csv ='/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/best_comb_065_035_2025-08-07_13-41-02.csv'        # CSV with 'Best Cost' column
+secondary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_comb_065_035_2025-08-07_13-41-02.csv'    # CSV to match joint/gear values
 output_txt = 'lowest_best_cost_info.txt'     # Output file
 
 # Load the primary CSV
@@ -58,6 +58,6 @@ final_text = primary_text + secondary_text
 
 # Print and write to file
 print(final_text)
-with open(output_txt, 'w') as f:
+with open(output_txt, 'a') as f:
     f.write(final_text)
 

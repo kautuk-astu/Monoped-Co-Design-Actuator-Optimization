@@ -16,8 +16,6 @@ random.seed(0)
 def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     m = mj.MjModel.from_xml_path(xml_path)
     d = mj.MjData(m)
-    #mj.mj_setTotalmass(m, mass)
-    #mj.mj_resetData(m, d)
     m.opt.iterations = 500  
     m.opt.tolerance = 1e-10
     total_energy = 0
@@ -31,11 +29,9 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     in_air = False  
     hip_actuator_id = m.actuator('torque1').id    
     knee_actuator_id = m.actuator('torque2').id    
-    #mj.mj_resetData(m, d)
-    l1n = 0.4959028110627651
-    l2n = 0.3603846109198206
+    l1n = 0.470947604311891
+    l2n = 0.3860421694932592
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, l1n, l2n)
-    #controller = vmc_ra_angle.Controller(xml_path, m, d, theta1, theta2)
     omega1_store = []
     omega2_store = []
     v0_store = []
@@ -49,19 +45,11 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     theta2d = np.rad2deg(theta2)
     start = time.time() 
     while time.time() - start < 8:
-        #controller = vmc_ra_angle.Controller(xml_path, m, d, theta1, theta2)
         step_start = time.time()
         t_elapsed = time.time() - start        
         if t_elapsed < 0:
             hip_error = 0 - d.qpos[1]
             knee_error = 0 - d.qpos[2]
-            # jac = controller.mujoco_jacobian()
-            # #Give code to ony take the first and third row of the jacobian and only last two columns
-            # #first and third row of the jacobian
-            # jac = jac[:3, -2:]
-            # #give first and third row of the jacobian
-            
-            # jac_2d = jac[:2, -2:]
             hip_torque = 100 * hip_error - 10 * d.qvel[1]
             knee_torque = 100 * knee_error - 10 * d.qvel[2]
         else:
@@ -87,9 +75,6 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
                     jump_results.append((current_jump_max, jump_energy))
                     max_height_after_control = max(max_height_after_control, current_jump_max)
                     current_jump_max = d.qpos[0]
-                    #jump_energy = 0
-                    if jump_count > 1:
-                        break
                 
                 controller.lin_sd_var(action)
                 controller.rot_sd_var(action)
@@ -101,9 +86,6 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
                 controller.fx_by_ee(action)
                 controller.force_applied_ground(action)
                 joint_torque = controller.joint_torque(action)
-                #print(controller.jacobian())
-
-                #print(controller.jacobian())
                 hip_torque = np.clip(joint_torque[0], -hip_peak_torque, hip_peak_torque)
                 knee_torque = np.clip(joint_torque[1], -knee_peak_torque, knee_peak_torque)
         
@@ -120,15 +102,11 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
             ha = m.opt.timestep * hip_torque * d.qvel[1]            
             ka = m.opt.timestep * knee_torque * d.qvel[2]
             if ha > 0:
-                hip_energy += ha
-                #print(ha, in_air)
-                
+                hip_energy += ha               
                 total_energy += ha
                 jump_energy += ha
             if ka > 0:
                 knee_energy += ka
-                #print(ka, in_air)
-                #print(d.qpos[0])
                 total_energy += ka
                 jump_energy += ka
         
@@ -167,11 +145,9 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
 
 
 # Define Action & XML Path
-action = np.array([100,5,10])
-#xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/humanoids_and_before/corrected_joint_cma/ll_xmls/24898_20099_2cae1ccf.xml'
-#xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_stoch3_60_60.xml'
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/seed_40_comb.xml'
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.5, 6*5.5,6*5.5*1.3636)
+action = np.array([138.9,4.6,7.9])
+xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/seed_10_comb.xml'
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.5, 4.0005439106249*5.5,7.4519014370975984*5.5*1.3636)
 data = {
     "omega2_store": omega2_store,
     "omega1_store": omega1_store,
@@ -186,7 +162,7 @@ data = {
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("new_nominal_jump.csv", index=False)
+df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/trajectories/seed_10.csv", index=False)
 
 # Print Results
 print(max_jump_height, max_jump_energy)
