@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d
 
-seed_list = np.linspace(20, 90, num = 8)  # Modify this list for desired seeds
+seed_list = np.linspace(30, 90, num = 7)  # Modify this list for desired seeds
 num_seeds = len(seed_list)
 
 
@@ -317,9 +317,10 @@ for seed in seed_list:
         writer = csv.writer(file)
         #subtract start time from end time
         end_time = datetime.now()
-        start_time = datetime.strptime(es.start_time, "%Y-%m-%d %H:%M:%S")
-        time_taken = (end_time - start_time).total_seconds()
+        # start_time = datetime.strptime(es.start_time, "%Y-%m-%d %H:%M:%S")
+        # start_time = 
+        # time_taken = (end_time - start_time).total_seconds()
         writer.writerow(["Time taken (seconds)"])
-        writer.writerow([time_taken])
+        writer.writerow([end_time.strftime("%Y-%m-%d %H:%M:%S")])
 
 
