@@ -134,6 +134,7 @@ for seed in seed_list:
         
         # Compute joint angles
         l1, l2 = thigh_length, calf_length
+        
         hip_peak_torque = thigh_gear_ratio*5.5
         knee_peak_torque = knee_gear_ratio*5.5*1.3636
         theta1, theta2 = inverse_kinematics(0, target_base_height, l1, l2)
