@@ -1,0 +1,310 @@
+seed - 10 
+
+Thigh: 0.4975886995523353
+Calf: 0.3658185407961469
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 6.0
+Best Cost: 33.64949487500087
+ac1: 154.8
+ac2: 2.1
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4975522425208676
+Calf: 0.3658643368122936
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.64974898477892
+hip peak torque: 0.451687608953874
+knee peak torque: 24.43991450921495
+Cost: [(np.float64(0.0), 0)]
+Max Height: 167.9
+Max Energy: 1.4
+Jump Results: 0.4
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+Primary CSV - Entry with Lowest Best Cost: seed - 0
+
+Thigh: 0.4975886995521039
+Calf: 0.3658185407963588
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 0.0
+Best Cost: 33.64949487500164
+ac1: 41.7
+ac2: 3.5
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.49751836592681
+Calf: 0.3658787458794392
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.649760472747474
+hip peak torque: 0.4517276438357162
+knee peak torque: 24.442817864644734
+Cost: [(np.float64(0.0), 0)]
+Max Height: 45.9
+Max Energy: 4.2
+Jump Results: 0.0
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+Primary CSV - Entry with Lowest Best Cost: seed - 20
+
+Thigh: 0.48970788727622
+Calf: 0.3682966838402943
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 7.0
+Best Cost: 33.64752393211113
+ac1: 46.6
+ac2: 0.3
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4897193365932049
+Calf: 0.3682571252689673
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.64761722034426
+hip peak torque: 0.4479496210077893
+knee peak torque: 24.165300142911068
+Cost: [(np.float64(0.0), 0)]
+Max Height: 48.8
+Max Energy: 0.1
+Jump Results: 0.0
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+
+Primary CSV - Entry with Lowest Best Cost: seed - 30
+
+Thigh: 0.4838387043833978
+Calf: 0.367457067025267
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 7.0
+Best Cost: 33.649703976487544
+ac1: 21.5
+ac2: 2.5
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4837803862068673
+Calf: 0.3674961494852092
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.65013934185093
+hip peak torque: 0.4466418437248137
+knee peak torque: 24.0783229217464
+Cost: [(np.float64(0.0), 0)]
+Max Height: 24.8
+Max Energy: 0.0
+Jump Results: 0.5
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+Primary CSV - Entry with Lowest Best Cost: seed - 40
+
+Thigh: 0.4896156804533841
+Calf: 0.3680839285183967
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 4.0
+Best Cost: 33.65455066993485
+ac1: 140.6
+ac2: 1.9
+ac3: 12.6
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4896156804533841
+Calf: 0.3680839285183967
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.65455066993485
+hip peak torque: 0.4480970007259856
+knee peak torque: 24.195716246006665
+Cost: [(np.float64(0.0), 0)]
+Max Height: 140.6
+Max Energy: 1.9
+Jump Results: 12.6
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+
+Primary CSV - Entry with Lowest Best Cost: seed - 50
+
+Thigh: 0.4975862567597585
+Calf: 0.3658211368798738
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 0.0
+Best Cost: 33.64962798907844
+ac1: 195.6
+ac2: 6.8
+ac3: 0.3
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4976092876675237
+Calf: 0.3657338704512642
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.650016405360034
+hip peak torque: 0.4518271337602318
+knee peak torque: 24.450682109251787
+Cost: [(np.float64(0.0), 0)]
+Max Height: 196.1
+Max Energy: 7.1
+Jump Results: 0.6
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: seed - 60
+
+Thigh: 0.4974491268896822
+Calf: 0.3659665409816739
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 2.0
+Best Cost: 33.65123909830026
+ac1: 56.5
+ac2: 5.5
+ac3: 17.2
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4974491268896822
+Calf: 0.3659665409816739
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.65123909830026
+hip peak torque: 0.4512343453809406
+knee peak torque: 24.411664602877668
+Cost: [(np.float64(0.0), 0)]
+Max Height: 56.5
+Max Energy: 5.5
+Jump Results: 17.2
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: eed - 70
+
+Thigh: 0.4975886995519852
+Calf: 0.3658185407965247
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 2.0
+Best Cost: 33.64949487500192
+ac1: 42.4
+ac2: 6.6
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4974958839186298
+Calf: 0.3659178882893917
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.64977562027415
+hip peak torque: 0.4516931389352815
+knee peak torque: 24.44038712150714
+Cost: [(np.float64(0.0), 0)]
+Max Height: 46.1
+Max Energy: 7.0
+Jump Results: 0.0
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: seed  80
+
+Thigh: 0.4717254851911134
+Calf: 0.365624565195334
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 7.0
+Best Cost: 33.66135127805155
+ac1: 119.5
+ac2: 0.2
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4717294777680744
+Calf: 0.3655652460691279
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.66163713321875
+hip peak torque: 0.4447655133327255
+knee peak torque: 23.97582919562493
+Cost: [(np.float64(0.0), 0)]
+Max Height: 104.0
+Max Energy: 0.1
+Jump Results: 0.0
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost:
+
+Thigh: 0.4838387035689079
+Calf: 0.3674570682597811
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 2.0
+Best Cost: 33.6497039764871
+ac1: 31.5
+ac2: 9.1
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4838293084764867
+Calf: 0.3674256093167614
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Best Cost: 33.64994642828293
+hip peak torque: 0.4466954976071812
+knee peak torque: 24.08163819979997
+Cost: [(np.float64(0.0), 0)]
+Max Height: 32.8
+Max Energy: 9.0
+Jump Results: 0.1
+ac1: nan
+ac2: nan
+ac3: nan
+
+----------------------------------------

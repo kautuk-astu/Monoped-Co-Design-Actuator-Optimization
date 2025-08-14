@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d
 
-seed_list = np.linspace(30, 90, num = 7)  # Modify this list for desired seeds
+seed_list = np.linspace(53, 53, num = 1)  # Modify this list for desired seeds
 num_seeds = len(seed_list)
 
 
@@ -272,7 +272,7 @@ for seed in seed_list:
         return final_cost 
 
     # CMA-ES Optimization
-    x0 = normalize(np.array([0.4,0.4,6.0,6.0,100,5,10]))
+    x0 = normalize(np.array([0.35,0.35,6.0,6.0,50,2.5,10]))
     sigma0 = 0.1
     opts = cma.CMAOptions()
     opts.set({

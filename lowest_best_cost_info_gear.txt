@@ -1,0 +1,279 @@
+Primary CSV - Entry with Lowest Best Cost: seed - 0
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.00000000000021
+Knee gear ratio: 7.024862080912476
+Best index: 1.0
+Best Cost: 33.657035085106685
+ac1: 195.7
+ac2: 0.5
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000017410758971
+Knee gear ratio: 7.024894111989385
+Best Cost: 33.65704588446643
+Max Height: 0.5126107064510496
+Max Energy: 28.69868022220623
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 197.9
+ac2: 0.7
+ac3: 0.0
+
+----------------------------------------
+Primary CSV - Entry with Lowest Best Cost: seed - 10
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000000000001
+Knee gear ratio: 7.024862080915407
+Best index: 2.0
+Best Cost: 33.65703508510654
+ac1: 52.6
+ac2: 2.4
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000064593711
+Knee gear ratio: 7.024914682757228
+Best Cost: 33.65709651139182
+Max Height: 0.5126106939295754
+Max Energy: 28.6988240258119
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 59.2
+ac2: 2.5
+ac3: 0.1
+
+----------------------------------------
+Primary CSV - Entry with Lowest Best Cost: seed - 20
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000000000001
+Knee gear ratio: 7.024862080915407
+Best index: 2.0
+Best Cost: 33.65703508510654
+ac1: 52.6
+ac2: 2.4
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000064593711
+Knee gear ratio: 7.024914682757228
+Best Cost: 33.65709651139182
+Max Height: 0.5126106939295754
+Max Energy: 28.6988240258119
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 59.2
+ac2: 2.5
+ac3: 0.1
+
+--------------------------------------
+Primary CSV - Entry with Lowest Best Cost: seed - 30
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.002997791563468
+Knee gear ratio: 7.419506824197711
+Best index: 1.0
+Best Cost: 33.65207126183371
+ac1: 97.0
+ac2: 5.4
+ac3: 5.5
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.002997791563468
+Knee gear ratio: 7.419506824197711
+Best Cost: 33.65207126183371
+Max Height: 0.5451270701529457
+Max Energy: 30.842878963920896
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 97.0
+ac2: 5.4
+ac3: 5.5
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: seed - 40
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000000000171
+Knee gear ratio: 7.024862080914499
+Best index: 4.0
+Best Cost: 33.65703508510651
+ac1: 100.5
+ac2: 5.7
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000015571365665
+Knee gear ratio: 7.024930050025644
+Best Cost: 33.65710213328049
+Max Height: 0.5126122480169938
+Max Energy: 28.698944933703064
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 103.1
+ac2: 5.8
+ac3: 0.1
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: seed - 50
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000000000012
+Knee gear ratio: 7.024862080913792
+Best index: 1.0
+Best Cost: 33.65703508510644
+ac1: 119.7
+ac2: 4.5
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000250336833
+Knee gear ratio: 7.024910164539684
+Best Cost: 33.65709515055217
+Max Height: 0.5126101080653396
+Max Energy: 28.698780612761283
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 119.9
+ac2: 4.5
+ac3: 0.1
+
+----------------------------------------
+
+Primary CSV - Entry with Lowest Best Cost: seed - 60
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.00000000000006
+Knee gear ratio: 7.415720054305577
+Best index: 4.0
+Best Cost: 33.647728851277044
+ac1: 153.3
+ac2: 2.2
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000001724930301
+Knee gear ratio: 7.415763889141247
+Best Cost: 33.647793119991114
+Max Height: 0.5449091880961587
+Max Energy: 30.816425168324862
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 152.6
+ac2: 2.3
+ac3: 0.1
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: seed - 70
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000000000304
+Knee gear ratio: 7.415720054305626
+Best index: 6.0
+Best Cost: 33.647728851277336
+ac1: 119.5
+ac2: 9.0
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000116157309
+Knee gear ratio: 7.415742127133425
+Best Cost: 33.64778386322483
+Max Height: 0.5449064741113457
+Max Energy: 30.816221442349043
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 122.4
+ac2: 8.6
+ac3: 0.1
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: seed - 90
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000000000036
+Knee gear ratio: 7.41572005431168
+Best index: 4.0
+Best Cost: 33.647728851278444
+ac1: 48.6
+ac2: 8.5
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000003635554301
+Knee gear ratio: 7.415737685325714
+Best Cost: 33.64773653350916
+Max Height: 0.5449089849813742
+Max Energy: 30.81625022517732
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 50.4
+ac2: 8.1
+ac3: 0.0
+
+----------------------------------------
+Primary CSV - Entry with Lowest Best Cost: seed - 80
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.000000000000055
+Knee gear ratio: 7.024862080913351
+Best index: 1.0
+Best Cost: 33.65703508510664
+ac1: 164.9
+ac2: 8.5
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4
+Calf: 0.4
+Hip gear ratio: 4.00002479910424
+Knee gear ratio: 7.024911045863474
+Best Cost: 33.65705148227934
+Max Height: 0.5126126825382156
+Max Energy: 28.698829531178948
+Jump Results: [(np.float64(0.0), 0)]
+ac1: 168.4
+ac2: 8.2
+ac3: 0.0
+
+----------------------------------------

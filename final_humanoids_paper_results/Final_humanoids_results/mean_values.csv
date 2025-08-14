@@ -1,0 +1,21 @@
+,Mean Value
+Thigh,0.4000000000000001
+Calf,0.4000000000000001
+Hip gear ratio,4.000302961026142
+Knee gear ratio,7.181603236816812
+Max Height,0.5255518850272575
+Max Energy,29.54846591512454
+ac1,111.72500000000002
+ac2,4.885
+ac3,0.58
+
+Mean values across all seeds:
+Thigh                0.479182
+Calf                 0.378973
+Hip gear ratio       4.018386
+Knee gear ratio      7.031296
+Max Height           0.524907
+Max Energy          28.792192
+ac1                104.218182
+ac2                  4.418182
+ac3                  7.863636

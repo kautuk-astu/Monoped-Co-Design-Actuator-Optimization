@@ -144,11 +144,11 @@ def modify_link_length_and_angle(xml_file, output_file,
     tree.write(output_file)
 
 
-l1n = 0.470947604311891
-l2n = 0.3860421694932592
-gt = 4.0005439106249
-gk = 7.4519014370975984
+l1n = 0.4
+l2n = 0.4
+gt = 4.000303
+gk = 7.181603
 print(f"l1n: {l1n}, l2n: {l2n}")   
 modify_link_length_and_angle(
-    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml", output_file= "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/seed_10_comb.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
+    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml", output_file= "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/avg_gear.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
 

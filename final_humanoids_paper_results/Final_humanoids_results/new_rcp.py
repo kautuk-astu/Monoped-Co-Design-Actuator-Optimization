@@ -29,8 +29,8 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     in_air = False  
     hip_actuator_id = m.actuator('torque1').id    
     knee_actuator_id = m.actuator('torque2').id    
-    l1n = 0.470947604311891
-    l2n = 0.3860421694932592
+    l1n = 0.4
+    l2n = 0.4
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, l1n, l2n)
     omega1_store = []
     omega2_store = []
@@ -145,9 +145,9 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
 
 
 # Define Action & XML Path
-action = np.array([100,5,10])
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/modified_robot_400_400_60_60.xml'
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.5, 4.0005439106249*5.5,7.4519014370975984*5.5*1.3636)
+action = np.array([111.725000,4.885000,0.580000])
+xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/avg_gear.xml'
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.5, 4.000303*5.5,7.181603*5.5*1.3636)
 data = {
     "omega2_store": omega2_store,
     "omega1_store": omega1_store,
@@ -162,7 +162,7 @@ data = {
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/trajectories/seed_10.csv", index=False)
+df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/avg_gear_jump.csv", index=False)
 
 # Print Results
 print(max_jump_height, max_jump_energy)
