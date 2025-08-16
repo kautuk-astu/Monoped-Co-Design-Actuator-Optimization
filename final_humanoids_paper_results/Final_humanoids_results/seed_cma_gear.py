@@ -14,7 +14,7 @@ import pandas as pd
 from scipy.interpolate import interp1d
 
 #sys.path.append(os.path.abspath('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/joint_cma/rcp.py'))
-seed_list = np.linspace(53, 53, num = 1)  # Modify this list for desired seeds
+seed_list = np.linspace(5, 5, num = 1)  # Modify this list for desired seeds
 num_seeds = len(seed_list)
 
 
@@ -43,8 +43,8 @@ for seed in seed_list:
     # Calf length
         [4, 8.7], 
         [4, 8.7],
-        [0, 200],        # Controller Param 1
-        [0, 10], 
+        [5, 200],        # Controller Param 1
+        [0, 5], 
         [0, 20] # Controller Param            # Controller Param 6
     ])
 
@@ -134,7 +134,7 @@ for seed in seed_list:
         
         # Compute joint angles
         l1, l2 = thigh_length, calf_length
-        
+
         hip_peak_torque = thigh_gear_ratio*5.5
         knee_peak_torque = knee_gear_ratio*5.5*1.3636
         theta1, theta2 = inverse_kinematics(0, target_base_height, l1, l2)
@@ -156,9 +156,13 @@ for seed in seed_list:
         theta2d = theta2 * 180 / np.pi
         hip_actuator_mass = act_interp_func(thigh_gear_ratio)
         knee_actuator_mass = act_interp_func(knee_gear_ratio)
-        torso_mass = hip_actuator_mass + knee_actuator_mass
-        thigh_link_mass = thigh_interp_func(thigh_length)
-        calf_link_mass = calf_interp_func(calf_length)
+        #torso_mass = hip_actuator_mass + knee_actuator_mass
+        # torso_mass = 0.09
+        # thigh_link_mass = thigh_interp_func(thigh_length) + hip_actuator_mass
+        # calf_link_mass = calf_interp_func(calf_length) + knee_actuator_mass
+        torso_mass = 0.0
+        thigh_link_mass = 0
+        calf_link_mass = 0
         for worldbody in root.findall('worldbody'):
             for torso in worldbody.findall('body'):
                 torso.set('pos', f"0 0 {-target_base_height}")
@@ -194,7 +198,7 @@ for seed in seed_list:
             elif motor.get("name") == "torque2" and knee_peak_torque:
                 motor.set("ctrlrange", f"-{knee_peak_torque} {knee_peak_torque}")
 
-        tree.write(output_file)
+        # tree.write(output_file)
         tree.write(output_file)
         #print(f"Modified XML saved to: {output_file}")
     import pandas as pd
@@ -255,8 +259,8 @@ for seed in seed_list:
 
     def get_cost(params):
         params = denormalize(params)
-        thigh_length= 0.35
-        calf_length= 0.35
+        thigh_length= 0.4
+        calf_length= 0.4
         other_params = process_action(params[2:])
         hip_gear_ratio = params[0]
         knee_gear_ratio = params[1]
@@ -302,7 +306,7 @@ for seed in seed_list:
     opts = cma.CMAOptions()
 
     opts.set({
-        'maxiter': 1000, 'popsize': 8, 'seed': int(seed),
+        'maxiter': 200, 'popsize': 8, 'seed': int(seed),
         'bounds': [np.zeros(5), np.ones(5)], 'verb_disp': 1000
     })
 

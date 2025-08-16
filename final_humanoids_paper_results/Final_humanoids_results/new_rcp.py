@@ -8,6 +8,7 @@ import random
 import vmc_roc_angle as vmc_ra_angle
 import pandas as pd
 import glfw
+from scipy.interpolate import interp1d
 
 # Set fixed random seed for deterministic behavior
 np.random.seed(0)
@@ -16,6 +17,28 @@ random.seed(0)
 def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     m = mj.MjModel.from_xml_path(xml_path)
     d = mj.MjData(m)
+    af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Final_humanoids_results/comb_mass_torque.csv')
+
+# Sort by gear ratio to avoid interpolation issues
+    af = af.sort_values(by='gear_ratio')
+
+    # Extract gear ratio and mass
+    gear_ratios = af['gear_ratio'].values
+    act_masses = af['mass'].values
+
+    # Create a linear interpolation function without extrapolation
+    act_interp_func = interp1d(
+        gear_ratios,
+        act_masses,
+        kind='linear',
+        bounds_error=True  # This raises an error if input is out of bounds
+    )
+
+    # hip_actuator_mass = act_interp_func(4.000146190606526)
+    # knee_actuator_mass = act_interp_func(5.999997890823783)
+    hip_actuator_mass = act_interp_func(6)
+    knee_actuator_mass = act_interp_func(6)
+    
     m.opt.iterations = 500  
     m.opt.tolerance = 1e-10
     total_energy = 0
@@ -29,8 +52,48 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     in_air = False  
     hip_actuator_id = m.actuator('torque1').id    
     knee_actuator_id = m.actuator('torque2').id    
-    l1n = 0.4
-    l2n = 0.4
+    l1n = 0.4999999996718242
+    l2n = 0.3584767209515728
+    dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/thigh_03_05.csv')
+
+# Sort by gear ratio to avoid interpolation issues
+    dft = dft.sort_values(by='Link Length (mm)')
+
+    # Extract gear ratio and mass
+    thigh_lengths = dft['Link Length (mm)'].values/1000
+    thigh_masses = dft['Calculated Mass (kg)'].values
+
+    # Create a linear interpolation function without extrapolation
+    thigh_interp_func = interp1d(
+        thigh_lengths,
+        thigh_masses,
+        kind='linear',
+        bounds_error=True  # This raises an error if input is out of bounds
+    )
+
+
+    dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/calf_03_05.csv')
+
+    # Sort by gear ratio to avoid interpolation issues
+    dfc = dfc.sort_values(by='Link Length (mm)')
+
+    # Extract gear ratio and mass
+    calf_lengths = dfc['Link Length (mm)'].values/1000
+    calf_masses = dfc['Calculated Mass (kg)'].values
+
+    # Create a linear interpolation function without extrapolation
+    calf_interp_func = interp1d(
+        calf_lengths,
+        calf_masses,
+        kind='linear',
+        bounds_error=True  # This raises an error if input is out of bounds
+    )
+
+    thigh_link_mass = thigh_interp_func(l1n) 
+    calf_link_mass = calf_interp_func(l2n)
+    mj.mj_setTotalmass(m, hip_actuator_mass + knee_actuator_mass + thigh_link_mass + calf_link_mass)
+    print(hip_actuator_mass, knee_actuator_mass, thigh_link_mass, calf_link_mass)
+
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, l1n, l2n)
     omega1_store = []
     omega2_store = []
@@ -40,7 +103,9 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     base_store = []
     torque1_store = []
     torque2_store = []
-    time_store = []    
+    time_store = [] 
+    store_com = []   
+    store_com_vel = []
     theta1d = np.rad2deg(theta1)
     theta2d = np.rad2deg(theta2)
     start = time.time() 
@@ -120,7 +185,19 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
         omega2_store.append(d.qvel[2])
         v0_store.append(d.qvel[0])
         time_store.append(t_elapsed)
+        com_z = d.subtree_com[0][2]
+        store_com.append(com_z)
+        #com_vel_z = d.subtree_linvel[1][2]
+        
         mj.mj_step(m, d)
+        masses = m.body_mass
+        velocities = d.cvel[:, :3]   # linear part of each body’s CoM velocity (Nx3)
+
+        total_mass = np.sum(masses)
+        com_vel = np.sum(masses[:, None] * velocities, axis=0) / total_mass
+        com_vel_z = com_vel[0]
+
+        store_com_vel.append(com_vel_z)
         
         
         if t_elapsed >= 0 and in_air:
@@ -141,13 +218,13 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     max_jump_height, max_jump_energy = max_jump
     print(time.time() - start)
 
-    return max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store,time_store
+    return max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store,time_store, store_com, store_com_vel
 
 
 # Define Action & XML Path
-action = np.array([111.725000,4.885000,0.580000])
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/avg_gear.xml'
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store= run(xml_path, action,-0.5, 4.000303*5.5,7.181603*5.5*1.3636)
+action = np.array([9,4.7,0.0])
+xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/caseBseed1.xml'
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store, store_com, store_com_vel = run(xml_path, action,-0.5, 6*5.5,6*5.5*1.3636)
 data = {
     "omega2_store": omega2_store,
     "omega1_store": omega1_store,
@@ -157,12 +234,14 @@ data = {
     "base_store": base_store,
     "torque1_store": torque1_store,
     "torque2_store": torque2_store,
-    "time_store": time_store
+    "time_store": time_store,
+    "store_com": store_com,
+    "store_com_vel": store_com_vel
 }
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/avg_gear_jump.csv", index=False)
+df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/caseBseed1.csv", index=False)
 
 # Print Results
 print(max_jump_height, max_jump_energy)

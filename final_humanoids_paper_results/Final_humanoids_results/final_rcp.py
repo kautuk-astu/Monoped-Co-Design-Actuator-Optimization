@@ -6,6 +6,8 @@ import vmc_roc_action as vmc_ra
 import ik as ik
 import random
 import vmc_roc_angle as vmc_ra_angle
+import pandas as pd
+from scipy.interpolate import interp1d
 
 # Set fixed random seed for deterministic behavior
 np.random.seed(0)
@@ -13,31 +15,84 @@ random.seed(0)
 
 def run(xml_path, action, thigh_length, calf_length, ik_value, hip_peak_torque, knee_peak_torque):
     m = mj.MjModel.from_xml_path(xml_path)
-    d = mj.MjData(m)
-    #mj.mj_setTotalmass(m, mass)
-    
-    # Reset simulation state for consistency
-    #mj.mj_resetData(m, d)
-    
-    # Increase solver precision for more stable results
-    m.opt.iterations = 500  
-    m.opt.tolerance = 1e-12
+    d = mj.MjData(m)    
+    # Increase solver precision for more stable results  
+    af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Final_humanoids_results/comb_mass_torque.csv')
 
+# Sort by gear ratio to avoid interpolation issues
+    af = af.sort_values(by='gear_ratio')
+
+    # Extract gear ratio and mass
+    gear_ratios = af['gear_ratio'].values
+    act_masses = af['mass'].values
+
+    # Create a linear interpolation function without extrapolation
+    act_interp_func = interp1d(
+        gear_ratios,
+        act_masses,
+        kind='linear',
+        bounds_error=True  # This raises an error if input is out of bounds
+    )
+
+    hip_actuator_mass = act_interp_func(hip_peak_torque / 5.5)
+    knee_actuator_mass = act_interp_func(knee_peak_torque / (5.5 * 1.3636))
     
-    # Energy variables
+    m.opt.iterations = 500  
+    m.opt.tolerance = 1e-10
     total_energy = 0
     hip_energy = 0
     knee_energy = 0
     jump_energy = 0  
     jump_results = []  
-
-    # Tracking jump state
     current_jump_max = float('-inf')
     max_height_after_control = float('-inf')
     jump_count = 0
     in_air = False  
     hip_actuator_id = m.actuator('torque1').id    
-    knee_actuator_id = m.actuator('torque2').id
+    knee_actuator_id = m.actuator('torque2').id    
+    l1n = thigh_length
+    l2n = calf_length
+    dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/thigh_03_05.csv')
+
+# Sort by gear ratio to avoid interpolation issues
+    dft = dft.sort_values(by='Link Length (mm)')
+
+    # Extract gear ratio and mass
+    thigh_lengths = dft['Link Length (mm)'].values/1000
+    thigh_masses = dft['Calculated Mass (kg)'].values
+
+    # Create a linear interpolation function without extrapolation
+    thigh_interp_func = interp1d(
+        thigh_lengths,
+        thigh_masses,
+        kind='linear',
+        bounds_error=True  # This raises an error if input is out of bounds
+    )
+
+
+    dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/calf_03_05.csv')
+
+    # Sort by gear ratio to avoid interpolation issues
+    dfc = dfc.sort_values(by='Link Length (mm)')
+
+    # Extract gear ratio and mass
+    calf_lengths = dfc['Link Length (mm)'].values/1000
+    calf_masses = dfc['Calculated Mass (kg)'].values
+
+    # Create a linear interpolation function without extrapolation
+    calf_interp_func = interp1d(
+        calf_lengths,
+        calf_masses,
+        kind='linear',
+        bounds_error=True  # This raises an error if input is out of bounds
+    )
+
+    thigh_link_mass = thigh_interp_func(l1n) 
+    calf_link_mass = calf_interp_func(l2n)
+    mj.mj_setTotalmass(m, hip_actuator_mass + knee_actuator_mass + thigh_link_mass + calf_link_mass)
+
+
+    # Tracking jump state
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, thigh_length, calf_length)
    
     

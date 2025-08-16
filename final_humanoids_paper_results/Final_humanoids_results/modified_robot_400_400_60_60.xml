@@ -2,7 +2,7 @@
 	<compiler inertiafromgeom="auto" angle="radian" />
 	<option solver="PGS" gravity="0 0 -9.81" integrator="RK4" timestep="0.002" />
 	<default>
-		<joint damping="1" armature="0" />
+		<joint damping="0" armature="0" />
 		<geom condim="1" material="matgeom" />
 	</default>
 	<visual>
@@ -26,21 +26,21 @@
 		
 		
 		<body name="base" pos="0 0 0.5">
-			<joint type="slide" axis="0 0 1" name="slidez" damping="2" />
+			<joint type="slide" axis="0 0 1" name="slidez" damping="0" />
 			
-			<geom type="box" size="0.03 0.03 0.1" rgba="0.5 0.6 0.7 1" mass="2.25" />
+			<geom type="box" size="0.03 0.03 0.1" rgba="0.5 0.6 0.7 1" />
 			
 			
 			<body name="link1" pos="0 0 0" euler="0 0.6751315329370315 0">
 				<joint type="hinge" axis="0 -1 0" pos="0 0 0" name="hinge1" limited="true" range="-3.14 3.14" />
 				
-				<geom name="thigh" type="capsule" fromto="0 0 0 0.4 0 0" size="0.05" rgba="0.5 0 0 0.3" mass="1.2702" />
+				<geom name="thigh" type="capsule" fromto="0 0 0 0.4 0 0" size="0.05" rgba="0.5 0 0 0.3"  />
 				
 				
 				<body name="link2" pos="0.4 0 0" euler="0 1.79132958771573 0">
 					<joint type="hinge" axis="0 -1 0" pos="0 0 0" name="hinge2" limited="true" range="-3.14 3.14" />
 					
-					<geom name="shank" type="capsule" fromto="0 0 0 0.4 0 0" size="0.025" mass="0.5642" />
+					<geom name="shank" type="capsule" fromto="0 0 0 0.4 0 0" size="0.025"  />
 				</body>
 			</body>
 		</body>

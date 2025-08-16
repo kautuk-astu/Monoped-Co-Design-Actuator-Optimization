@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 
 # File paths
-primary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/best_ll_06_04_2025-08-13_21-10-17_90.0.csv'
-secondary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_ll_06_04_2025-08-13_21-10-17_90.0.csv'
+primary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/best_ll_06_04_2025-08-15_02-52-50_40.0.csv'
+secondary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_ll_06_04_2025-08-15_02-52-50_40.0.csv'
 output_txt = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/lowest_best_cost_info_ll.txt'
 
 # Load primary CSV

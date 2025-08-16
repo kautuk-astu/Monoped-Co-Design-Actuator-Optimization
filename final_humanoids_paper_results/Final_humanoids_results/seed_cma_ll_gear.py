@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d
 
-seed_list = np.linspace(53, 53, num = 1)  # Modify this list for desired seeds
+seed_list = np.linspace(0, 5, num = 1)  # Modify this list for desired seeds
 num_seeds = len(seed_list)
 
 
@@ -22,7 +22,7 @@ num_seeds = len(seed_list)
 for seed in seed_list:
     print(f"\n\n========== Running optimization for SEED = {seed} ==========\n")
 
-    xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml"
+    xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/old_std.xml"
     mass_ik_values_file = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/final_links_with_mass.csv"  
     date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/best_comb_065_035_{date_str}_{seed}.csv"
@@ -33,8 +33,8 @@ for seed in seed_list:
         [0.3, 0.5],  # Calf length
         [4, 8.7], 
         [4, 8.7],
-        [0, 200],    # Controller Param 1
-        [0, 10], 
+        [5, 200],    # Controller Param 1
+        [0, 5], 
         [0, 20]     # Controller Param        # Controller Param 6
     ])
 
@@ -137,9 +137,12 @@ for seed in seed_list:
         theta2d = theta2 * 180 / np.pi
         hip_actuator_mass = act_interp_func(thigh_gear_ratio)
         knee_actuator_mass = act_interp_func(knee_gear_ratio)
-        torso_mass = hip_actuator_mass + knee_actuator_mass
-        thigh_link_mass = thigh_interp_func(thigh_length)
-        calf_link_mass = calf_interp_func(calf_length)
+        #torso_mass = hip_actuator_mass + knee_actuator_mass
+        torso_mass = 0.0
+        thigh_link_mass = 0
+        calf_link_mass = 0
+        # thigh_link_mass = thigh_interp_func(thigh_length) + hip_actuator_mass
+        # calf_link_mass = calf_interp_func(calf_length) + knee_actuator_mass
         for worldbody in root.findall('worldbody'):
             for torso in worldbody.findall('body'):
                 torso.set('pos', f"0 0 {-target_base_height}")
@@ -272,11 +275,11 @@ for seed in seed_list:
         return final_cost 
 
     # CMA-ES Optimization
-    x0 = normalize(np.array([0.35,0.35,6.0,6.0,50,2.5,10]))
+    x0 = normalize(np.array([0.4,0.4,6.0,6.0,50,2.5,10]))
     sigma0 = 0.1
     opts = cma.CMAOptions()
     opts.set({
-        'maxiter': 1000, 'popsize': 8, 'seed': int(seed),
+        'maxiter': 200, 'popsize': 8, 'seed': int(seed),
         'bounds': [np.zeros(7), np.ones(7)], 'verb_disp': 1000
     })
 
