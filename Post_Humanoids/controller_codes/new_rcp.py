@@ -17,7 +17,7 @@ random.seed(0)
 def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     m = mj.MjModel.from_xml_path(xml_path)
     d = mj.MjData(m)
-    af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post Humanoids/data/comb_mass_torque.csv')
+    af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/data/comb_mass_torque.csv')
 
 # Sort by gear ratio to avoid interpolation issues
     af = af.sort_values(by='gear_ratio')
@@ -37,8 +37,8 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     # hip_actuator_mass = act_interp_func(4.000146190606526)
     # knee_actuator_mass = act_interp_func(5.999997890823783)
     
-    hip_actuator_mass = act_interp_func(5.5)
-    knee_actuator_mass = act_interp_func(5.5)
+    hip_actuator_mass = act_interp_func(6)
+    knee_actuator_mass = act_interp_func(6)
     
     m.opt.iterations = 500  
     m.opt.tolerance = 1e-10
@@ -53,9 +53,9 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     in_air = False  
     hip_actuator_id = m.actuator('torque1').id    
     knee_actuator_id = m.actuator('torque2').id    
-    l1n = 0.5
+    l1n = 0.4
     l2n = 0.4
-    dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post Humanoids/data/thigh_03_05.csv')
+    dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/data/thigh_03_05.csv')
 
 # Sort by gear ratio to avoid interpolation issues
     dft = dft.sort_values(by='Link Length (mm)')
@@ -73,7 +73,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     )
 
 
-    dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post Humanoids/data/calf_03_05.csv')
+    dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/data/calf_03_05.csv')
 
     # Sort by gear ratio to avoid interpolation issues
     dfc = dfc.sort_values(by='Link Length (mm)')
@@ -228,8 +228,8 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
 
 # Define Action & XML Path
 action = np.array([50,2.5,10])
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/test3.xml'
-max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store, store_com, store_com_vel = run(xml_path, action,-0.5, 5.5*5.5,5.5*5.5*1.3636)
+xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/old_std.xml'
+max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store, store_com, store_com_vel = run(xml_path, action,-0.5, 6*5.5,6*5.5*1.3636)
 data = {
     "omega2_store": omega2_store,
     "omega1_store": omega1_store,
@@ -246,7 +246,7 @@ data = {
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/nodampnominal.csv", index=False)
+df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/nodampnominal.csv", index=False)
 
 # Print Results
 print(max_jump_height, max_jump_energy)
