@@ -17,7 +17,7 @@ random.seed(0)
 def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     m = mj.MjModel.from_xml_path(xml_path)
     d = mj.MjData(m)
-    af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Final_humanoids_results/comb_mass_torque.csv')
+    af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post Humanoids/data/comb_mass_torque.csv')
 
 # Sort by gear ratio to avoid interpolation issues
     af = af.sort_values(by='gear_ratio')
@@ -55,7 +55,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     knee_actuator_id = m.actuator('torque2').id    
     l1n = 0.5
     l2n = 0.4
-    dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/thigh_03_05.csv')
+    dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post Humanoids/data/thigh_03_05.csv')
 
 # Sort by gear ratio to avoid interpolation issues
     dft = dft.sort_values(by='Link Length (mm)')
@@ -73,7 +73,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     )
 
 
-    dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/calf_03_05.csv')
+    dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post Humanoids/data/calf_03_05.csv')
 
     # Sort by gear ratio to avoid interpolation issues
     dfc = dfc.sort_values(by='Link Length (mm)')
