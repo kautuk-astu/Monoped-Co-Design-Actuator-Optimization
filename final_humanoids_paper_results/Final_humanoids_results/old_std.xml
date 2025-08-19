@@ -2,7 +2,7 @@
 	<compiler inertiafromgeom="auto" angle="radian" />
 	<option solver="PGS" gravity="0 0 -9.81" integrator="RK4" timestep="0.002" />
 	<default>
-		<joint damping="0" armature="0" />
+		<joint armature="0" />
 		<geom condim="1" material="matgeom" />
 	</default>
 	<visual>
@@ -32,13 +32,13 @@
 			
 			
 			<body name="link1" pos="0 0 0" euler="0 0.6751315329370315 0">
-				<joint type="hinge" axis="0 -1 0" pos="0 0 0" name="hinge1" limited="true" range="-3.14 3.14" />
+				<joint type="hinge" axis="0 -1 0" pos="0 0 0" name="hinge1" limited="true" range="-3.14 3.14"/>
 				
 				<geom name="thigh" type="capsule" fromto="0 0 0 0.4 0 0" size="0.05" rgba="0.5 0 0 0.3" mass="1.2702" />
 				
 				
 				<body name="link2" pos="0.4 0 0" euler="0 1.79132958771573 0">
-					<joint type="hinge" axis="0 -1 0" pos="0 0 0" name="hinge2" limited="true" range="-3.14 3.14" />
+					<joint type="hinge" axis="0 -1 0" pos="0 0 0" name="hinge2" limited="true" range="-3.14 3.14"/>
 					
 					<geom name="shank" type="capsule" fromto="0 0 0 0.4 0 0" size="0.025" mass="0.5642" />
 				</body>
@@ -46,8 +46,8 @@
 		</body>
 	</worldbody>
 	<actuator>
-		<motor name="torque1" joint="hinge1" ctrlrange="-33.0 33.0" ctrllimited="true" />
-		<motor name="torque2" joint="hinge2" ctrlrange="-44.998799999999996 44.998799999999996" ctrllimited="true" />
+		<motor name="torque1" joint="hinge1"  ctrlrange="-33 33" ctrllimited="true" />
+		<motor name="torque2" joint="hinge2"  ctrlrange="-44.9988 44.9988" ctrllimited="true" />
 	</actuator>
     
 </mujoco>

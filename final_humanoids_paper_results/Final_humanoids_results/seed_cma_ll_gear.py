@@ -14,7 +14,7 @@ import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d
 
-seed_list = np.linspace(0, 5, num = 1)  # Modify this list for desired seeds
+seed_list = np.linspace(1, 1, num = 1)  # Modify this list for desired seeds
 num_seeds = len(seed_list)
 
 
@@ -25,16 +25,16 @@ for seed in seed_list:
     xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/old_std.xml"
     mass_ik_values_file = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/final_links_with_mass.csv"  
     date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/best_comb_065_035_{date_str}_{seed}.csv"
-    all_samples_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_comb_065_035_{date_str}_{seed}.csv"
-    all_runs_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_runs_{date_str}_{seed}.csv"
+    best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/post_camera_ready/best_comb_065_035_{date_str}_{seed}.csv"
+    all_samples_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/post_camera_ready/all_comb_065_035_{date_str}_{seed}.csv"
+    all_runs_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/post_camera_ready/all_runs_{date_str}_{seed}.csv"
     original_bounds = np.array([
         [0.3, 0.5],  # Thigh length
         [0.3, 0.5],  # Calf length
         [4, 8.7], 
         [4, 8.7],
-        [5, 200],    # Controller Param 1
-        [0, 5], 
+        [0, 200],    # Controller Param 1
+        [0, 10], 
         [0, 20]     # Controller Param        # Controller Param 6
     ])
 
@@ -118,7 +118,10 @@ for seed in seed_list:
                                     target_base_height=-0.5):
         
         # Compute joint angles
-        l1, l2 = thigh_length, calf_length
+        #l1, l2 = thigh_length, calf_length
+        l1, l2 = 0.4, 0.4  # Default values for testing
+        thigh_gear_ratio = 6
+        knee_gear_ratio = 6
         hip_peak_torque = thigh_gear_ratio*5.5
         knee_peak_torque = knee_gear_ratio*5.5*1.3636
         theta1, theta2 = inverse_kinematics(0, target_base_height, l1, l2)   
@@ -137,12 +140,12 @@ for seed in seed_list:
         theta2d = theta2 * 180 / np.pi
         hip_actuator_mass = act_interp_func(thigh_gear_ratio)
         knee_actuator_mass = act_interp_func(knee_gear_ratio)
-        #torso_mass = hip_actuator_mass + knee_actuator_mass
-        torso_mass = 0.0
-        thigh_link_mass = 0
-        calf_link_mass = 0
-        # thigh_link_mass = thigh_interp_func(thigh_length) + hip_actuator_mass
-        # calf_link_mass = calf_interp_func(calf_length) + knee_actuator_mass
+        torso_mass = hip_actuator_mass + knee_actuator_mass
+        #torso_mass = 0.0
+        # thigh_link_mass = 0
+        # calf_link_mass = 0
+        thigh_link_mass = thigh_interp_func(thigh_length) 
+        calf_link_mass = calf_interp_func(calf_length)
         for worldbody in root.findall('worldbody'):
             for torso in worldbody.findall('body'):
                 torso.set('pos', f"0 0 {-target_base_height}")
@@ -220,28 +223,19 @@ for seed in seed_list:
             action[i] = np.round(action[i], 1)
         return action
 
-    def load_mass_ik_values(filename):
-        mass_ik_dict = {}
-        with open(filename, newline='') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                thigh = float(row["thigh_length"])
-                calf = float(row["calf_length"])
-                mass = float(row["mass"])
-                ik_value = float(row["ik_value"])
-                mass_ik_dict[(thigh, calf)] = (mass, ik_value)
-        return mass_ik_dict
-
     def round_to_nearest(x, base=0.005):
         return round(base * round(x / base), 3)
 
     def get_cost(params):
         params = denormalize(params)
-        thigh_length = params[0]
-        calf_length = params[1]    
-        other_params = process_action(params[4:])
-        hip_gear_ratio = params[2]
-        knee_gear_ratio = params[3]
+        thigh_length, calf_length = 0.4, 0.4  # Default values for testing
+        # thigh_length = params[0]
+        # calf_length = params[1]    
+        other_params = [20,2.5,10]
+        #other_params = process_action(params[4:])
+        # hip_gear_ratio = params[2]
+        # knee_gear_ratio = params[3]
+        hip_gear_ratio, knee_gear_ratio = 6,6  # Default values for testing
         controller_params = other_params   
         unique_id = uuid.uuid4().hex[:8]
         
@@ -275,11 +269,11 @@ for seed in seed_list:
         return final_cost 
 
     # CMA-ES Optimization
-    x0 = normalize(np.array([0.4,0.4,6.0,6.0,50,2.5,10]))
+    x0 = normalize(np.array([0.4,0.4,6.0,6.0,100,5,10]))
     sigma0 = 0.1
     opts = cma.CMAOptions()
     opts.set({
-        'maxiter': 200, 'popsize': 8, 'seed': int(seed),
+        'maxiter': 2, 'popsize': 8, 'seed': int(seed),
         'bounds': [np.zeros(7), np.ones(7)], 'verb_disp': 1000
     })
 

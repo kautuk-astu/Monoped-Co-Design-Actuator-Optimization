@@ -103,12 +103,12 @@ def modify_link_length_and_angle(xml_file, output_file,
     theta2d = theta2 * 180 / np.pi
     hip_actuator_mass = act_interp_func(thigh_gear_ratio)
     knee_actuator_mass = act_interp_func(knee_gear_ratio)
-    #torso_mass = hip_actuator_mass 
-    torso_mass = 0.0
-    thigh_link_mass = 0
-    #thigh_link_mass = thigh_interp_func(thigh_length) + knee_actuator_mass 
-    #calf_link_mass = calf_interp_func(calf_length) 
-    calf_link_mass = 0
+    torso_mass = hip_actuator_mass  + knee_actuator_mass
+    # torso_mass = 0.0
+    # thigh_link_mass = 0
+    thigh_link_mass = thigh_interp_func(thigh_length) 
+    calf_link_mass = calf_interp_func(calf_length) 
+    #calf_link_mass = 0
     for worldbody in root.findall('worldbody'):
         for torso in worldbody.findall('body'):
             torso.set('pos', f"0 0 {-target_base_height}")
@@ -147,12 +147,12 @@ def modify_link_length_and_angle(xml_file, output_file,
     tree.write(output_file)
 
 
-l1n = 0.4999999996718242
-l2n = 0.3584767209515728
-gt = 6
+l1n = 0.5
+l2n = 0.4
+gt = 5.5
 
-gk = 6
+gk = 5.5
 print(f"l1n: {l1n}, l2n: {l2n}")   
 modify_link_length_and_angle(
-    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/modified_robot_400_400_60_60.xml", output_file= "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/caseBseed1.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
+    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/old_std.xml", output_file= "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/xmls/test3.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
 
