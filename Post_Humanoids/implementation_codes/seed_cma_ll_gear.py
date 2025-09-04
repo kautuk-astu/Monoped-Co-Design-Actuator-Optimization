@@ -9,12 +9,17 @@ import sys
 import multiprocessing
 import uuid
 from datetime import datetime
-import final_rcp as rcp
+#from Post_Humanoids.controller_codes import final_rcp as rcp
 import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d
+import sys, os
+sys.path.append("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization")
 
-seed_list = np.linspace(1, 1, num = 1)  # Modify this list for desired seeds
+from Post_Humanoids.controller_codes import final_rcp as rcp
+
+
+seed_list = np.linspace(0, 5, num = 6)  # Modify this list for desired seeds
 num_seeds = len(seed_list)
 
 
@@ -22,12 +27,12 @@ num_seeds = len(seed_list)
 for seed in seed_list:
     print(f"\n\n========== Running optimization for SEED = {seed} ==========\n")
 
-    xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/old_std.xml"
-    mass_ik_values_file = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/final_links_with_mass.csv"  
+    xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/modified_robot_400_400_60_60.xml"
+      
     date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/post_camera_ready/best_comb_065_035_{date_str}_{seed}.csv"
-    all_samples_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/post_camera_ready/all_comb_065_035_{date_str}_{seed}.csv"
-    all_runs_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/post_camera_ready/all_runs_{date_str}_{seed}.csv"
+    best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/comb/best_comb_065_035_{date_str}_{seed}.csv"
+    all_samples_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/comb/all_comb_065_035_{date_str}_{seed}.csv"
+    
     original_bounds = np.array([
         [0.3, 0.5],  # Thigh length
         [0.3, 0.5],  # Calf length
@@ -39,7 +44,7 @@ for seed in seed_list:
     ])
 
     # Helper Functions
-    dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/thigh_03_05.csv')
+    dft = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/data/thigh_03_05.csv')
 
     # Sort by gear ratio to avoid interpolation issues
     dft = dft.sort_values(by='Link Length (mm)')
@@ -57,7 +62,7 @@ for seed in seed_list:
     )
 
 
-    dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/calf_03_05.csv')
+    dfc = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/data/calf_03_05.csv')
 
     # Sort by gear ratio to avoid interpolation issues
     dfc = dfc.sort_values(by='Link Length (mm)')
@@ -74,7 +79,7 @@ for seed in seed_list:
         bounds_error=True  # This raises an error if input is out of bounds
     )
 
-    af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/comb_mass_torque.csv')
+    af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/data/comb_mass_torque.csv')
 
     # Sort by gear ratio to avoid interpolation issues
     af = af.sort_values(by='gear_ratio')
@@ -118,10 +123,8 @@ for seed in seed_list:
                                     target_base_height=-0.5):
         
         # Compute joint angles
-        #l1, l2 = thigh_length, calf_length
-        l1, l2 = 0.4, 0.4  # Default values for testing
-        thigh_gear_ratio = 6
-        knee_gear_ratio = 6
+        l1, l2 = thigh_length, calf_length
+        #l1, l2 = 0.4, 0.4  # Default values for testing
         hip_peak_torque = thigh_gear_ratio*5.5
         knee_peak_torque = knee_gear_ratio*5.5*1.3636
         theta1, theta2 = inverse_kinematics(0, target_base_height, l1, l2)   
@@ -228,18 +231,18 @@ for seed in seed_list:
 
     def get_cost(params):
         params = denormalize(params)
-        thigh_length, calf_length = 0.4, 0.4  # Default values for testing
-        # thigh_length = params[0]
-        # calf_length = params[1]    
-        other_params = [20,2.5,10]
-        #other_params = process_action(params[4:])
-        # hip_gear_ratio = params[2]
-        # knee_gear_ratio = params[3]
-        hip_gear_ratio, knee_gear_ratio = 6,6  # Default values for testing
+        #thigh_length, calf_length = 0.4, 0.4  # Default values for testing
+        thigh_length = params[0]
+        calf_length = params[1]    
+        
+        other_params = process_action(params[4:])
+        hip_gear_ratio = params[2]
+        knee_gear_ratio = params[3]
+        #hip_gear_ratio, knee_gear_ratio = 6,6  # Default values for testing
         controller_params = other_params   
         unique_id = uuid.uuid4().hex[:8]
         
-        modified_xml = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/design_xmls/{int(thigh_length * 100000)}_{int(calf_length * 100000)}_{int(hip_gear_ratio*100)}_{int(knee_gear_ratio*100)}_{unique_id}.xml"
+        modified_xml = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/design_xmls/{int(thigh_length * 100000)}_{int(calf_length * 100000)}_{int(hip_gear_ratio*100)}_{int(knee_gear_ratio*100)}_{unique_id}.xml"
         modify_link_length_and_angle(xml_template, modified_xml, thigh_length,calf_length, hip_gear_ratio, knee_gear_ratio)        
         height_values = []
         energy_values = []
@@ -273,7 +276,7 @@ for seed in seed_list:
     sigma0 = 0.1
     opts = cma.CMAOptions()
     opts.set({
-        'maxiter': 2, 'popsize': 8, 'seed': int(seed),
+        'maxiter': 1000, 'popsize': 8, 'seed': int(seed),
         'bounds': [np.zeros(7), np.ones(7)], 'verb_disp': 1000
     })
 

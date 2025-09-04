@@ -1,6 +1,6 @@
 import numpy as np
 import mujoco as mj 
-import len_rad_id as lri
+#import len_rad_id as lri
 import time
 
 # def inverse_kinematics(x, y, l1, l2):

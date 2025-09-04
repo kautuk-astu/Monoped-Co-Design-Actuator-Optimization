@@ -93,7 +93,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     thigh_link_mass = thigh_interp_func(l1n) 
     calf_link_mass = calf_interp_func(l2n)
     #mj.mj_setTotalmass(m, hip_actuator_mass + knee_actuator_mass + thigh_link_mass + calf_link_mass)
-    print(hip_actuator_mass+ knee_actuator_mass+ thigh_link_mass+ calf_link_mass)
+    #print(hip_actuator_mass+ knee_actuator_mass+ thigh_link_mass+ calf_link_mass)
     #exit()
 
     theta1, theta2 = ik.inverse_kinematics(0, ik_value, l1n, l2n)
@@ -219,7 +219,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     # Obtain the jump with max height and its energy
     max_jump = max(jump_results, key=lambda x: x[0], default=(-1e12,1e12))
     max_jump_height, max_jump_energy = max_jump
-    print(time.time() - start)
+    #print(time.time() - start)
     #command to get total mass
     print(mj.mj_getTotalmass(m))
 
@@ -227,8 +227,8 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
 
 
 # Define Action & XML Path
-action = np.array([50,2.5,10])
-xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/old_std.xml'
+action = np.array([1000,2.5,10])
+xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/modified_robot_400_400_60_60.xml'
 max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results,omega2_store,omega1_store, v0_store, theta1_store, theta2_store, base_store, torque1_store, torque2_store, time_store, store_com, store_com_vel = run(xml_path, action,-0.5, 6*5.5,6*5.5*1.3636)
 data = {
     "omega2_store": omega2_store,

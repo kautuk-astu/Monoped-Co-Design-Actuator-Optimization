@@ -1,0 +1,136 @@
+<mujoco model="2R_quadroped">
+    <compiler angle="radian" autolimits="true"/>
+    <option integrator = "implicit" timestep = "0.0003" 
+          jacobian = "dense" cone = "elliptic"
+          solver = "Newton" tolerance="1e-10"/>
+
+  <default>
+    <geom contype="0" conaffinity="0" condim="1" solref="0.005 1"/>
+  </default>
+
+  <asset>
+    <texture name="skybox" type="skybox" builtin="gradient" rgb1=".4 .6 .8" rgb2="0 0 0" width="800" height="800" mark="random" markrgb="1 1 1" />
+		<texture name="matplane" type="2d" builtin="checker" rgb1=".1 .2 .3" rgb2=".2 .3 .4" width="300" height="300" mark="edge" markrgb=".2 .3 .4" />
+		<material name="matplane" texture="matplane" texrepeat="1 1" texuniform="true" reflectance=".1" />
+		<material name="matgeom" rgba=".7 .5 .3 1" />
+    <mesh name="Torso" file="Torso.STL"/>
+    <mesh name="FL_AC" file="FL_AC.STL"/>
+    <mesh name="FL_CP" file="FL_CP.STL"/>
+    <mesh name="BL_AC" file="BL_AC.STL"/>
+    <mesh name="BL_CP" file="BL_CP.STL"/>
+    <mesh name="FR_AC" file="FR_AC.STL"/>
+    <mesh name="FR_CP" file="FR_CP.STL"/>
+    <mesh name="BR_AC" file="BR_AC.STL"/>
+    <mesh name="BR_CP" file="BR_CP.STL"/>
+  </asset>
+
+  <worldbody>
+    <light directional="false" diffuse="0.1 0.1 0.1" specular="0 0 0" pos="0 0 2" dir="0 0 -1" castshadow="false" />
+    <light mode="targetbodycom" target="Torso" directional="false" diffuse="0.8 0.8 0.8" specular="0.3 0.3 0.3" pos="-0.0 0.0 2.0" dir="0 0 -1" />
+		<camera name="cam0" pos="0 -2.8 0.8" euler="90 0 0" mode="trackcom" />
+		<camera name="back" pos="-2 -.2 1.2" xyaxes="0.2 -1 0 .5 0 2" mode="trackcom" />
+		<geom name="floor" pos="0 0 0" size="5 5 .25" type="plane" material="matplane" contype="1" conaffinity="1" condim="3" solref="0.005 1"/>
+
+    <body name= "Torso" pos= "0 0 0.18935" >
+      <freejoint/>
+      <inertial pos="0 0 0" quat="1 0 0 0" mass="5" diaginertia="0.003522698 0.005207970 0.006709789"/>
+      <geom type="mesh" rgba="1 1 1 1" mesh="Torso"/>   
+      <body name="FL_AC" pos="0.13 0.1053 0.051966">
+        <inertial pos="-0.0176916 -0.004 -0.0318729" quat="0.684533 0.177244 0.177245 0.684532" mass="0.0206242" diaginertia="1.95913e-05 1.86424e-05 1.15511e-06"/>
+        <joint name="FL_A" pos="0 0 0" axis="0 1 0" stiffness="0" damping="0.1"/>
+        <geom type="mesh" rgba="1 1 1 1" mesh="FL_AC"/>
+        <body name="FL_CP" pos="-0.043387 0 -0.078166">
+          <inertial pos="0.0142047 -0.004 -0.0311411" quat="0.977195 0 -0.212345 0" mass="0.0156241" diaginertia="9.60921e-06 9.54584e-06 5.0918e-07"/>
+          <joint name="FL_C" pos="0 0 0" axis="0 1 0" stiffness="0" damping="0.1"/>
+          <geom type="mesh" rgba="1 1 1 1" mesh="FL_CP"/>
+          <body name="FL_sphere" pos="0.03606 -0.004 -0.07906">
+              <geom type="sphere" size="0.005" contype="2" conaffinity="1" group="1"/>
+              <site name="FL_touch_site" pos="0 0 0" size="0.005" type="sphere" rgba="1 0 0 1"/>
+          </body>
+        </body>
+      </body>
+      <body name="BL_AC" pos="-0.13 0.1053 0.051966">
+        <inertial pos="-0.0176916 -0.004 -0.0318729" quat="0.684533 0.177244 0.177245 0.684532" mass="0.0206242" diaginertia="1.95913e-05 1.86424e-05 1.15511e-06"/>
+        <joint name="BL_A" pos="0 0 0" axis="0 1 0" stiffness="0" damping="0.1"/>
+        <geom type="mesh" rgba="1 1 1 1" mesh="BL_AC"/>
+        <body name="BL_CP" pos="-0.043387 0 -0.078166">
+          <inertial pos="0.0142047 -0.004 -0.0311411" quat="0.977195 0 -0.212345 0" mass="0.0156241" diaginertia="9.60921e-06 9.54584e-06 5.0918e-07"/>
+          <joint name="BL_C" pos="0 0 0" axis="0 1 0" stiffness="0" damping="0.1"/>
+          <geom type="mesh" rgba="1 1 1 1" mesh="BL_CP"/>
+          <body name="BL_sphere" pos="0.03606 -0.004 -0.07906">
+              <geom type="sphere" size="0.005" contype="2" conaffinity="1" group="1"/>
+              <site name="BL_touch_site" pos="0 0 0" size="0.005" type="sphere" rgba="1 0 0 1"/>
+          </body>
+        </body>
+      </body>
+      <body name="FR_AC" pos="0.13 -0.1053 0.051966">
+        <inertial pos="-0.0176916 0.004 -0.0318729" quat="0.684533 0.177244 0.177245 0.684532" mass="0.0206242" diaginertia="1.95913e-05 1.86424e-05 1.15511e-06"/>
+        <joint name="FR_A" pos="0 0 0" axis="0 1 0" stiffness="0" damping="0.1"/>
+        <geom type="mesh" rgba="1 1 1 1" mesh="FR_AC"/>
+        <body name="FR_CP" pos="-0.043387 0 -0.078166">
+          <inertial pos="0.0142047 0.004 -0.0311411" quat="0.977195 0 -0.212345 0" mass="0.0156241" diaginertia="9.60921e-06 9.54584e-06 5.0918e-07"/>
+          <joint name="FR_C" pos="0 0 0" axis="0 1 0" stiffness="0" damping="0.1"/>
+          <geom type="mesh" rgba="1 1 1 1" mesh="FR_CP"/>
+          <body name="FR_sphere" pos="0.03606 0.004 -0.07906">
+              <geom type="sphere" size="0.005" contype="2" conaffinity="1" group="1"/>
+              <site name="FR_touch_site" pos="0 0 0" size="0.005" type="sphere" rgba="1 0 0 1"/>
+          </body>
+        </body>
+      </body>
+      <body name="BR_AC" pos="-0.13 -0.1053 0.051966">
+        <inertial pos="-0.0176916 0.004 -0.0318729" quat="0.684533 0.177244 0.177245 0.684532" mass="0.0206242" diaginertia="1.95913e-05 1.86424e-05 1.15511e-06"/>
+        <joint name="BR_A" pos="0 0 0" axis="0 1 0" stiffness="0" damping="0.1"/>
+        <geom type="mesh" rgba="1 1 1 1" mesh="BR_AC"/>
+        <body name="BR_CP" pos="-0.043387 0 -0.078166">
+          <inertial pos="0.0142047 0.004 -0.0311411" quat="0.977195 0 -0.212345 0" mass="0.0156241" diaginertia="9.60921e-06 9.54584e-06 5.0918e-07"/>
+          <joint name="BR_C" pos="0 0 0" axis="0 1 0" stiffness="0" damping="0.1"/>
+          <geom type="mesh" rgba="1 1 1 1" mesh="BR_CP"/>
+          <body name="BR_sphere" pos="0.03606 0.004 -0.07906">
+              <geom type="sphere" size="0.005" contype="2" conaffinity="1" group="1"/>
+              <site name="BR_touch_site" pos="0 0 0" size="0.005" type="sphere" rgba="1 0 0 1"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <contact>
+    <exclude body1="FL_AC" body2="Torso"/>
+    <exclude body1="FL_AC" body2="FL_CP"/>
+    <exclude body1="Torso" body2="FL_CP"/>
+
+    <exclude body1="FR_AC" body2="Torso"/>
+    <exclude body1="FR_AC" body2="FR_CP"/>
+    <exclude body1="Torso" body2="FR_CP"/>
+
+    <exclude body1="BL_AC" body2="Torso"/>
+    <exclude body1="BL_AC" body2="BL_CP"/>
+    <exclude body1="Torso" body2="BL_CP"/>
+
+    <exclude body1="BR_AC" body2="Torso"/>
+    <exclude body1="BR_AC" body2="BR_CP"/>
+    <exclude body1="Torso" body2="BR_CP"/>
+
+  </contact>
+  
+  <sensor>
+      <touch name="touch_FL" site="FL_touch_site"/>
+      <touch name="touch_FR" site="FR_touch_site"/>
+      <touch name="touch_BL" site="BL_touch_site"/>
+      <touch name="touch_BR" site="BR_touch_site"/>
+  </sensor>
+
+  <actuator>
+    <position joint="FL_A" kp="15"/>
+    <position joint="FL_C" kp="15"/>
+
+    <position joint="BL_A" kp="15"/>
+    <position joint="BL_C" kp="15"/>
+
+    <position joint="FR_A" kp="15"/>
+    <position joint="FR_C" kp="15"/>
+
+    <position joint="BR_A" kp="15"/>
+    <position joint="BR_C" kp="15"/>
+  </actuator> 
+
+</mujoco>

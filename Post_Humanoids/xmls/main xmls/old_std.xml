@@ -1,6 +1,6 @@
 <mujoco model="Hopper">
     <compiler inertiafromgeom="auto" angle="radian" />
-    <option solver="PGS" gravity="0 0 -9.81" integrator="RK4" timestep="0.002" />
+    <option solver="PGS" gravity="0 0 -9.81" integrator="Euler" timestep="0.001" />
 
     <default>
         <!-- Explicitly zero geom friction -->
@@ -39,7 +39,7 @@
         <!-- Floor with explicit zero friction -->
         <geom name="floor" pos="0 0 0" size="5 5 .25"
               type="plane" material="matplane"
-              condim="3" friction="0 0 0" />
+              condim="3" friction="0 0 0"/>
 
         <body name="base" pos="0 0 0.5">
             <joint type="slide" axis="0 0 1" name="slidez"

@@ -1,11 +1,14 @@
 import numpy as np
 import mujoco as mj
 import time
-import len_rad_id as lri
-import vmc_roc_action as vmc_ra
-import ik as ik
+import sys, os
+sys.path.append("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization")
+from Post_Humanoids.controller_codes import ik as ik
+from Post_Humanoids.controller_codes import vmc_roc_angle as vmc_ra_angle
+
+# import ik as ik
 import random
-import vmc_roc_angle as vmc_ra_angle
+# import vmc_roc_angle as vmc_ra_angle
 import pandas as pd
 from scipy.interpolate import interp1d
 
