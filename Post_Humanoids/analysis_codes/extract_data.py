@@ -2,9 +2,9 @@ import pandas as pd
 import numpy as np
 
 # File paths
-primary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/best_ll_06_04_2025-08-15_02-52-50_40.0.csv'
-secondary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/final_humanoids_paper_results/Final_humanoids_results/camera_ready/all_ll_06_04_2025-08-15_02-52-50_40.0.csv'
-output_txt = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/lowest_best_cost_info_ll.txt'
+primary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/planar/comb/best_comb_040_060_2025-09-16_03-15-35_5.0.csv'
+secondary_csv = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/planar/comb/all_comb_040_060_2025-09-16_03-15-35_5.0.csv'
+output_txt = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/planar/comb/analysis/analysis_combined.txt'
 
 # Load primary CSV
 df1 = pd.read_csv(primary_csv)
@@ -39,7 +39,7 @@ if 'Cost' in df2.columns and 'Best Cost' not in df2.columns:
     df2 = df2.rename(columns={'mass': 'Best Cost'})
 # Match: First by Best Cost (float tolerance)
 
-required_cols_secondary = ['Best Cost', 'Thigh', 'Calf', 'Hip gear ratio', 'Knee gear ratio']
+required_cols_secondary = ['Cost', 'Thigh', 'Calf', 'Hip gear ratio', 'Knee gear ratio']
 missing_secondary = [col for col in required_cols_secondary if col not in df2.columns]
 if missing_secondary:
     raise ValueError(f"Secondary CSV missing columns: {missing_secondary}")
@@ -47,7 +47,7 @@ if missing_secondary:
 for col in required_cols_secondary:
     df2[col] = pd.to_numeric(df2[col], errors='coerce')
 tolerance = 1e-4
-filtered_rows = df2[np.isclose(df2['Best Cost'], best_cost_value, atol=tolerance)]
+filtered_rows = df2[np.isclose(df2['Cost'], best_cost_value, atol=tolerance)]
 
 # Match: Then by Thigh, Calf, Hip gear ratio, Knee gear ratio (also with tolerance)
 for col in ['Thigh', 'Calf', 'Hip gear ratio', 'Knee gear ratio']:
@@ -63,8 +63,10 @@ if filtered_rows.empty:
         f"\n\nNo matching entries found in secondary CSV for:\n"
         f"Best Cost = {best_cost_value}, Thigh = {min_row['Thigh']}, "
         f"Calf = {min_row['Calf']}, Hip gear ratio = {min_row['Hip gear ratio']}, "
-        f"Knee gear ratio = {min_row['Knee gear ratio']}"
-    )
+        f"Knee gear ratio = {min_row['Knee gear ratio']},"
+        f"Max Distance = {min_row['Max Distance']},Max x = {min_row['Max x']},Max Height = {min_row['Max Height']},"
+        f"Max Energy = {min_row['Max Energy']},Max Joule = {min_row['Max Joule']},Max Mech = {min_row['Max Mech']}\n"
+    )  
 else:
     secondary_output = ["\n\nMatching Entry/Entries from Secondary CSV:\n"]
     for idx, row in filtered_rows.iterrows():

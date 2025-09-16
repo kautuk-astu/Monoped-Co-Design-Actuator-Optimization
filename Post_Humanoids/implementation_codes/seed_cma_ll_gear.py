@@ -19,7 +19,7 @@ sys.path.append("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization")
 from Post_Humanoids.controller_codes import final_rcp as rcp
 
 
-seed_list = np.linspace(0, 5, num = 6)  # Modify this list for desired seeds
+seed_list = np.linspace(5, 5, num = 1)  # Modify this list for desired seeds
 num_seeds = len(seed_list)
 
 
@@ -252,7 +252,7 @@ for seed in seed_list:
         knee_peak_torque = knee_gear_ratio * 5.5 * 1.3636
         for i in range(1):
             knee_peak_torque = knee_gear_ratio * 5.5 * 1.3636
-            max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results = rcp.run(modified_xml, controller_params, thigh_length, calf_length, ik_value, hip_peak_torque, knee_peak_torque)
+            max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, max_jump_joule_energy, max_jump_mech_energy,jump_results = rcp.run(modified_xml, controller_params, thigh_length, calf_length, ik_value, hip_peak_torque, knee_peak_torque)
             base_max =max_height_after_control
             te = max_jump_energy
             height_values.append(base_max)
@@ -268,7 +268,7 @@ for seed in seed_list:
         final_cost = (0.65*(height_cost) + 0.35*(avg_energy))
         with open(all_samples_file, "a", newline="") as file:
             writer = csv.writer(file)
-            writer.writerow([thigh_length, calf_length, hip_gear_ratio, knee_gear_ratio, final_cost, mode_height, avg_energy, jump_results, unique_id] + list(controller_params))
+            writer.writerow([thigh_length, calf_length, hip_gear_ratio, knee_gear_ratio, final_cost, mode_height, avg_energy, max_jump_joule_energy, max_jump_mech_energy,jump_results, unique_id] + list(controller_params))
         return final_cost 
 
     # CMA-ES Optimization
@@ -276,7 +276,7 @@ for seed in seed_list:
     sigma0 = 0.1
     opts = cma.CMAOptions()
     opts.set({
-        'maxiter': 1000, 'popsize': 8, 'seed': int(seed),
+        'maxiter': 30, 'popsize': 8, 'seed': int(seed),
         'bounds': [np.zeros(7), np.ones(7)], 'verb_disp': 1000
     })
 
@@ -289,7 +289,7 @@ for seed in seed_list:
 
     with open(all_samples_file, "a", newline="") as file:
         writer = csv.writer(file)
-        writer.writerow(["Thigh", "Calf", "Hip gear ratio", "Knee gear ratio", "Cost", "Max Height", "Max Energy", "Jump Results", "unique id"] + [f"ac{i+1}" for i in range(3)])
+        writer.writerow(["Thigh", "Calf", "Hip gear ratio", "Knee gear ratio", "Cost", "Max Height", "Max Energy", "Max Joule", "Max Mech", "Jump Results", "unique id"] + [f"ac{i+1}" for i in range(3)])
 
 
     while not es.stop():

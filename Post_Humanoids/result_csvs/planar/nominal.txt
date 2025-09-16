@@ -1,0 +1,17 @@
+All jumps results:
+Jump 1: Height=0.282m, Mech=3.456J, Joule=16.747J, Total=20.203J, Distance=0.116m, X_end=0.116m, Duration=9.628s, Euclidean=0.305m
+Jump 2: Height=0.214m, Mech=4.683J, Joule=18.726J, Total=23.409J, Distance=0.379m, X_end=0.496m, Duration=9.564s, Euclidean=0.435m
+Jump 3: Height=-0.011m, Mech=0.301J, Joule=1.621J, Total=1.922J, Distance=0.015m, X_end=0.512m, Duration=0.759s, Euclidean=0.018m
+
+Jump with maximum Euclidean distance (sqrt(x² + z²)):
+Height: 0.214m
+Mechanical Energy: 4.683J
+Joule Heating Energy: 18.726J
+Total Energy: 23.409J
+Distance: 0.379m
+X_end position: 0.496m
+Duration: 9.564s
+Euclidean distance: 0.435m
+
+Final cost: 36.819877003788996
+Segmentation fault (core dumped)

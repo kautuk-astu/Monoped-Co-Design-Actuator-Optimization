@@ -45,7 +45,9 @@ def run(xml_path, action, thigh_length, calf_length, ik_value, hip_peak_torque, 
     total_energy = 0
     hip_energy = 0
     knee_energy = 0
-    jump_energy = 0  
+    jump_energy = 0
+    joule_energy = 0
+    mech_energy = 0
     jump_results = []  
     current_jump_max = float('-inf')
     max_height_after_control = float('-inf')
@@ -138,7 +140,9 @@ def run(xml_path, action, thigh_length, calf_length, ik_value, hip_peak_torque, 
                     jump_results.append((current_jump_max, jump_energy))
                     max_height_after_control = max(max_height_after_control, current_jump_max)
                     current_jump_max = d.qpos[0]
-                    jump_energy = 0
+                    #jump_energy = 0
+                # if jump_count == 1:
+                #     break
                 
                 controller.lin_sd_var(action)
                 controller.rot_sd_var(action)
@@ -162,18 +166,20 @@ def run(xml_path, action, thigh_length, calf_length, ik_value, hip_peak_torque, 
         if t_elapsed >= 0:
             ha = m.opt.timestep * hip_torque * d.qvel[1]            
             ka = m.opt.timestep * knee_torque * d.qvel[2]
+            joule_energy += (0.0955*hip_torque*hip_torque + 0.0955*knee_torque*knee_torque)*m.opt.timestep
             if ha > 0:
                 hip_energy += ha
                 #print(ha, in_air)
                 
                 total_energy += ha
-                jump_energy += ha
+                mech_energy += ha
             if ka > 0:
                 knee_energy += ka
                 #print(ka, in_air)
                 #print(d.qpos[0])
                 total_energy += ka
-                jump_energy += ka
+                mech_energy += ka
+            jump_energy = mech_energy + joule_energy
         
         # Step simulation
         mj.mj_step(m, d)
@@ -194,4 +200,4 @@ def run(xml_path, action, thigh_length, calf_length, ik_value, hip_peak_torque, 
     max_jump = max(jump_results, key=lambda x: x[0], default=(-1e12,1e12))
     max_jump_height, max_jump_energy = max_jump
 
-    return max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, jump_results
+    return max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, max_jump_height, max_jump_energy, joule_energy, mech_energy, jump_results

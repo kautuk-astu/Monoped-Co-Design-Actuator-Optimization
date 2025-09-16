@@ -4,7 +4,7 @@ import time
 import xml.etree.ElementTree as ET
 
 class Controller:
-    def __init__(self, xml_path, m, d, initial_hip_pos, initial_knee_pos, ori_l = 10.0, ori_theta=0):
+    def __init__(self, xml_path, m, d, initial_hip_pos, initial_knee_pos, ori_l = 10, ori_theta=0):
         self.xml_path = xml_path
         self.initial_hip_pos = initial_hip_pos
         self.initial_knee_pos = initial_knee_pos
