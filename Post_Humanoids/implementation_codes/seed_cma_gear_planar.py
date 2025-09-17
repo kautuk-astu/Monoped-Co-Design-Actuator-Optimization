@@ -46,7 +46,7 @@ for coeff_set in coefficient_sets:
         # Update filenames to include coefficient values
         best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/planar/gear/best_gear_{coeff_str}_{date_str}_{seed}.csv"
         all_samples_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/planar/gear/all_gear_{coeff_str}_{date_str}_{seed}.csv"
-        
+
         # Ensure directories exist
         os.makedirs(os.path.dirname(best_results_file), exist_ok=True)
         os.makedirs(os.path.dirname(all_samples_file), exist_ok=True)

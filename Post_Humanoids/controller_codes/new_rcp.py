@@ -18,7 +18,7 @@ random.seed(0)
 def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     m = mj.MjModel.from_xml_path(xml_path)
     d = mj.MjData(m)
-    viewer = view.launch_passive(m, d)
+    #viewer = view.launch_passive(m, d)
     af = pd.read_csv('/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/data/comb_mass_torque.csv')
 
 # Sort by gear ratio to avoid interpolation issues
@@ -135,7 +135,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
     #add viewer if you want to see the simulation
 
     
-    while time.time() - start < 20 and jump_count < 3:  # Stop after 3 jumps
+    while time.time() - start < 25 and jump_count < 3:  # Stop after 3 jumps
         step_start = time.time()
         t_elapsed = time.time() - start        
         if t_elapsed < 0:
@@ -281,7 +281,7 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
         
         mj.mj_step(m, d)
                 # ---------------- Render frame ---------------- #
-        viewer.sync()
+        #viewer.sync()
         # ----------------------------------------------- #
 
         masses = m.body_mass
@@ -345,7 +345,7 @@ xml_path = '/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_H
  max_euclidean_distance, max_euclidean_x_end, max_euclidean_duration, max_euclidean_value,
  jump_results, omega2_store, omega1_store, v0_store, theta1_store, theta2_store,
  base_store, torque1_store, torque2_store, time_store, store_com, store_com_vel, 
- base_x_store, current_x_max) = run(xml_path, action,-0.5, 6*5.5,6*5.5*1.3636)
+ base_x_store, current_x_max) = run(xml_path, action,-0.5, 6*5.5, 6*5.5*1.3636)
 
 data = {
     "omega2_store": omega2_store,
@@ -364,7 +364,7 @@ data = {
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/nominal_planar.csv", index=False)
+df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/planar/nominal_planar.csv", index=False)
 
 print("All jumps results:")
 for i, jump in enumerate(jump_results):

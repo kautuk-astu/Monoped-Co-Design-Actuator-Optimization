@@ -217,12 +217,12 @@ def modify_link_length_and_angle(xml_file, output_file,
         tree.write(output_file)
 
 
-l1n = 0.3371880322006635
-l2n = 0.30000119897805666
-gt = 4.000000040018973
+l1n = 0.3005195166704806
+l2n= 0.4590527493985643
+gt= 4.000098726071941
+gk= 4.180053094312462
 
-gk = 8.699999987222025
 print(f"l1n: {l1n}, l2n: {l2n}")   
 modify_link_length_and_angle(
-    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/modified_robot_planar.xml", output_file= "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/test_planar.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
+    xml_file="/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/modified_robot_planar.xml", output_file= "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/opt_comb.xml", thigh_length = l1n, calf_length = l2n, thigh_gear_ratio = gt, knee_gear_ratio=gk)
 
