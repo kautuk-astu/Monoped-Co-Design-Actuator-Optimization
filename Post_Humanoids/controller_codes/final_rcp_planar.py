@@ -230,6 +230,10 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque, thigh_len
             # Mechanical energy (work done by actuators)
             ha = m.opt.timestep * hip_torque * d.qvel[2]            
             ka = m.opt.timestep * knee_torque * d.qvel[3]
+            if ha < 0:
+                ha = 0
+            if ka < 0:
+                ka = 0
             mech_energy_step = ha + ka
             
             # Joule heating energy (I²R losses)
