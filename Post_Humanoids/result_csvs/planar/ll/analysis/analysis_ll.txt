@@ -1,0 +1,300 @@
+Primary CSV - Entry with Lowest Best Cost: 0.4,0.6
+
+Thigh: 0.3000853414978972
+Calf: 0.3000221655762656
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 4.0
+Best Cost: 18.71340886266306
+ac1: 5.1
+ac2: 2.7
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.3000820645753622
+Calf: 0.3000370427331773
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 18.713658346334704
+Max Distance: 0.1423229286154916
+Max Height: 0.0989740769544692
+Max x: 0.1022738876776526
+Max Energy: 2.278059844259744
+Max Joule: 3.029371503695019
+Max Mech: -0.7513116594352733
+Jump Results: [(np.float64(0.09897407695446929), np.float64(-0.7513116594352733), np.float64(3.029371503695019), np.float64(2.278059844259744), np.float64(0.10227388767765264), np.float64(0.1022105782949544), 24.932764053344727, np.float64(0.1423229286154916))]
+unique id: 7da5f3bc
+ac1: 5.1
+ac2: 2.7
+ac3: 0.0
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: 0.45,0.55
+
+Thigh: 0.3000879306562757
+Calf: 0.3000434153104837
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 1.0
+Best Cost: 20.7457983811355
+ac1: 5.9
+ac2: 4.4
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.3001075382218481
+Calf: 0.3000422040689345
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 20.74603579575693
+Max Distance: 0.1398672116532597
+Max Height: 0.0997350540031402
+Max x: 0.0980599607314242
+Max Energy: 2.150687113381641
+Max Joule: 3.0048178169081714
+Max Mech: -0.8541307035265264
+Jump Results: [(np.float64(0.09973505400314023), np.float64(-0.8541307035265264), np.float64(3.0048178169081714), np.float64(2.1506871133816414), np.float64(0.09805996073142427), np.float64(0.09799666823743536), 24.98860764503479, np.float64(0.13986721165325977))]
+unique id: 7a93c906
+ac1: 5.9
+ac2: 4.4
+ac3: 0.0
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: 0.5,0.5
+
+Thigh: 0.300198876043589
+Calf: 0.3000008355746336
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 3.0
+Best Cost: 22.81123687130849
+ac1: 6.0
+ac2: 4.6
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.300198876043589
+Calf: 0.3000008355746336
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 22.81123687130849
+Max Distance: 0.1397233539461976
+Max Height: 0.0998432352105474
+Max x: 0.0977442787106525
+Max Energy: 2.1425350828994145
+Max Joule: 3.002869117010918
+Max Mech: -0.8603340341115112
+Jump Results: [(np.float64(0.09984323521054742), np.float64(-0.8603340341115112), np.float64(3.002869117010918), np.float64(2.1425350828994145), np.float64(0.09774427871065255), np.float64(0.09768101262575829), 24.99385690689087, np.float64(0.13972335394619764))]
+unique id: effa9ecd
+ac1: 6.0
+ac2: 4.6
+ac3: 0.0
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: 0.55,0.45
+
+Thigh: 0.3000222723152671
+Calf: 0.3167987862520404
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 1.0
+Best Cost: 24.73871786821016
+ac1: 6.9
+ac2: 2.5
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.3000222723152671
+Calf: 0.3167987862520404
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 24.73871786821016
+Max Distance: 0.1623777226216342
+Max Height: 0.1062871109951221
+Max x: 0.1227581966310151
+Max Energy: 3.0231487209508243
+Max Joule: 3.3213037448386764
+Max Mech: -0.2981550238878497
+Jump Results: [(np.float64(0.1062871109951221), np.float64(-0.2981550238878497), np.float64(3.3213037448386764), np.float64(3.0231487209508243), np.float64(0.12275819663101516), np.float64(0.12265818924628015), 24.976794958114624, np.float64(0.16237772262163422))]
+unique id: bca88423
+ac1: 6.9
+ac2: 2.5
+ac3: 0.0
+
+----------------------------------------
+
+Primary CSV - Entry with Lowest Best Cost: 0.6,0.4
+
+Thigh: 0.3660395247723332
+Calf: 0.4294284230656254
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 3.0
+Best Cost: 26.880253184155663
+ac1: 45.5
+ac2: 1.7
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.3660395247723332
+Calf: 0.4294284230656254
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 26.880253184155663
+Max Distance: 0.3466371118696086 - 20\% decrease
+Max Height: 0.1480901568391903
+Max x: 0.3134112199214438
+Max Energy: 14.170993005415214 - 39.44\% decrease
+Max Joule: 10.756589008006603
+Max Mech: 3.414403997408612
+Jump Results: [(np.float64(0.21946711509250796), np.float64(3.5107089905029873), np.float64(9.790790740070102), np.float64(13.301499730573095), np.float64(0.11742487052167062), np.float64(0.11766896257771402), 13.082031011581421, np.float64(0.2489064378919502))]
+unique id: 49bc09b8
+ac1: 45.5
+ac2: 1.7
+ac3: 0.0
+
+----------------------------------------
+
+Primary CSV - Entry with Lowest Best Cost: 0.65,0.35
+
+Thigh: 0.4999976941256973
+Calf: 0.304413795885791
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 1.0
+Best Cost: 27.176365496309487
+ac1: 73.5
+ac2: 0.1
+ac3: 0.1
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4999976941256973
+Calf: 0.304413795885791
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 27.176365496309487
+Max Distance: 0.5264400229391316
+Max Height: 0.2331566353726878
+Max x: 0.4719926706357217
+Max Energy: 22.795661320965777
+Max Joule: 15.362347581946551
+Max Mech: 7.433313739019209
+Jump Results: [(np.float64(0.30856165668957175), np.float64(6.7650268683961645), np.float64(14.072064677027592), np.float64(20.837091545423746), np.float64(0.144781709557829), np.float64(0.1448539072826975), 13.11435580253601, np.float64(0.3408401962819243))]
+unique id: cab56367
+ac1: 73.5
+ac2: 0.1
+ac3: 0.1
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: 0.7,0.3
+
+Thigh: 0.4646032412459085
+Calf: 0.3000628771898189
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 2.0
+Best Cost: 24.122653598407773
+ac1: 199.7
+ac2: 0.1
+ac3: 0.1
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4646032412459085
+Calf: 0.3000628771898189
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 24.122653598407773
+Max Distance: 0.8722238335238496
+Max Height: 0.2744842604035043
+Max x: 0.8279086945779596
+Max Energy: 31.639739636309805
+Max Joule: 23.22221835847008
+Max Mech: 8.417521277839635
+Jump Results: [(np.float64(0.48574548619034663), np.float64(8.847362660007256), np.float64(24.8197963399839), np.float64(33.66715899999111), np.float64(0.11626476407617209), np.float64(0.11631153436814337), 8.922216415405273, np.float64(0.4994658874437614))]
+unique id: 3b10b77e
+ac1: 199.7
+ac2: 0.1
+ac3: 0.1
+
+----------------------------------------
+
+
+Primary CSV - Entry with Lowest Best Cost: 0.75,0.25
+
+Thigh: 0.4686975805608777
+Calf: 0.300070554457034
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 7.0
+Best Cost: 23.56131940594435
+ac1: 198.3
+ac2: 0.0
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4686975805608777
+Calf: 0.300070554457034
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 23.56131940594435
+Max Distance: 0.8781821418624075
+Max Height: 0.269818372798898
+Max x: 0.8357044453550553
+Max Energy: 31.91463553339236
+Max Joule: 23.13415280255682
+Max Mech: 8.78048273083548
+Jump Results: [(np.float64(0.4874971610803912), np.float64(8.945147833866898), np.float64(25.059047689443176), np.float64(34.00419552331009), np.float64(0.1209105204468914), np.float64(0.12095998117499235), 9.07935881614685, np.float64(0.5022676935819972))]
+unique id: 25797193
+ac1: 198.3
+ac2: 0.0
+ac3: 0.0
+
+----------------------------------------
+Primary CSV - Entry with Lowest Best Cost: 0.8,0.2
+
+Thigh: 0.4778132808492199
+Calf: 0.3001465315039639
+Hip gear ratio: 6.0
+Knee gear ratio: 6.0
+Best index: 2.0
+Best Cost: 22.986667240166437
+ac1: 197.8
+ac2: 0.6
+ac3: 0.2
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4778132808492199
+Calf: 0.3001465315039639
+Hip gear ratio: 6.0
+Knee gear ratio: 6
+Cost: 22.986667240166437
+Max Distance: 0.8879588010613234
+Max Height: 0.2620506126618685
+Max x: 0.8484104600874522
+Max Energy: 32.63436841711541
+Max Joule: 22.96995584611993
+Max Mech: 9.664412570995518
+Jump Results: [(np.float64(0.4968351581608513), np.float64(9.776558439351962), np.float64(25.697467185902834), np.float64(35.47402562525481), np.float64(0.1313026153003808), np.float64(0.13135790185765642), 9.082444429397583, np.float64(0.5138925482719494))]
+unique id: 0d1520d5
+ac1: 197.8
+ac2: 0.6
+ac3: 0.2
+
+----------------------------------------
