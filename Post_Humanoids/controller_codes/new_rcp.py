@@ -245,6 +245,10 @@ def run(xml_path, action, ik_value, hip_peak_torque, knee_peak_torque):
             # Mechanical energy (work done by actuators)
             ha = m.opt.timestep * hip_torque * d.qvel[2]            
             ka = m.opt.timestep * knee_torque * d.qvel[3]
+            if ha < 0:
+                ha = 0
+            if ka < 0:
+                ka = 0
             mech_energy_step = ha + ka
             
             # Joule heating energy (I²R losses)
@@ -364,7 +368,7 @@ data = {
 
 # Create DataFrame and save to CSV
 df = pd.DataFrame(data)
-df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/planar/nominal_planar.csv", index=False)
+df.to_csv("/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/planar/nominal_planar_regenerative.csv", index=False)
 
 print("All jumps results:")
 for i, jump in enumerate(jump_results):

@@ -13,17 +13,17 @@ class SLIPHopperMPC:
         self.l0 = 0.7       # nominal spring length (m)
         
         # MPC parameters
-        self.dt = 0.005     # time step (s)
+        self.dt = 0.001  # time step (s)
         self.horizon = 20   # prediction horizon steps
         self.control_horizon = 20  # control horizon steps
         
         # Control constraints
-        self.u_min = 0.65   # min spring rest length (m)
-        self.u_max = 0.75   # max spring rest length (m)
-        self.f_max = 20000.0 # max force (N)
+        self.u_min = 0.7   # min spring rest length (m)
+        self.u_max = 0.9   # max spring rest length (m)
+        self.f_max = 230.0 # max force (N)
         
         # Target height for jumping
-        self.target_height = 1.2  # target jump height (m)
+        self.target_height = 1.5 # target jump height (m)
         
         # Storage for visualization
         self.spring_forces = []
@@ -39,7 +39,7 @@ class SLIPHopperMPC:
         
         # Spring force with smooth activation
         f_spring = alpha * (self.k * (u - l) - self.c * ldot)
-        f_spring = np.clip(f_spring, 0, self.f_max)
+        f_spring = np.clip(f_spring, -self.f_max, self.f_max)
         
         # Store for visualization
         self.spring_forces.append(f_spring)
@@ -71,7 +71,7 @@ class SLIPHopperMPC:
             new_state = states[-1] + state_dot * self.dt
             
             # Physical constraints
-            new_state[2] = max(0.1, new_state[2])  # Spring length > 0.1m
+            new_state[2] = max(0.7, new_state[2])  # Spring length > 0.1m
             new_state[0] = max(new_state[2], new_state[0])  # z >= l
             
             states.append(new_state)
@@ -82,6 +82,7 @@ class SLIPHopperMPC:
         """MPC cost function with phase-aware terms"""
         states = self.simulate_slip(state, u_sequence)
         z_positions = states[:, 0]
+        peak_height = np.max(z_positions)
         
         # Detect phases for specialized costing
         phases = self.detect_phase_transitions(states)
@@ -91,21 +92,21 @@ class SLIPHopperMPC:
         takeoff_velocity = 0
         if stance_count > 0:
             # Estimate takeoff velocity from stance phase
-            stance_indices = np.where(phases == 1)[0]
+            stance_indices = np.where(phases == 1)[0] #np.where returns a tuple, [0] extracts the first array
             if len(stance_indices) > 0:
                 takeoff_idx = stance_indices[-1]
                 takeoff_velocity = states[takeoff_idx, 1]  # zdot at end of stance
         
         # Cost components
-        height_error = np.square(z_positions[-1] - self.target_height)
+        height_error = np.square(peak_height - self.target_height)
         control_effort = np.sum(np.square(u_sequence - self.l0))
         velocity_penalty = np.square(takeoff_velocity - np.sqrt(2 * self.g * self.target_height))
         
         # Penalize excessive control changes for smoothness
         control_smoothness = np.sum(np.square(np.diff(u_sequence)))
         
-        total_cost = (1000.0 * height_error + 
-                      0.1 * control_effort + 
+        total_cost = (10000.0 * height_error + 
+                      80 * control_effort + 
                       5.0 * velocity_penalty +
                       0.01 * control_smoothness)
         
@@ -121,7 +122,7 @@ class SLIPHopperMPC:
         
         # Solve optimization problem
         result = minimize(self.cost_function, u0, args=(current_state,),
-                         method='SLSQP', bounds=bounds,
+                         method='L-BFGS-B', bounds=bounds,
                          options={'maxiter': 100, 'disp': False, 'ftol': 1e-4})
         
         if not result.success:
@@ -131,10 +132,12 @@ class SLIPHopperMPC:
         
         return result.x
     
-    def control_loop(self, total_time=3.0):
+    def control_loop(self, total_time=10.0):
         """Main control loop simulation"""
         # Initial state: [z, zdot, l, ldot]
         state = np.array([self.l0, 0.0, self.l0, 0.0])
+        # jump_count = 0
+        # reset_after_jump = True
         
         # Storage for results
         time_history = []
@@ -146,6 +149,8 @@ class SLIPHopperMPC:
         # Run simulation
         for t in np.arange(0, total_time, self.dt):
             # Solve MPC problem
+            # if reset_after_jump and jump_count > 0:
+            #     state = np.array([self.l0, 0.0, self.l0, 0.0])
             u_sequence = self.solve_mpc(state)
             
             # Apply first control input
@@ -156,11 +161,22 @@ class SLIPHopperMPC:
             state = state + state_dot * self.dt
             
             # Ensure physical constraints
-            state[2] = max(0.1, state[2])  # Spring length > 0
+            state[2] = max(0.7, state[2])  # Spring length > 0.7m
             state[0] = max(state[2], state[0])  # z >= l (can't go below ground)
             
             # Detect current phase
             current_phase = 1 if (state[0] - state[2] <= 0) else 0
+            # was_in_flight = (state[0] - state[2] > 0)
+            # now_landing = (state[0] - state[2] <= 0)
+
+            # if was_in_flight and now_landing:
+            #     jump_count += 1
+            #     print(f"Jump {jump_count} completed at time {t:.2f}s")
+            #     if reset_after_jump:
+            #     # Don't use the landed state, reset for next jump
+            #         continue
+            # # Reset to nominal state but keep current height
+            # state = new_state
             
             # Store results
             time_history.append(t)
@@ -289,7 +305,7 @@ if __name__ == "__main__":
     
     # Create and run the controller
     hopper = SLIPHopperMPC()
-    time, states, controls, phases, forces = hopper.control_loop(total_time=3.0)
+    time, states, controls, phases, forces = hopper.control_loop(total_time=1.0)
     
     # Analyze results
     max_height, jump_count = analyze_performance(time, states, phases, hopper.target_height)

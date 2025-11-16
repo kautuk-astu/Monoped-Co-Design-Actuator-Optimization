@@ -233,15 +233,13 @@ for seed in seed_list:
         params = denormalize(params)
         #thigh_length, calf_length = 0.4, 0.4  # Default values for testing
         thigh_length = params[0]
-        calf_length = params[1]    
-        
+        calf_length = params[1]         
         other_params = process_action(params[4:])
         hip_gear_ratio = params[2]
         knee_gear_ratio = params[3]
         #hip_gear_ratio, knee_gear_ratio = 6,6  # Default values for testing
         controller_params = other_params   
-        unique_id = uuid.uuid4().hex[:8]
-        
+        unique_id = uuid.uuid4().hex[:8]        
         modified_xml = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/design_xmls/{int(thigh_length * 100000)}_{int(calf_length * 100000)}_{int(hip_gear_ratio*100)}_{int(knee_gear_ratio*100)}_{unique_id}.xml"
         modify_link_length_and_angle(xml_template, modified_xml, thigh_length,calf_length, hip_gear_ratio, knee_gear_ratio)        
         height_values = []

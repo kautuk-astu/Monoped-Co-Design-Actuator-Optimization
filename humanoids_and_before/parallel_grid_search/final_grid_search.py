@@ -6,13 +6,13 @@ import rcp  # Your script for running simulations
 import csv
 from collections import Counter
 # Define grid search range
-thigh_lengths = np.linspace(0.400, 0.600, 9)  #both inclusive
-calf_lengths = np.linspace(0.400, 0.600, 9)
+thigh_lengths = np.linspace(0.250, 0.450, 9)  #both inclusive
+calf_lengths = np.linspace(0.250, 0.450, 9)
 print(thigh_lengths)
 print(calf_lengths)
 
 
-xml_template = "template_robot.xml"
+xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/modified_robot_400_400_60_60.xml"
 # File for storing the best results for each link length combination
 best_results_file = "best_results.csv"
 # Load Mass & IK Values from CSV

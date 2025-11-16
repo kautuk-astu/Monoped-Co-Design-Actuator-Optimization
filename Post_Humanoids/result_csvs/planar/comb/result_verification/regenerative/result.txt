@@ -1,0 +1,14 @@
+All jumps results:
+Jump 1: Height=0.322m, Mech=4.031J, Joule=12.597J, Total=16.628J, Distance=0.081m, X_end=0.081m, Duration=8.716s, Euclidean=0.332m
+Jump 2: Height=0.248m, Mech=5.169J, Joule=12.807J, Total=17.976J, Distance=0.337m, X_end=0.419m, Duration=8.690s, Euclidean=0.418m
+Jump 3: Height=0.158m, Mech=2.841J, Joule=11.706J, Total=14.547J, Distance=0.450m, X_end=0.869m, Duration=7.544s, Euclidean=0.477m
+
+Jump with maximum Euclidean distance (sqrt(x² + z²)):
+Height: 0.158m
+Mechanical Energy: 2.841J
+Joule Heating Energy: 11.706J
+Total Energy: 14.547J
+Distance: 0.450m
+X_end position: 0.869m
+Duration: 7.544s
+Euclidean distance: 0.477m

@@ -4,34 +4,24 @@ import time
 import xml.etree.ElementTree as ET
 
 class Controller:
-    def __init__(self, xml_path, m, d, ori_l = 10.0, ori_theta=0):
+    def __init__(self, xml_path, m, d, initial_hip_pos, initial_knee_pos, ori_l = 10, ori_theta=0):
         self.xml_path = xml_path
-        #m = mj.MjModel.from_xml_path(xml_path)
-        #d = mj.MjData(m)
+        self.initial_hip_pos = initial_hip_pos
+        self.initial_knee_pos = initial_knee_pos
         self.m = m
         self.d = d
         self.ori_l = ori_l
         self.ori_theta = ori_theta
-        # Get the joint index for the slider joint
         base_joint_id = mj.mj_name2id(m, mj.mjtObj.mjOBJ_JOINT, "slidez")
         self.base_joint_id = base_joint_id
         self.base_force_index = m.jnt_dofadr[base_joint_id]
-        # Get the joint index for the thigh/hip joint
         thigh_joint_id = mj.mj_name2id(m, mj.mjtObj.mjOBJ_JOINT, "hinge1")
         self.thigh_joint_id = thigh_joint_id
         self.hip_force_index = m.jnt_dofadr[thigh_joint_id]
-        # Get the joint index for the knee joint
         knee_joint_id = mj.mj_name2id(m, mj.mjtObj.mjOBJ_JOINT, "hinge2")
         self.knee_joint_id = knee_joint_id
         self.knee_force_index = m.jnt_dofadr[knee_joint_id]
 
-    def test_init(self):
-        print("base_joint_id:", self.base_joint_id)
-        print("thigh_joint_id:", self.thigh_joint_id)
-        print("knee_joint_id:", self.knee_joint_id)
-        print("base_force_index:", self.base_force_index)
-        print("hip_force_index:", self.hip_force_index)
-        print("knee_force_index:", self.knee_force_index)
 
     def get_ground_contact_forces(self):
 
@@ -69,19 +59,11 @@ class Controller:
 
                 ground_contact_forces.append((contact_force, body_id))
 
-        return ground_contact_forces
+        return ground_contact_forces    
+ 
     
-    def print_contact_force(self):
-        contact_force = self.get_ground_contact_forces() #only one contact gets updated everytime since it starts with empty array
-        for force, body_id in contact_force:
-            print(f"Contact force on body {body_id}: {force}")
-        return force 
-    
-    def body_names(self):
-        # Get the number of bodies in the model
-        num_bodies = self.m.nbody
-        # Get the names of all bodies    
-        #get body names usig bodyname2id
+    def body_names(self):        
+        num_bodies = self.m.nbody        
         body_names = [mj.mj_id2name(self.m, mj.mjtObj.mjOBJ_BODY, i) for i in range(num_bodies)]
         return body_names
     
@@ -95,7 +77,7 @@ class Controller:
     
     #following functions are to obtain velocity of the leg link in world frame 
 
-    def body_cvel(self):  #COM velocity
+    def body_cvel(self):  #COM velocity in local frame
         body_names = self.body_names()
         body_id = self.body_dict()
         # make a list of linear velocities of all bodies
@@ -113,15 +95,13 @@ class Controller:
         leg_velocity = body_velocity[leg_index]
         return leg_velocity
     
-    #following functions are to obtain position of the leg link in world frame
-
-    #function to obtain thigh joint position
     def thigh_joint_position(self):
         # get the index of thigh joint
         thigh_joint_id = self.thigh_joint_id
         # get the position of thigh joint
-        thigh_joint_position = self.d.qpos[thigh_joint_id]
-        return thigh_joint_position
+        thigh_joint_position = self.d.qpos[thigh_joint_id] 
+        thigh_total_position = thigh_joint_position + self.initial_hip_pos #NOTE: Initial Thigh angle accounted for
+        return thigh_total_position
     
     def rotmat_thigh(self):
         # get the position of thigh joint
@@ -136,7 +116,6 @@ class Controller:
         leg_xz_velocity = np.array([leg_velocity[0], leg_velocity[2]])
         # get the rotation matrix of thigh joint
         rotmat_thigh = self.rotmat_thigh()
-        # get the linear velocity of the leg link in world frame
         leg_world_velocity = np.dot(rotmat_thigh, leg_xz_velocity)
         return leg_world_velocity  
     
@@ -147,7 +126,6 @@ class Controller:
         base_index = body_id['base']
         base_velocity = self.d.cvel[base_index]
         base_z_velocity = base_velocity[2]
-        #print("base_index", base_index) #gives 2 as the index as world/slot are 0/1
         return base_z_velocity
     
     #function to obtain base jpint velocity (rootz)
@@ -163,8 +141,6 @@ class Controller:
         num_joints = self.m.njnt
         return num_joints
 
-    #function to obtain dictionary of names of joints in the model
-    # get the names of all joints
     def joint_names(self):
         num_joints = self.num_joints()
         #make a dictionary of joint names
@@ -173,15 +149,15 @@ class Controller:
         
       
     def lin_sd_var(self, action):
-        #TODO: CHECK FOR LOGIC AT REACHING GROUND AGAIN 
-        #TODO: MODIFY LOGIC FOR LANDING, CURRENTLY BASED ON COMING DOWN INITIALLY
         base_velocity = self.base_cvel()
         if base_velocity>= 0:
             lin_kp = action[0]
             lin_kd = action[1]
+            #lin_kd = 0
         elif base_velocity<0:
             lin_kp = action[2]
             lin_kd = action[3]
+            #lin_kd = 0
         return lin_kp, lin_kd
     
     def rot_sd_var(self,action):
@@ -210,12 +186,12 @@ class Controller:
 
     def hip_position(self):
         thigh_joint_id = self.thigh_joint_id
-        hip_position = self.d.qpos[thigh_joint_id]
+        hip_position = self.d.qpos[thigh_joint_id] + self.initial_hip_pos
         return hip_position     
 
     def torso_bottom_position(self):
         rootz_position = self.rootz_position()
-        torso_z_position = rootz_position - 0.05
+        torso_z_position = rootz_position 
         torso_x_position = 0
         torso_y_position = 0
         torso_bottom_position = np.array([torso_x_position, torso_y_position, torso_z_position])
@@ -223,45 +199,14 @@ class Controller:
     
     def knee_position(self):
         knee_joint_id = self.knee_joint_id
-        knee_position = self.d.qpos[knee_joint_id]
+        knee_position = self.d.qpos[knee_joint_id] + self.initial_knee_pos
         return knee_position
     
     def xml_parser(self):
         xml = self.xml_path
         tree = ET.parse(xml)
         root = tree.getroot()
-        return root, tree    
-    
-    def thigh_length_found(self):
-        root, tree = self.xml_parser()
-        # Get the index of the specified axis
-        for link in root.findall('worldbody'):
-            print("worldbody found")
-            for slot in link.findall('body'):
-                print("body found")
-                if slot.get('name')== 'slot':
-                    print("slot found")
-                    for new in slot.findall('body'):
-                        if new.get('name') == 'torso':
-                            print("torso found")
-                            for element in new.findall('body'):
-                                if element.get('name') == 'thigh':
-                                    print("thigh found")
-                                    for ele in element.findall('geom'):
-                                        print("geom found")
-                                        if ele.get('name')=='thigh_geom':
-                                            print("thigh_geom found")
-                                            fromto = ele.get('fromto')
-                                            print("fromto:", fromto) 
-                                            thigh_start = float(fromto.split()[2])
-                                            print("thigh_start:", thigh_start)
-                                            thigh_end = float(fromto.split()[5])    
-                                            print("thigh_end:", thigh_end)
-                                            thigh_length = thigh_end - thigh_start
-                                            print("thigh_length:", thigh_length)                                       
-                                            return thigh_length
-                       
-        return thigh_length
+        return root, tree  
     
     def thigh_length_xml(self):
             root, tree = self.xml_parser()
@@ -289,41 +234,9 @@ class Controller:
                                     return thigh_length
             return thigh_length 
 
-    def leg_length_found(self):
-        root, tree = self.xml_parser()
-        # Get the index of the specified axis
-        for link in root.findall('worldbody'):
-            print("worldbody found")
-            for slot in link.findall('body'):
-                print("body found")
-                if slot.get('name')== 'slot':
-                    print("slot found")
-                    for new in slot.findall('body'):
-                        if new.get('name') == 'torso':
-                            print("torso found")
-                            for element in new.findall('body'):
-                                if element.get('name') == 'thigh':
-                                    print("thigh found")
-                                    for ele in element.findall('body'):
-                                        if ele.get('name') == 'leg': 
-                                            print("leg found")
-                                            for legs in ele.findall('geom'):
-                                                print("geom found")
-                                                fromto = legs.get('fromto')
-                                                print("fromto:", fromto)
-                                                leg_start = float(fromto.split()[2])
-                                                print("leg_start:", leg_start)
-                                                leg_end = float(fromto.split()[5])
-                                                print("leg_end:", leg_end)
-                                                leg_length = leg_end - leg_start
-                                                print("leg_length:", leg_length)
-                                                return leg_length                                                
-                                   
-        return leg_length
-    
+
     def calf_length_xml(self):
             root, tree = self.xml_parser()
-            # Get the index of the specified axis
             for link in root.findall('worldbody'):            
                 for slot in link.findall('body'):               
                     if slot.get('name')== 'base':                    
@@ -349,35 +262,10 @@ class Controller:
                                             return calf_length
             return calf_length
     
-    def leg_width_found(self):
-        root, tree = self.xml_parser()
-        # Get the index of the specified axis
-        for link in root.findall('worldbody'):
-            print("worldbody found")
-            for slot in link.findall('body'):
-                print("body found")
-                if slot.get('name')== 'slot':
-                    print("slot found")
-                    for new in slot.findall('body'):
-                        if new.get('name') == 'torso':
-                            print("torso found")
-                            for element in new.findall('body'):
-                                if element.get('name') == 'thigh':
-                                    print("thigh found")
-                                    for ele in element.findall('body'):
-                                        if ele.get('name') == 'leg': 
-                                            print("leg found")
-                                            for legs in ele.findall('geom'):
-                                                print("geom found")
-                                                leg_radius = legs.get('size')
-                                                print("size:", leg_radius)                                                                                            
-                                                return leg_radius                                               
-                                   
-        return leg_radius
+    
     
     def calf_radius_xml(self):
         root, tree = self.xml_parser()
-        # Get the index of the specified axis
         for link in root.findall('worldbody'):            
             for slot in link.findall('body'):               
                 if slot.get('name')== 'base':                    
@@ -390,32 +278,10 @@ class Controller:
                                         calf_radius = float(radius)
         return calf_radius
     
-    def thigh_width_found(self):
-        root, tree = self.xml_parser()
-        # Get the index of the specified axis
-        for link in root.findall('worldbody'):
-            print("worldbody found")
-            for slot in link.findall('body'):
-                print("body found")
-                if slot.get('name')== 'slot':
-                    print("slot found")
-                    for new in slot.findall('body'):
-                        if new.get('name') == 'torso':
-                            print("torso found")
-                            for element in new.findall('body'):
-                                if element.get('name') == 'thigh':
-                                    print("thigh found")
-                                    for ele in element.findall('geom'):
-                                        print("geom found")
-                                        thigh_radius = ele.get('size')
-                                        print("size:", thigh_radius)                                                                                            
-                                        return thigh_radius                                              
-                                   
-        return thigh_radius
+    
     
     def thigh_radius_xml(self):    
         root, tree = self.xml_parser()
-        # Get the index of the specified axis
         for link in root.findall('worldbody'):            
             for slot in link.findall('body'):               
                 if slot.get('name')== 'base':                    
@@ -426,29 +292,8 @@ class Controller:
                                 thigh_radius = float(radius)
         return thigh_radius
     
-    def torso_width_found(self):
-        root, tree = self.xml_parser()
-        # Get the index of the specified axis
-        for link in root.findall('worldbody'):
-            print("worldbody found")
-            for slot in link.findall('body'):
-                print("body found")
-                if slot.get('name')== 'slot':
-                    print("slot found")
-                    for new in slot.findall('body'):
-                        if new.get('name') == 'torso':
-                            print("torso found")
-                            for element in new.findall('geom'):
-                                print("geom found")
-                                torso_radius = element.get('size')
-                                print("size:", torso_radius)                                                                                            
-                                return torso_radius                                              
-                                   
-        return torso_radius
-    
     def torso_width_xml(self): #TODO: MODIFY FOR CORRECT BODY NAME - BASE
         root, tree = self.xml_parser()
-        # Get the index of the specified axis
         for link in root.findall('worldbody'):            
             for slot in link.findall('body'):                
                 if slot.get('name')== 'slot':                   
@@ -463,13 +308,13 @@ class Controller:
     def thigh_total_length(self):
         thigh_length = self.thigh_length_xml()
         thigh_radius = self.thigh_radius_xml()
-        total_length = thigh_length + 2*thigh_radius
+        total_length = thigh_length
         return total_length
 
     def calf_total_length(self):
         calf_length = self.calf_length_xml()
         calf_radius = self.calf_radius_xml()
-        total_length = calf_length + calf_radius
+        total_length = calf_length 
         return total_length
     
     def ee_pos(self):
@@ -477,22 +322,16 @@ class Controller:
         base_z_pos = base_inertial_pos[2]
         base_x_pos = base_inertial_pos[0]
         base_y_pos = base_inertial_pos[1]        
-        #leg_length = (self.leg_length_xml()).astype(np.float64)
         leg_length = self.calf_total_length()
         knee_pos = self.knee_position()
         hip_pos = self.hip_position()
-        #thigh_length = (self.thigh_length_xml()).astype(np.float64)
         thigh_length = self.thigh_total_length()
-        #torso_width = (self.torso_width_xml()).astype(np.float64)  
-        # torso_width = float(self.torso_width_xml()) 
-        # thigh_width = float(self.thigh_radius_xml())
         leg_width = float(self.calf_radius_xml())   
-
         #NOTE: REMOVED LEG WIDTH FROM CALCULATION OF BASE BOTTOM Z AS BASE BOTTOM AND LINK LENGTHS HAVE RIGHT VALUES 
         base_bottom_z = base_z_pos 
         base_bottom = np.array([base_x_pos, base_y_pos, base_bottom_z])
         ee_x_pos = base_bottom[0] + thigh_length*np.sin(hip_pos) + leg_length*np.sin(knee_pos+hip_pos)
-        ee_z_pos = base_bottom[2] - thigh_length*np.cos(hip_pos) - leg_length*np.cos(knee_pos+hip_pos) - leg_width
+        ee_z_pos = base_bottom[2] - thigh_length*np.cos(hip_pos) - leg_length*np.cos(knee_pos+hip_pos) 
         ee_y_pos = base_bottom[1]
         ee_pos = np.array([ee_x_pos, ee_y_pos, ee_z_pos])
         return ee_pos
@@ -511,8 +350,6 @@ class Controller:
         distance = self.distance()
         z_axis_vector = np.array([0, 0, -1])
         base_to_foot_unit_vector = (ee_pos - base_inertial_pos) / distance
-
-    # Calculate the angle between the base_to_foot_unit_vector and z-axis using the dot product
         dot_product = np.dot(base_to_foot_unit_vector, z_axis_vector)
         angle_with_z = np.arccos(np.clip(dot_product, -1.0, 1.0))
         return angle_with_z
@@ -601,8 +438,7 @@ class Controller:
         dzb_dt = self.dzb_dt()
         kp, kd = self.lin_sd_var(action)
         Fld = kd*(dl_dxee*dxee_dt + dl_dxb*dxb_dt + dl_dzee*dzee_dt + dl_dzb*dzb_dt)
-        return Fld
-    
+        return Fld  
     
 
     
@@ -615,7 +451,7 @@ class Controller:
     def total_linear_force(self,action):
         linear_spring_force = self.linear_spring_force(action)
         linear_damper_force = self.linear_damper_force(action)
-        total_linear_force = linear_spring_force - linear_damper_force
+        total_linear_force = (linear_spring_force - linear_damper_force)
         return total_linear_force
     
     def torsional_spring_force(self,action):
@@ -653,21 +489,23 @@ class Controller:
         return force_applied_ground
     
     def jacobian(self):      
-        leg_length = self.calf_length_xml()
+        leg_length = self.calf_total_length()
         knee_pos = self.knee_position()
         hip_pos = self.hip_position() 
-        thigh_length = self.thigh_length_xml()
-        #torso_width = float(self.torso_width_xml()) 
-        # thigh_width = float(self.thigh_width_xml())
-        # leg_width = float(self.leg_width_xml())
-        
-        J11 =  -(thigh_length*np.cos(hip_pos)+leg_length*np.cos(knee_pos+hip_pos))
-        J12 = -(leg_length*np.cos(knee_pos+hip_pos))
+        thigh_length = self.thigh_total_length()       
+        J11 =  (thigh_length*np.cos(hip_pos)+leg_length*np.cos(knee_pos+hip_pos))
+        J12 = (leg_length*np.cos(knee_pos+hip_pos))
         J21 = thigh_length*np.sin(hip_pos) + leg_length*np.sin(knee_pos + hip_pos)
         J22 = leg_length*np.sin(knee_pos + hip_pos)
         jacobian = np.array([[J11, J12], [J21, J22]])    
-        #jacobian = np.array([[thigh_length*np.cos(hip_pos)+leg_length*np.cos(knee_pos+hip_pos), leg], [0, 1, 0], [thigh_length*np.sin(hip_pos) + leg_length*np.sin(knee_pos), 0, 0]])
         return jacobian
+    
+    def mujoco_jacobian(self):
+        J_pos = np.zeros((3, self.m.nv)) 
+        foot_site_id = self.m.site("foot").id
+        mj.mj_jacSite(self.m, self.d, J_pos, None, foot_site_id)
+        J_2d = J_pos[:3, :3]
+        return J_2d
     
     def jacobian_transpose(self):
         jacobian = self.jacobian()

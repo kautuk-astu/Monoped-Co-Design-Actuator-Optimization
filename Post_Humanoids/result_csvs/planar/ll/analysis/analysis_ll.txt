@@ -298,3 +298,67 @@ ac2: 0.6
 ac3: 0.2
 
 ----------------------------------------
+Primary CSV - Entry with Lowest Best Cost:
+
+Thigh: 0.4999710330641038
+Calf: 0.3001958181803407
+Hip gear ratio: 4.000042823098815
+Knee gear ratio: 4.001503799354666
+Best index: 7.0
+Best Cost: 28.801551210798934
+ac1: 58.5
+ac2: 0.0
+ac3: 0.0
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.4999710330641038
+Calf: 0.3001958181803407
+Hip gear ratio: 4.000042823098815
+Knee gear ratio: 4.001503799354666
+Cost: 28.801551210798934
+Max Distance: 0.4688104459045497
+Max Height: 0.1936617359874201
+Max x: 0.4269407057233609
+Max Energy: 24.185143454607545
+Max Joule: 10.99014661142534
+Max Mech: 13.194996843182162
+Jump Results: [(np.float64(0.2774683425163303), np.float64(12.973355403507556), np.float64(10.631710943537831), np.float64(23.60506634704538), np.float64(0.15228107414187267), np.float64(0.152397607355038), 13.485944986343384, np.float64(0.31650941003477623))]
+unique id: b80294cc
+ac1: 58.5
+ac2: 0.0
+ac3: 0.0
+
+----------------------------------------
+Primary CSV - Entry with Lowest Best Cost:
+
+Thigh: 0.3780017631778465
+Calf: 0.3611584386058381
+Hip gear ratio: 4.003371527657343
+Knee gear ratio: 4.000860548998937
+Best index: 3.0
+Best Cost: 27.14681169217819
+ac1: 176.6
+ac2: 6.1
+ac3: 0.1
+
+Matching Entry/Entries from Secondary CSV:
+
+Thigh: 0.3780017631778465
+Calf: 0.3611584386058381
+Hip gear ratio: 4.003371527657343
+Knee gear ratio: 4.000860548998937
+Cost: 27.14681169217819
+Max Distance: 0.4389339837036307
+Max Height: 0.140540141787498
+Max x: 0.4158262985866684
+Max Energy: 19.512778695041565
+Max Joule: 9.08657278509536
+Max Mech: 10.426205909946177
+Jump Results: [(np.float64(0.3508523398202709), np.float64(17.632730091562), np.float64(13.52673293238503), np.float64(31.15946302394701), np.float64(0.08619367260227587), np.float64(0.08625702911187402), 9.951069593429565, np.float64(0.3612848094703501))]
+unique id: be252c4b
+ac1: 176.6
+ac2: 6.1
+ac3: 0.1
+
+----------------------------------------
