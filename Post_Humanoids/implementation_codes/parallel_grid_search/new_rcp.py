@@ -167,10 +167,10 @@ def run(xml_path, action, thigh_length, calf_length, ik_value, hip_peak_torque, 
     return (max_height_after_control, jump_count, total_energy, hip_energy, knee_energy, 
             max_jump_height, max_jump_energy, max_jump_joule, max_jump_mech, jump_results)
 
-xml_path = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/ll_xmls/25000_25000_600_600_0a4b8e51.xml"
-action = np.array([30.0,0,0,0,0,0])
-thigh_length = 0.25
-calf_length = 0.25
+xml_path = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/main xmls/gs_nom.xml"
+action = np.array([100, 2.5, 2.5, 12.5, 10, 0.5])
+thigh_length = 0.297
+calf_length = 0.302
 ik_value = -0.35
 hip_gear_ratio = 6.0
 knee_gear_ratio = 6.0

@@ -1,0 +1,24 @@
+action = np.array([200, 2.5, 2.5, 12.5, 10, 0.5])
+Max Height After Control: 0.5935136196758214
+Jump Count: 2
+Total Energy: 24.55855032043484
+Hip Energy: 0.34437364287361727
+Knee Energy: 24.214176677561227
+Max Jump Height: 0.5935136196758214
+Max Jump Energy: 37.84088566853653
+Max Jump Joule Energy: 13.732728745605787
+Max Jump Mech Energy: 24.10815692293075
+Jump Results: [{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}, {'height': np.float64(0.5935136196758214), 'total_energy': np.float64(37.84088566853653), 'joule_energy': np.float64(13.732728745605787), 'mech_energy': np.float64(24.10815692293075)}]
+
+-----------------------------------------------------------
+
+action = np.array([100, 2.5, 2.5, 12.5, 10, 0.5])
+Jump Count: 2
+Total Energy: 25.33029608037601
+Hip Energy: 0.36322263679274547
+Knee Energy: 24.967073443583256
+Max Jump Height: 0.6085709190766999
+Max Jump Energy: 38.76775098788752
+Max Jump Joule Energy: 13.92402136077439
+Max Jump Mech Energy: 24.84372962711314
+Jump Results: [{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}, {'height': np.float64(0.6085709190766999), 'total_energy': np.float64(38.76775098788752), 'joule_energy': np.float64(13.92402136077439), 'mech_energy': np.float64(24.84372962711314)}]

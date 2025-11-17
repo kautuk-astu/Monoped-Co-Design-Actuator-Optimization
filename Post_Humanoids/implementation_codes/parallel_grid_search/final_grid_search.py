@@ -35,7 +35,7 @@ print(grid_calf_lengths)
 date_st = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 xml_template = "/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/xmls/modified_robot_400_400_60_60.xml"
 # File for storing the best results for each link length combination
-best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/1D/ll/gs_best_results_{date_st}.csv"
+best_results_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/1D/ll/gs_150/best_results_{date_st}.csv"
 # Load Mass & IK Values from CSV
 def load_mass_ik_values(csv_filename):
     mass_ik_dict = {}
@@ -56,7 +56,7 @@ with open(best_results_file, "a", newline="") as file:
 
 np.random.seed(42)
 original_bounds = np.array([
-    [5, 400],    # Param 1
+    [5, 600],    # Param 1
     [0, 5],      # Param 2
     [0, 5],      # Param 3
     [5, 20],     # Param 4
@@ -243,7 +243,7 @@ def get_reward(action, log_file, mode_data_file, thigh_length, calf_length):
     mode_energy_values = [energy for height, energy in zip(height_values, energy_values) if height == mode_height]
     avg_energy = np.mean(mode_energy_values) if mode_energy_values else 0
     jump_results = [result for height, result in zip(height_values, jump_results) if height == mode_height]
-    height_cost = 100 * np.exp(-(0.35+mode_height))
+    height_cost = 150 * np.exp(-(0.35+mode_height))
     final_cost = (0.65*(height_cost) + 0.35*(avg_energy))
     # Log individual runs in separate file
     # with open(log_file, "a", newline="") as file:
@@ -267,15 +267,15 @@ def optimize_for_design(thigh_length, calf_length):
     # # Now update calf length using the updated file
     # modify_link_length(modified_xml, "link2", calf_length, output_file=modified_xml)
     log_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/1D/ll/gs_065_035_runs_{date_str}_{seed}_{int(thigh_length * 1000)}_{int(calf_length * 1000)}.csv"
-    mode_data_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/1D/ll/gs_065_035_all_{date_str}_{seed}_{int(thigh_length * 1000)}_{int(calf_length * 1000)}.csv"
-    progress_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/1D/ll/gs_065_035_best_{date_str}_{seed}_{int(thigh_length * 1000)}_{int(calf_length * 1000)}.csv"
+    mode_data_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/1D/ll/gs_150/all_{int(thigh_length * 1000)}_{int(calf_length * 1000)}.csv"
+    progress_file = f"/home/stochlab/repo/Aastha_Coopt_Monoped/Monoped-optimization/Post_Humanoids/result_csvs/1D/ll/gs_150/best_{int(thigh_length * 1000)}_{int(calf_length * 1000)}.csv"
 
     # Initialize CMA-ES
     x0 = normalize(np.array([100,2.5,2.5,12.5,10,0.5]))  # Initial guess in normalized space
     sigma0 = 0.1
     opts = cma.CMAOptions()
     opts.set({
-        'maxiter': 75, 'popsize': 8, 'seed': int(seed),
+        'maxiter': 100, 'popsize': 8, 'seed': int(seed),
         'bounds': [np.zeros(6), np.ones(6)], 'verb_disp': 1000
     })
 

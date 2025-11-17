@@ -1,0 +1,10 @@
+Thigh,Calf,Cost,Max Height,Max Energy,Max Joule,Max Mech,Jump Results,unique id,ac1,ac2,ac3,ac4,ac5,ac6
+0.4,0.375,34.35354437378728,0.0,0.0,0,0,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",07c64061,97.4,2.8,1.5,10.6,9.3,0.4
+0.4,0.375,34.35354437378728,0.0,0.0,0,0,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",74a1907f,124.3,2.3,1.9,10.9,9.7,0.6
+0.4,0.375,34.35354437378728,0.0,0.0,0,0,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",cc44593a,100.9,2.6,2.5,12.1,10.9,0.4
+0.4,0.375,34.35354437378728,0.0,0.0,0,0,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",052bd959,188.2,1.9,3.1,11.6,12.6,0.5
+0.4,0.375,34.35354437378728,0.0,0.0,0,0,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",79e4335d,32.6,1.9,3.2,15.9,9.2,0.5
+0.4,0.375,34.35354437378728,0.0,0.0,0,0,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",8620da1e,152.6,2.4,2.0,15.3,7.3,0.6
+0.4,0.375,34.35354437378728,0.0,0.0,0,0,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",aafb6f02,63.5,2.0,2.7,13.1,12.4,0.2
+0.4,0.375,34.35354437378728,0.0,0.0,0,0,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",95a84dba,121.6,2.2,2.1,12.9,12.2,0.4
+0.4,0.375,35.92681302332832,0.6440461646172219,51.101699868632465,22.625964861463924,28.475735007168552,"[{'height': np.float64(0.0), 'total_energy': 0, 'joule_energy': 0, 'mech_energy': 0}]",af0633fc,63.5,2.0,2.7,13.1,12.4,0.2
