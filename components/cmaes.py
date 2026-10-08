@@ -22,12 +22,12 @@ COMPONENTS_DIR = os.path.join(REPO_DIR, "components")
 ACT_OPT_DIR = os.path.join(REPO_DIR, "actuator_optimization")
 # Define the coefficient sets
 coefficient_sets = []
-for first_coeff in np.arange(0.56599, 0.65, 0.05):  # 0.4 to 0.8 with step 0.05
+for first_coeff in np.arange(0.56599, 0.65, 0.05):  # 0.56 to 0.65 with step 0.05
     second_coeff = 1.0 - first_coeff
     coefficient_sets.append((first_coeff, second_coeff))
 
 seed_list = np.linspace(5, 5, num=1)  # Modify this list for desired seeds
-num_seeds = len(seed_list)
+num_seeds = len(seed_list) # [5]
 
 # Main loop for coefficient sets
 for coeff_set in coefficient_sets:
@@ -69,7 +69,7 @@ for coeff_set in coefficient_sets:
         os.makedirs(os.path.dirname(all_samples_file), exist_ok=True)
         
         original_bounds = np.array([
-            [0.15, 0.35],  # Thigh length
+            [0.15, 0.35],  # Thigh length , in meters
             [0.15, 0.35],
             [0.05, 0.15],
             [0.3, 0.6],  # IK height
@@ -147,7 +147,7 @@ for coeff_set in coefficient_sets:
         dfc = pd.read_csv(os.path.join(COMPONENTS_DIR, "calf_15_35.csv"))
 
         dfc = dfc.sort_values(by='Link Length (mm)')
-        calf_lengths = dfc['Link Length (mm)'].values/1000
+        calf_lengths = dfc['Link Length (mm)'].values/1000 # in meters
         calf_masses = dfc['Calculated Mass (kg)'].values
         calf_interp_func = interp1d(
             calf_lengths,
