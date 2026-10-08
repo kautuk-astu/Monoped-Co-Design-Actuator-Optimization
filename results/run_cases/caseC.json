@@ -1,0 +1,15 @@
+{
+  "case": "caseC",
+  "label": "Case C",
+  "source": "results/Opt_design_control_parameters/summary_CaseC.json",
+  "xml": "xmls/design_xmls/92df14d3.xml",
+  "video": "results/videos/caseC.mp4",
+  "log": "results/run_cases/caseC.log",
+  "height_m": 0.2728854302557161,
+  "signed_jump_distance_m": -1.029055351797712,
+  "jump_distance_m": 1.029055351797712,
+  "energy_j": 23.096106631775644,
+  "duration_s": 0.143784761428833,
+  "velocity_m_s": 7.15691525007014,
+  "detected_jumps": 1
+}

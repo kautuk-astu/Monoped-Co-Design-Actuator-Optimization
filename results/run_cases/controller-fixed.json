@@ -1,0 +1,15 @@
+{
+  "case": "controller-fixed",
+  "label": "Controller fixed",
+  "source": "results/CMAES_output/only_design/all_dist_20_newl_55000_44999_2026-06-16_19-04-44_5.0.csv",
+  "xml": "xmls/only_design_xmls/29f16492.xml",
+  "video": "results/videos/controller-fixed.mp4",
+  "log": "results/run_cases/controller-fixed.log",
+  "height_m": 0.9111347768547047,
+  "signed_jump_distance_m": -1.2512004951737665,
+  "jump_distance_m": 1.2512004951737665,
+  "energy_j": 3.1187651225353075,
+  "duration_s": 0.2678079605102539,
+  "velocity_m_s": 4.672006361535546,
+  "detected_jumps": 1
+}

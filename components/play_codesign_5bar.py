@@ -20,7 +20,7 @@ MONOPED_OPT_DIR = os.path.abspath(
 if os.path.isdir(MONOPED_OPT_DIR):
     sys.path.append(MONOPED_OPT_DIR)
 
-CASE = "C"  # Choose: A, B, C, or Nominal
+CASE = "C"
 RECORD_VIDEO = True
 VIDEO_DIR = os.path.join(RESULTS_DIR, "videos")
 

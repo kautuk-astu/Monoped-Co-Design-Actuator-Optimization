@@ -1,0 +1,15 @@
+{
+  "case": "caseA",
+  "label": "Case A",
+  "source": "results/Opt_design_control_parameters/summary_CaseA.json",
+  "xml": "xmls/Case_A_xmls/52961d30.xml",
+  "video": "results/videos/caseA.mp4",
+  "log": "results/run_cases/caseA.log",
+  "height_m": 0.17342647245901796,
+  "signed_jump_distance_m": 0.5781455191032929,
+  "jump_distance_m": 0.5781455191032929,
+  "energy_j": 13.186547149098876,
+  "duration_s": 0.1363515853881836,
+  "velocity_m_s": 4.240108521344672,
+  "detected_jumps": 1
+}

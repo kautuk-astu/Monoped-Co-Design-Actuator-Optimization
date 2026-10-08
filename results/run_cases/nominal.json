@@ -1,0 +1,15 @@
+{
+  "case": "nominal",
+  "label": "Nominal",
+  "source": "results/Opt_design_control_parameters/summary_nominal.json",
+  "xml": "xmls/Nominal_xmls/60f37fab.xml",
+  "video": "results/videos/nominal.mp4",
+  "log": "results/run_cases/nominal.log",
+  "height_m": 0.24147109701378314,
+  "signed_jump_distance_m": 0.7931157503352543,
+  "jump_distance_m": 0.7931157503352543,
+  "energy_j": 25.9699295678519,
+  "duration_s": 0.3145718574523926,
+  "velocity_m_s": 2.5212546244868226,
+  "detected_jumps": 1
+}
