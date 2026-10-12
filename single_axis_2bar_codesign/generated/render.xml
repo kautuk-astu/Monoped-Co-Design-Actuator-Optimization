@@ -1,0 +1,52 @@
+<mujoco model="single_axis_two_bar">
+  <compiler angle="radian" inertiafromgeom="true"/>
+  <option timestep="0.001" integrator="implicitfast" gravity="0 0 -9.81"/>
+  <visual>
+    <!-- Accommodates the default 640x640 MP4 renderer. -->
+    <global offwidth="1280" offheight="1280"/>
+  </visual>
+  <default>
+    <joint damping="0.08"/>
+    <geom friction="1.2 0.01 0.0001" condim="3"/>
+  </default>
+  <worldbody>
+    <geom name="floor" type="plane" size="5 5 0.1" rgba="0.18 0.22 0.25 1"/>
+    <!-- A visual linear guide.  It deliberately has no collision geometry:
+         the pole_slide joint below, rather than contact with this pole, is
+         what strictly constrains the carriage to vertical translation. -->
+    <geom name="vertical_pole" type="capsule" fromto="-0.14 0 0 -0.14 0 2.5" size="0.03"
+          mass="0" contype="0" conaffinity="0" rgba="0.28 0.30 0.34 1"/>
+    <body name="carriage" pos="0 0 0.51">
+      <joint name="pole_slide" type="slide" axis="0 0 1"/>
+      <!-- This massless slider block visibly wraps the guide pole. -->
+      <geom name="guide_bracket" type="box" pos="-0.14 0 0" size="0.05 0.05 0.065"
+            mass="0" contype="0" conaffinity="0" rgba="0.42 0.45 0.50 1"/>
+      <!-- The slider link connects the pole carriage to the hip housing. -->
+      <geom name="slider_link" type="capsule" fromto="-0.10 0 0 -0.055 0 0" size="0.018"
+            mass="0" contype="0" conaffinity="0" rgba="0.42 0.45 0.50 1"/>
+      <!-- This sphere is the hip motor cover.  Its mass is the selected hip
+           motor/gearbox mass, and the hip hinge sits at its centre. -->
+      <geom name="hip_motor_cover" type="sphere" pos="0 0 0" size="0.06" mass="0.64"
+            rgba="0.16 0.43 0.82 1"/>
+      <geom name="payload" type="box" pos="0.075 0 0" size="0.035 0.045 0.045"
+            mass="1.0" rgba="0.2 0.6 1 1"/>
+      <body name="thigh" pos="0 0 0">
+        <joint name="hip" type="hinge" axis="0 1 0"/>
+        <geom name="thigh_link" type="capsule" fromto="0 0 0 0 0 -0.25" size="0.018" mass="0.17812830345854125" rgba="0.9 0.25 0.2 1"/>
+        <body name="shank" pos="0 0 -0.25">
+          <joint name="knee" type="hinge" axis="0 1 0"/>
+          <!-- The selected knee actuator mass is placed at the knee pivot. -->
+          <geom name="knee_motor_cover" type="sphere" size="0.035" mass="0.64"
+                rgba="0.18 0.45 0.84 1"/>
+          <geom name="shank_link" type="capsule" fromto="0 0 0 0 0 -0.25" size="0.016" mass="0.17812830345854125" rgba="0.95 0.6 0.15 1"/>
+          <geom name="foot" type="sphere" pos="0 0 -0.25" size="0.025" mass="0.03" rgba="0.15 0.15 0.15 1"/>
+          <site name="toe" pos="0 0 -0.25" size="0.008"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <motor name="hip_motor" joint="hip" ctrlrange="-21.611968032334648 21.611968032334648"/>
+    <motor name="knee_motor" joint="knee" ctrlrange="-21.611968032334648 21.611968032334648"/>
+  </actuator>
+</mujoco>

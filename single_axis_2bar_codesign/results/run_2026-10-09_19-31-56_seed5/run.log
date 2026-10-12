@@ -1,0 +1,58 @@
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 15 (seed=5, Fri Oct  9 19:31:57 2026)
+new global best: 0.013687; jump=0.0000 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.000000 m
+Absolute apex height:       0.379395 m
+Initial height:             0.379395 m
+Mechanical energy:          0.912488 J
+Hip mechanical work:        1.174270 J
+Knee mechanical work:       0.000000 J
+Best cost:                  0.013687
+Peak power:                 25.446652 W
+Takeoff time:               0.002 s
+
+Morphology
+----------
+Thigh L1:   0.225905 m (225.905 mm)
+Shank L2:   0.213202 m (213.202 mm)
+Theta1:     -0.470838 rad (-26.977 deg)
+Theta2:     1.240764 rad (71.091 deg)
+
+Payload
+-------
+1.195685 kg
+
+Hip Actuator
+------------
+Motor: U8; Gearbox: CPG; Ratio: 9.665092; Efficiency: 0.950000
+Mass: 0.669000 kg; Torque limit: 21.043221 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: U8; Gearbox: CPG; Ratio: 10.016475; Efficiency: 0.943000
+Mass: 0.640000 kg; Torque limit: 21.647573 Nm
+
+Controller
+----------
+ori_l: 0.343640 m; ori_theta: 0.158386 rad (9.075 deg)
+K: 663.157202; C: 5.186918; T_gain: 23.588404; Thrust time: 0.126944 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.309000 kg
+Moving carriage mass: 2.754685 kg
+Toe/rail min clearance: 0.039071 m
+Toe/hip min clearance: 0.036832 m
+Link/rail min clearance: 0.051337 m
+Valid: YES
+============================================================
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/run_2026-10-09_19-31-56_seed5
+Video: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/run_2026-10-09_19-31-56_seed5/best_jump.mp4
+Apex gain: 0.000 m; positive work: 0.91 J
+Rendering global best valid candidate: /home/aerodaas/miniconda3/envs/ssds/bin/python /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/render_video.py --output /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/run_2026-10-09_19-31-56_seed5/best_jump.mp4 --xml /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/run_2026-10-09_19-31-56_seed5/best_design.xml --thigh 0.2259046185015448 --shank 0.21320249941242567 --payload 1.1956851028359439 --theta1 -0.47083787691542023 --theta2 1.240763639960579 --hip-motor U8 --knee-motor U8 --hip-ratio 9.665091866676963 --knee-ratio 10.016474713035958 --ori-l 0.3436402653718375 --ori-theta 0.1583863911877912 --K 663.1572022176714 --C 5.186918242030835 --T-gain 23.588404015661553 --thrust-time 0.12694410170938705
