@@ -1,0 +1,20 @@
+/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/optimize.py:187: RuntimeWarning: invalid value encountered in divide
+  x0 = (x0_physical - BOUNDS[:, 0]) / (BOUNDS[:, 1] - BOUNDS[:, 0])
+Traceback (most recent call last):
+  File "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/optimize.py", line 237, in <module>
+    main()
+  File "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/optimize.py", line 188, in main
+    es = cma.CMAEvolutionStrategy(x0, .06, {
+  File "/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/evolution_strategy.py", line 1198, in __init__
+    self.mean = self.gp.geno(np.array(self.x0, copy=True),
+  File "/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/transformations.py", line 1142, in geno
+    x = from_bounds(x, copy)
+  File "/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/boundary_handler.py", line 530, in inverse
+    return np.asarray(self.bounds_tf.inverse(x, copy_if_changed))  # this doesn't exist
+  File "/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/transformations.py", line 141, in inverse
+    return [self._inverse_i(y, i) for i, y in enumerate(solution_in_phenotype)]
+  File "/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/transformations.py", line 141, in <listcomp>
+    return [self._inverse_i(y, i) for i, y in enumerate(solution_in_phenotype)]
+  File "/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/transformations.py", line 482, in _inverse_i
+    raise ValueError('argument of inverse must be within the given bounds')
+ValueError: argument of inverse must be within the given bounds

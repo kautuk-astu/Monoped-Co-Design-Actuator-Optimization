@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-10-13T19:32:35.509765",
+  "git_commit": "f8e167d130216461ce7ec41b60dc680cc9e97840",
+  "seed": 5,
+  "popsize": 8,
+  "maxiter": 1000,
+  "energy_weight": 0.015,
+  "python_version": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+  "fixed_l1_m": 0.2,
+  "fixed_l2_m": 0.2,
+  "fixed_hip_motor": "MAD_M6C12",
+  "fixed_knee_motor": "MAD_M6C12",
+  "candidate_xml_logging": "temporary only; best_design.xml retained",
+  "mujoco_version": "3.14.0"
+}

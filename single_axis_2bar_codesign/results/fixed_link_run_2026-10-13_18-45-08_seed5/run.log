@@ -1,0 +1,85 @@
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 13 (seed=5, Tue Oct 13 18:45:09 2026)
+new global best: 0.075666; jump=0.0000 m
+new global best: 0.057495; jump=0.0000 m
+new global best: 0.017064; jump=0.0000 m
+new global best: 0.012503; jump=0.0000 m
+new global best: 0.003107; jump=0.0000 m
+new global best: 0.000442; jump=0.0000 m
+new global best: 0.000161; jump=0.0000 m
+new global best: -0.039368; jump=0.1248 m
+new global best: -0.043798; jump=0.1295 m
+new global best: -0.071040; jump=0.1557 m
+new global best: -0.092653; jump=0.1850 m
+new global best: -0.118077; jump=0.3472 m
+new global best: -0.149685; jump=0.3146 m
+new global best: -0.161026; jump=0.3393 m
+new global best: -0.176033; jump=0.3372 m
+new global best: -0.180547; jump=0.3256 m
+new global best: -0.195688; jump=0.3538 m
+new global best: -0.219820; jump=0.4055 m
+new global best: -0.234061; jump=0.4001 m
+new global best: -0.235699; jump=0.3968 m
+new global best: -0.237830; jump=0.4053 m
+new global best: -0.239589; jump=0.4104 m
+new global best: -0.240437; jump=0.4106 m
+new global best: -0.243625; jump=0.4141 m
+new global best: -0.244303; jump=0.4150 m
+new global best: -0.244587; jump=0.4159 m
+new global best: -0.245251; jump=0.4170 m
+new global best: -0.245338; jump=0.4170 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.416995 m
+Absolute apex height:       0.448018 m
+Initial height:             0.031023 m
+Mechanical energy:          11.443778 J
+Hip mechanical work:        12.153704 J
+Knee mechanical work:       0.861239 J
+Best cost:                  -0.245338
+Peak power:                 134.821083 W
+Takeoff time:               0.08900000000000007 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -1.570737 rad (-89.997 deg)
+Theta2:     0.030002 rad (1.719 deg)
+
+Payload
+-------
+0.250066 kg
+
+Hip Actuator
+------------
+Motor: U8; Gearbox: CPG; Ratio: 7.956918; Efficiency: 0.951000
+Mass: 0.605000 kg; Torque limit: 17.342353 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: U8; Gearbox: CPG; Ratio: 4.048498; Efficiency: 0.963000
+Mass: 0.523000 kg; Torque limit: 8.935171 Nm
+
+Controller
+----------
+ori_l: 0.323098 m; ori_theta: -0.483428 rad (-27.698 deg)
+K: 173.551115; C: 8.314008; T_gain: 36.200094; Thrust time: 0.188641 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.128000 kg
+Moving carriage mass: 1.628066 kg
+Toe/rail min clearance: 0.094314 m
+Toe/hip min clearance: 0.019204 m
+Link/rail min clearance: 0.092000 m
+Valid: YES
+============================================================
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_run_2026-10-13_18-45-08_seed5
+Video: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_run_2026-10-13_18-45-08_seed5/best_jump.mp4
+Apex gain: 0.417 m; positive work: 11.44 J
+Rendering global best fixed-link candidate: /home/aerodaas/miniconda3/envs/ssds/bin/python /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/render_video.py --output /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_run_2026-10-13_18-45-08_seed5/best_jump.mp4 --xml /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_run_2026-10-13_18-45-08_seed5/best_design.xml --thigh 0.2 --shank 0.2 --payload 0.2500663453625084 --theta1 -1.5707368803708883 --theta2 0.030001970652123972 --hip-motor U8 --knee-motor U8 --hip-ratio 7.956918180963423 --knee-ratio 4.0484981927939145 --ori-l 0.3230975614933208 --ori-theta -0.48342751755992186 --K 173.55111482335676 --C 8.314008252441225 --T-gain 36.20009368161491 --thrust-time 0.18864082475529603

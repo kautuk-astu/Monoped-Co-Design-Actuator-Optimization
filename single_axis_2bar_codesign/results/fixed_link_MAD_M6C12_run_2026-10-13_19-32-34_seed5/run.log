@@ -1,0 +1,279 @@
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 11 (seed=5, Tue Oct 13 19:32:35 2026)
+new global best: -0.045868; jump=0.1100 m
+new global best: -0.086959; jump=0.2330 m
+new global best: -0.096241; jump=0.2058 m
+new global best: -0.098820; jump=0.2725 m
+new global best: -0.124681; jump=0.3148 m
+new global best: -0.128618; jump=0.3155 m
+new global best: -0.187212; jump=0.4326 m
+new global best: -0.268260; jump=0.4875 m
+new global best: -0.319500; jump=0.6488 m
+new global best: -0.331400; jump=0.5669 m
+new global best: -0.354245; jump=0.6221 m
+new global best: -0.434489; jump=0.7530 m
+new global best: -0.549135; jump=0.9304 m
+new global best: -0.552304; jump=0.9433 m
+new global best: -0.552971; jump=0.8838 m
+new global best: -0.577707; jump=0.9424 m
+new global best: -0.610107; jump=0.9455 m
+new global best: -0.613560; jump=0.9669 m
+new global best: -0.618623; jump=0.9558 m
+new global best: -0.645694; jump=0.9981 m
+new global best: -0.654079; jump=1.0251 m
+new global best: -0.659629; jump=1.0269 m
+new global best: -0.662006; jump=1.0298 m
+new global best: -0.666035; jump=1.0380 m
+new global best: -0.666273; jump=1.0392 m
+new global best: -0.666894; jump=1.0403 m
+new global best: -0.668675; jump=1.0428 m
+new global best: -0.668793; jump=1.0385 m
+new global best: -0.669271; jump=1.0451 m
+new global best: -0.671402; jump=1.0424 m
+new global best: -0.671653; jump=1.0418 m
+new global best: -0.672583; jump=1.0448 m
+new global best: -0.673084; jump=1.0459 m
+new global best: -0.673208; jump=1.0484 m
+new global best: -0.673267; jump=1.0488 m
+new global best: -0.674475; jump=1.0506 m
+new global best: -0.675033; jump=1.0514 m
+new global best: -0.675648; jump=1.0515 m
+new global best: -0.676067; jump=1.0521 m
+new global best: -0.676620; jump=1.0527 m
+new global best: -0.676737; jump=1.0528 m
+new global best: -0.677103; jump=1.0522 m
+new global best: -0.677223; jump=1.0525 m
+new global best: -0.677261; jump=1.0523 m
+new global best: -0.677267; jump=1.0522 m
+new global best: -0.677299; jump=1.0524 m
+new global best: -0.677556; jump=1.0526 m
+new global best: -0.677678; jump=1.0527 m
+new global best: -0.678079; jump=1.0532 m
+new global best: -0.678099; jump=1.0531 m
+new global best: -0.678128; jump=1.0531 m
+new global best: -0.678151; jump=1.0531 m
+new global best: -0.678230; jump=1.0532 m
+new global best: -0.678347; jump=1.0533 m
+new global best: -0.678452; jump=1.0535 m
+new global best: -0.678641; jump=1.0536 m
+new global best: -0.678765; jump=1.0537 m
+new global best: -0.678789; jump=1.0536 m
+new global best: -0.678854; jump=1.0536 m
+new global best: -0.678966; jump=1.0536 m
+new global best: -0.679299; jump=1.0540 m
+new global best: -0.679373; jump=1.0539 m
+new global best: -0.679700; jump=1.0539 m
+new global best: -0.679868; jump=1.0541 m
+new global best: -0.679927; jump=1.0540 m
+new global best: -0.680261; jump=1.0542 m
+new global best: -0.680536; jump=1.0537 m
+new global best: -0.680619; jump=1.0537 m
+new global best: -0.680757; jump=1.0540 m
+new global best: -0.680893; jump=1.0541 m
+new global best: -0.680957; jump=1.0545 m
+new global best: -0.681027; jump=1.0544 m
+new global best: -0.681091; jump=1.0547 m
+new global best: -0.681153; jump=1.0547 m
+new global best: -0.681207; jump=1.0548 m
+new global best: -0.681263; jump=1.0546 m
+new global best: -0.681491; jump=1.0550 m
+new global best: -0.681584; jump=1.0552 m
+new global best: -0.681664; jump=1.0555 m
+new global best: -0.681886; jump=1.0556 m
+new global best: -0.682021; jump=1.0559 m
+new global best: -0.682271; jump=1.0561 m
+new global best: -0.682280; jump=1.0561 m
+new global best: -0.682448; jump=1.0564 m
+new global best: -0.682450; jump=1.0565 m
+new global best: -0.682554; jump=1.0564 m
+new global best: -0.682564; jump=1.0564 m
+new global best: -0.682572; jump=1.0563 m
+new global best: -0.682594; jump=1.0565 m
+new global best: -0.682613; jump=1.0563 m
+new global best: -0.682661; jump=1.0564 m
+new global best: -0.682683; jump=1.0564 m
+new global best: -0.682737; jump=1.0566 m
+new global best: -0.682753; jump=1.0565 m
+new global best: -0.682793; jump=1.0566 m
+new global best: -0.682803; jump=1.0566 m
+new global best: -0.682887; jump=1.0567 m
+new global best: -0.682982; jump=1.0568 m
+new global best: -0.683136; jump=1.0571 m
+new global best: -0.683163; jump=1.0572 m
+new global best: -0.683200; jump=1.0571 m
+new global best: -0.683221; jump=1.0574 m
+new global best: -0.683228; jump=1.0572 m
+new global best: -0.683280; jump=1.0573 m
+new global best: -0.683324; jump=1.0573 m
+new global best: -0.683349; jump=1.0572 m
+new global best: -0.683411; jump=1.0573 m
+new global best: -0.683479; jump=1.0575 m
+new global best: -0.683486; jump=1.0574 m
+new global best: -0.683538; jump=1.0575 m
+new global best: -0.683540; jump=1.0576 m
+new global best: -0.683542; jump=1.0574 m
+new global best: -0.683560; jump=1.0576 m
+new global best: -0.683613; jump=1.0576 m
+new global best: -0.683630; jump=1.0576 m
+new global best: -0.683722; jump=1.0577 m
+new global best: -0.683726; jump=1.0577 m
+new global best: -0.683769; jump=1.0578 m
+new global best: -0.683771; jump=1.0577 m
+new global best: -0.683787; jump=1.0578 m
+new global best: -0.683789; jump=1.0578 m
+new global best: -0.683799; jump=1.0578 m
+new global best: -0.683817; jump=1.0578 m
+new global best: -0.683822; jump=1.0578 m
+new global best: -0.683828; jump=1.0578 m
+new global best: -0.683828; jump=1.0578 m
+new global best: -0.683829; jump=1.0578 m
+new global best: -0.683831; jump=1.0578 m
+new global best: -0.683836; jump=1.0578 m
+new global best: -0.683842; jump=1.0578 m
+new global best: -0.683844; jump=1.0579 m
+new global best: -0.683846; jump=1.0579 m
+new global best: -0.683847; jump=1.0579 m
+new global best: -0.683849; jump=1.0579 m
+new global best: -0.683854; jump=1.0579 m
+new global best: -0.683856; jump=1.0579 m
+new global best: -0.683857; jump=1.0579 m
+new global best: -0.683858; jump=1.0579 m
+new global best: -0.683858; jump=1.0579 m
+new global best: -0.683859; jump=1.0579 m
+new global best: -0.683864; jump=1.0579 m
+new global best: -0.683868; jump=1.0579 m
+new global best: -0.683868; jump=1.0579 m
+new global best: -0.683872; jump=1.0579 m
+new global best: -0.683872; jump=1.0579 m
+new global best: -0.683873; jump=1.0579 m
+new global best: -0.683874; jump=1.0579 m
+new global best: -0.683875; jump=1.0579 m
+new global best: -0.683879; jump=1.0579 m
+new global best: -0.683880; jump=1.0579 m
+new global best: -0.683880; jump=1.0579 m
+new global best: -0.683880; jump=1.0579 m
+new global best: -0.683881; jump=1.0579 m
+new global best: -0.683881; jump=1.0579 m
+new global best: -0.683882; jump=1.0579 m
+new global best: -0.683882; jump=1.0579 m
+new global best: -0.683883; jump=1.0579 m
+new global best: -0.683884; jump=1.0579 m
+new global best: -0.683884; jump=1.0579 m
+new global best: -0.683884; jump=1.0579 m
+new global best: -0.683884; jump=1.0579 m
+new global best: -0.683885; jump=1.0579 m
+new global best: -0.683885; jump=1.0579 m
+new global best: -0.683886; jump=1.0579 m
+new global best: -0.683886; jump=1.0579 m
+new global best: -0.683886; jump=1.0579 m
+new global best: -0.683886; jump=1.0579 m
+new global best: -0.683887; jump=1.0579 m
+new global best: -0.683888; jump=1.0579 m
+new global best: -0.683888; jump=1.0579 m
+new global best: -0.683888; jump=1.0579 m
+new global best: -0.683888; jump=1.0579 m
+new global best: -0.683889; jump=1.0579 m
+new global best: -0.683889; jump=1.0579 m
+new global best: -0.683891; jump=1.0579 m
+new global best: -0.683891; jump=1.0579 m
+new global best: -0.683892; jump=1.0579 m
+new global best: -0.683892; jump=1.0579 m
+new global best: -0.683893; jump=1.0579 m
+new global best: -0.683894; jump=1.0579 m
+new global best: -0.683895; jump=1.0579 m
+new global best: -0.683895; jump=1.0579 m
+new global best: -0.683896; jump=1.0579 m
+new global best: -0.683896; jump=1.0579 m
+new global best: -0.683898; jump=1.0579 m
+new global best: -0.683899; jump=1.0579 m
+new global best: -0.683900; jump=1.0579 m
+new global best: -0.683900; jump=1.0579 m
+new global best: -0.683901; jump=1.0579 m
+new global best: -0.683901; jump=1.0579 m
+new global best: -0.683902; jump=1.0579 m
+new global best: -0.683902; jump=1.0579 m
+new global best: -0.683902; jump=1.0579 m
+new global best: -0.683904; jump=1.0579 m
+new global best: -0.683904; jump=1.0579 m
+new global best: -0.683905; jump=1.0579 m
+new global best: -0.683905; jump=1.0579 m
+new global best: -0.683905; jump=1.0579 m
+new global best: -0.683905; jump=1.0579 m
+new global best: -0.683906; jump=1.0579 m
+new global best: -0.683906; jump=1.0579 m
+new global best: -0.683906; jump=1.0579 m
+new global best: -0.683907; jump=1.0579 m
+new global best: -0.683907; jump=1.0579 m
+new global best: -0.683907; jump=1.0579 m
+new global best: -0.683907; jump=1.0579 m
+new global best: -0.683908; jump=1.0579 m
+new global best: -0.683908; jump=1.0579 m
+new global best: -0.683909; jump=1.0579 m
+new global best: -0.683909; jump=1.0579 m
+new global best: -0.683909; jump=1.0579 m
+new global best: -0.683909; jump=1.0579 m
+new global best: -0.683909; jump=1.0579 m
+new global best: -0.683909; jump=1.0579 m
+new global best: -0.683910; jump=1.0579 m
+new global best: -0.683911; jump=1.0579 m
+new global best: -0.683911; jump=1.0579 m
+new global best: -0.683911; jump=1.0579 m
+new global best: -0.683912; jump=1.0579 m
+new global best: -0.683912; jump=1.0579 m
+new global best: -0.683912; jump=1.0579 m
+new global best: -0.683913; jump=1.0579 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  1.057924 m
+Absolute apex height:       1.166925 m
+Initial height:             0.109000 m
+Mechanical energy:          24.934083 J
+Hip mechanical work:        0.447364 J
+Knee mechanical work:       26.207353 J
+Best cost:                  -0.683913
+Peak power:                 457.084678 W
+Takeoff time:               0.08500000000000006 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -0.582730 rad (-33.388 deg)
+Theta2:     2.581428 rad (147.905 deg)
+
+Payload
+-------
+0.250021 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: SSPG; Ratio: 5.150006; Efficiency: 0.960000
+Mass: 0.514000 kg; Torque limit: 11.393776 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 10.649972; Efficiency: 0.945000
+Mass: 0.663000 kg; Torque limit: 23.193644 Nm
+
+Controller
+----------
+ori_l: 0.395000 m; ori_theta: 0.079386 rad (4.549 deg)
+K: 983.015433; C: 7.664544; T_gain: 10.094786; Thrust time: 0.188210 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.177000 kg
+Moving carriage mass: 1.677021 kg
+Toe/rail min clearance: 0.004000 m
+Toe/hip min clearance: 0.004000 m
+Link/rail min clearance: 0.013452 m
+Valid: YES
+============================================================
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_run_2026-10-13_19-32-34_seed5
+Video: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_run_2026-10-13_19-32-34_seed5/best_jump.mp4
+Apex gain: 1.058 m; positive work: 24.93 J
+Rendering global best fixed-link/MAD_M6C12 candidate: /home/aerodaas/miniconda3/envs/ssds/bin/python /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/render_video.py --output /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_run_2026-10-13_19-32-34_seed5/best_jump.mp4 --xml /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_run_2026-10-13_19-32-34_seed5/best_design.xml --thigh 0.2 --shank 0.2 --payload 0.25002149607314234 --theta1 -0.5827295570168568 --theta2 2.5814278055638447 --hip-motor MAD_M6C12 --knee-motor MAD_M6C12 --hip-ratio 5.150006110798843 --knee-ratio 10.649972476390694 --ori-l 0.3949999591766847 --ori-theta 0.07938644838532505 --K 983.0154327939999 --C 7.664544077607842 --T-gain 10.094786250776957 --thrust-time 0.18820957207174888

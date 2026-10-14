@@ -1,0 +1,6 @@
+# Legacy/ad-hoc generated MuJoCo models (including prior CMA-ES candidates).
+/generated/
+
+# Per-candidate XMLs from older run layouts; the retained best_design.xml in a
+# run directory is intentionally not ignored.
+/results/**/generated_xml/
