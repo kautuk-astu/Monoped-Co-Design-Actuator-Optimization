@@ -11,3 +11,7 @@ Post_Humanoids/xmls/ll_xmls
 # Generated optimization designs. Keep the selected best design available to Git.
 *.xml
 !best_design.xml
+
+2510.05923v1.pdf
+.git
+.gitignore

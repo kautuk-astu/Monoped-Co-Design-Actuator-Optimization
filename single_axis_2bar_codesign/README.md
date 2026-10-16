@@ -1,5 +1,11 @@
 # Single-axis two-bar jumper
 
+For a detailed explanation of the fixed 0.20 m-link, fixed `MAD_M6C12`
+CMA-ES study—including every function on its runtime path, execution steps,
+controller equations, outputs, and a section-by-section mapping to
+`2510.05923v1`—see
+[`README_optimize_fixed_link_motor.md`](README_optimize_fixed_link_motor.md).
+
 This is a self-contained, deliberately small experiment for a *single* two-link
 leg attached to a vertical pole.  The pole is modelled as a body that may
 translate only along `z`; it supplies whatever lateral reaction is needed to
