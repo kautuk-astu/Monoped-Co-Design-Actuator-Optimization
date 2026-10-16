@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="650" viewBox="0 0 920 650" role="img" aria-labelledby="title desc">
+  <title id="title">Two-bar leg joint-angle convention</title>
+  <desc id="desc">Side-view diagram showing theta one at the hip from vertical down to the thigh, and theta two at the knee from the thigh direction to the shank direction.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L8,4.5 L0,9 Z" fill="#263746"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L8,4.5 L0,9 Z" fill="#1677c8"/>
+    </marker>
+    <style>
+      text { font-family: Inter, Arial, sans-serif; fill: #17232d; }
+      .small { font-size: 19px; }
+      .label { font-size: 24px; font-weight: 600; }
+      .formula { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 18px; }
+    </style>
+  </defs>
+
+  <rect width="920" height="650" fill="#fbfcfe"/>
+  <text x="50" y="58" font-size="30" font-weight="700">MuJoCo two-bar leg: θ₁ and θ₂</text>
+  <text x="50" y="88" class="small">Side view: x is right, z is up; the +y hinge axis points out of the page.</text>
+
+  <!-- Coordinate frame and +y marker -->
+  <line x1="105" y1="180" x2="185" y2="180" stroke="#263746" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="105" y1="180" x2="105" y2="110" stroke="#263746" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="190" y="187" class="small">+x</text>
+  <text x="82" y="109" class="small">+z</text>
+  <circle cx="105" cy="228" r="15" fill="none" stroke="#263746" stroke-width="3"/>
+  <circle cx="105" cy="228" r="4" fill="#263746"/>
+  <text x="130" y="235" class="small">+y (out of page)</text>
+
+  <!-- Reference for theta 1 -->
+  <line x1="405" y1="152" x2="405" y2="410" stroke="#8796a3" stroke-width="3" stroke-dasharray="9 8"/>
+  <text x="420" y="397" class="small" fill="#61717f">vertical down (θ₁ = 0)</text>
+
+  <!-- Leg: H=(405,152), K=(525,410), toe=(333,530) -->
+  <line x1="405" y1="152" x2="525" y2="410" stroke="#e45034" stroke-width="20" stroke-linecap="round"/>
+  <line x1="525" y1="410" x2="333" y2="530" stroke="#e5a52d" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="405" cy="152" r="15" fill="#1a75bb"/>
+  <circle cx="525" cy="410" r="14" fill="#1a75bb"/>
+  <circle cx="333" cy="530" r="13" fill="#263746"/>
+  <text x="365" y="142" class="label">hip H</text>
+  <text x="538" y="405" class="label">knee K</text>
+  <text x="273" y="565" class="label">toe T</text>
+  <text x="463" y="273" class="label" fill="#a93321">thigh (L₁)</text>
+  <text x="399" y="489" class="label" fill="#966600">shank (L₂)</text>
+
+  <!-- theta 1 arc: from vertical-down direction to thigh direction. Positive means toward -x. -->
+  <path d="M405 258 A106 106 0 0 1 360 248" fill="none" stroke="#1677c8" stroke-width="5" marker-end="url(#arrowBlue)"/>
+  <text x="302" y="256" font-size="31" font-weight="700" fill="#1677c8">θ₁</text>
+  <text x="255" y="283" class="small" fill="#1677c8">hip angle</text>
+
+  <!-- theta 2 arc: from an extension of the thigh to the shank. -->
+  <line x1="525" y1="410" x2="591" y2="552" stroke="#8796a3" stroke-width="3" stroke-dasharray="9 8"/>
+  <path d="M559 483 A80 80 0 0 1 453 455" fill="none" stroke="#1677c8" stroke-width="5" marker-end="url(#arrowBlue)"/>
+  <text x="478" y="510" font-size="31" font-weight="700" fill="#1677c8">θ₂</text>
+  <text x="553" y="526" class="small" fill="#1677c8">knee relative angle</text>
+
+  <!-- Callout -->
+  <rect x="650" y="150" width="225" height="255" rx="12" fill="#edf5fc" stroke="#bad6eb" stroke-width="2"/>
+  <text x="673" y="190" class="label">Angle definitions</text>
+  <text x="673" y="228" class="small">θ₁ = angle from</text>
+  <text x="673" y="254" class="small">vertical-down to thigh</text>
+  <text x="673" y="302" class="small">θ₂ = angle from</text>
+  <text x="673" y="328" class="small">thigh extension to shank</text>
+  <text x="673" y="376" class="small">shank absolute angle:</text>
+  <text x="673" y="398" class="formula">θ₁ + θ₂</text>
+
+  <text x="50" y="616" class="small">Straight leg: θ₂ = 0.  The code stores angles in radians; values in reports also include degrees.</text>
+</svg>

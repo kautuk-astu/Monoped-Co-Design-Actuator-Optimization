@@ -7,3 +7,7 @@ final_humanoids_paper_results/Final_humanoids_results/ll_xmls
 Post_Humanoids/xmls/design_xmls
 Post_Humanoids/xmls/gear_xmls
 Post_Humanoids/xmls/ll_xmls
+
+# Generated optimization designs. Keep the selected best design available to Git.
+*.xml
+!best_design.xml

@@ -1,0 +1,69 @@
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 8 (seed=5, Thu Oct 15 17:20:49 2026)
+new global best: 40.497574; jump=0.4311 m
+new global best: 38.750185; jump=0.3247 m
+new global best: 33.454736; jump=0.0007 m
+new global best: 33.444569; jump=0.0115 m
+new global best: 30.714915; jump=0.0753 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.075319 m
+Absolute apex height:       0.337919 m
+Initial height:             0.262600 m
+Mechanical energy:          6.365873 J
+Hip mechanical work:        0.809712 J
+Knee mechanical work:       5.556161 J
+Best cost:                  30.714915
+Peak power:                 1791.668427 W
+Takeoff time:               0.016000000000000007 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -1.195697 rad (-68.508 deg)
+Theta2:     0.589177 rad (33.757 deg)
+
+Payload
+-------
+1.323098 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: SSPG; Ratio: 10.192919; Efficiency: 0.957000
+Mass: 0.525000 kg; Torque limit: 22.480149 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: SSPG; Ratio: 9.030063; Efficiency: 0.957000
+Mass: 0.525000 kg; Torque limit: 19.915508 Nm
+
+Controller
+----------
+ori_l: 10.000000 m; ori_theta: 0.000000 rad (0.000 deg)
+K: 130.875671; C: 6.857817; T_gain: 6.555257; Thrust time: 8.000000 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.050000 kg
+Moving carriage mass: 2.623098 kg
+Toe/rail min clearance: 0.307570 m
+Toe/hip min clearance: 0.044742 m
+Link/rail min clearance: 0.092000 m
+Valid: YES
+============================================================
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5
+Video: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_jump_front.mp4
+Apex gain: 0.075 m; positive work: 6.37 J
+Video: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_jump_left_oblique.mp4
+Apex gain: 0.075 m; positive work: 6.37 J
+Video: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_jump_right_oblique.mp4
+Apex gain: 0.075 m; positive work: 6.37 J
+Rendering front view: /home/aerodaas/miniconda3/envs/ssds/bin/python /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/render_video.py --xml /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_design.xml --thigh 0.2 --shank 0.2 --payload 1.323097566958643 --theta1 -1.1956969939803983 --theta2 0.5891773401608332 --hip-motor MAD_M6C12 --knee-motor MAD_M6C12 --hip-ratio 10.192918766032275 --knee-ratio 9.030062747694124 --ori-l 10.0 --ori-theta 0.0 --K 130.87567141336459 --C 6.857816501466944 --T-gain 6.5552572720340905 --thrust-time 8.0 --duration 2.0 --authors-single-jump --output /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_jump_front.mp4 --view front
+Rendering left_oblique view: /home/aerodaas/miniconda3/envs/ssds/bin/python /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/render_video.py --xml /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_design.xml --thigh 0.2 --shank 0.2 --payload 1.323097566958643 --theta1 -1.1956969939803983 --theta2 0.5891773401608332 --hip-motor MAD_M6C12 --knee-motor MAD_M6C12 --hip-ratio 10.192918766032275 --knee-ratio 9.030062747694124 --ori-l 10.0 --ori-theta 0.0 --K 130.87567141336459 --C 6.857816501466944 --T-gain 6.5552572720340905 --thrust-time 8.0 --duration 2.0 --authors-single-jump --output /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_jump_left_oblique.mp4 --view left_oblique
+Rendering right_oblique view: /home/aerodaas/miniconda3/envs/ssds/bin/python /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/render_video.py --xml /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_design.xml --thigh 0.2 --shank 0.2 --payload 1.323097566958643 --theta1 -1.1956969939803983 --theta2 0.5891773401608332 --hip-motor MAD_M6C12 --knee-motor MAD_M6C12 --hip-ratio 10.192918766032275 --knee-ratio 9.030062747694124 --ori-l 10.0 --ori-theta 0.0 --K 130.87567141336459 --C 6.857816501466944 --T-gain 6.5552572720340905 --thrust-time 8.0 --duration 2.0 --authors-single-jump --output /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_jump_right_oblique.mp4 --view right_oblique
+Composing three-panel collage: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/fixed_link_MAD_M6C12_single_jump_run_2026-10-15_17-20-48_seed5/best_jump_collage.mp4
