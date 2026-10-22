@@ -1,0 +1,78 @@
+fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 11 (seed=5, Sun Oct 18 15:43:02 2026)
+new global best: -0.045868; jump=0.1100 m
+new global best: -0.086959; jump=0.2330 m
+new global best: -0.096241; jump=0.2058 m
+new global best: -0.098820; jump=0.2725 m
+new global best: -0.124681; jump=0.3148 m
+new global best: -0.128618; jump=0.3155 m
+new global best: -0.187212; jump=0.4326 m
+new global best: -0.268260; jump=0.4875 m
+new global best: -0.319500; jump=0.6488 m
+new global best: -0.331400; jump=0.5669 m
+new global best: -0.354245; jump=0.6221 m
+new global best: -0.434489; jump=0.7530 m
+new global best: -0.549135; jump=0.9304 m
+new global best: -0.552304; jump=0.9433 m
+new global best: -0.552971; jump=0.8838 m
+new global best: -0.577707; jump=0.9424 m
+new global best: -0.610107; jump=0.9455 m
+new global best: -0.613560; jump=0.9669 m
+new global best: -0.618623; jump=0.9558 m
+new global best: -0.645694; jump=0.9981 m
+new global best: -0.654079; jump=1.0251 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  1.025128 m
+Absolute apex height:       1.137852 m
+Initial height:             0.112724 m
+Mechanical energy:          24.736614 J
+Hip mechanical work:        0.172280 J
+Knee mechanical work:       26.292847 J
+Best cost:                  -0.654079
+Peak power:                 436.399049 W
+Takeoff time:               0.09100000000000007 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -0.720286 rad (-41.269 deg)
+Theta2:     2.609428 rad (149.509 deg)
+
+Payload
+-------
+0.273964 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: SSPG; Ratio: 4.614983; Efficiency: 0.957000
+Mass: 0.497000 kg; Torque limit: 10.178195 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 10.632738; Efficiency: 0.945000
+Mass: 0.663000 kg; Torque limit: 23.156110 Nm
+
+Controller
+----------
+ori_l: 0.393166 m; ori_theta: 0.065386 rad (3.746 deg)
+K: 984.907826; C: 7.743103; T_gain: 10.364583; Thrust time: 0.188690 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.160000 kg
+Moving carriage mass: 1.683964 kg
+Toe/rail min clearance: 0.017166 m
+Toe/hip min clearance: 0.007724 m
+Link/rail min clearance: 0.028768 m
+Valid: YES
+============================================================
+
+Results: /home/rishika/monoped/repo/single_axis_2bar_codesign/results/seed_study_2026-10-18_15-43-00/default_seed5

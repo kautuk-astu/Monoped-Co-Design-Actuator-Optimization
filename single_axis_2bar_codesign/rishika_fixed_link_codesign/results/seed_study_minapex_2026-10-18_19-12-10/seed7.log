@@ -1,0 +1,7 @@
+fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+(8_w,16)-aCMA-ES (mu_w=4.8,w_1=32%) in dimension 11 (seed=7, Sun Oct 18 19:12:12 2026)
+No valid takeoff candidate was found; see all_candidates.csv.
+
+Results: /home/rishika/monoped/repo/single_axis_2bar_codesign/results/seed_study_minapex_2026-10-18_19-12-10/seed7

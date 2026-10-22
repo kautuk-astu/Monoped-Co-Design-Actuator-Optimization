@@ -1,0 +1,120 @@
+fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+(8_w,16)-aCMA-ES (mu_w=4.8,w_1=32%) in dimension 11 (seed=6, Sun Oct 18 19:12:12 2026)
+new global best: -0.038131; jump=0.0695 m
+new global best: -0.048621; jump=0.0912 m
+new global best: -0.050425; jump=0.0944 m
+new global best: -0.070698; jump=0.1354 m
+new global best: -0.081998; jump=0.1535 m
+new global best: -0.083509; jump=0.1600 m
+new global best: -0.086447; jump=0.1590 m
+new global best: -0.089358; jump=0.1649 m
+new global best: -0.115895; jump=0.2300 m
+new global best: -0.118975; jump=0.2424 m
+new global best: -0.119852; jump=0.2536 m
+new global best: -0.125664; jump=0.2638 m
+new global best: -0.126552; jump=0.2553 m
+new global best: -0.131759; jump=0.2682 m
+new global best: -0.136820; jump=0.2711 m
+new global best: -0.145415; jump=0.2877 m
+new global best: -0.146554; jump=0.3190 m
+new global best: -0.160164; jump=0.3189 m
+new global best: -0.162041; jump=0.3108 m
+new global best: -0.166938; jump=0.3443 m
+new global best: -0.170219; jump=0.3314 m
+new global best: -0.176504; jump=0.3597 m
+new global best: -0.188019; jump=0.3777 m
+new global best: -0.193773; jump=0.4058 m
+new global best: -0.198843; jump=0.3898 m
+new global best: -0.202042; jump=0.3959 m
+new global best: -0.216543; jump=0.4345 m
+new global best: -0.244865; jump=0.5097 m
+new global best: -0.258173; jump=0.5319 m
+new global best: -0.268584; jump=0.5366 m
+new global best: -0.272146; jump=0.5523 m
+new global best: -0.280155; jump=0.5460 m
+new global best: -0.285929; jump=0.5659 m
+new global best: -0.332084; jump=0.6451 m
+new global best: -0.334510; jump=0.6656 m
+new global best: -0.338151; jump=0.6537 m
+new global best: -0.340997; jump=0.6735 m
+new global best: -0.364186; jump=0.7181 m
+new global best: -0.366669; jump=0.7498 m
+new global best: -0.366918; jump=0.7496 m
+new global best: -0.383132; jump=0.7911 m
+new global best: -0.384723; jump=0.7877 m
+new global best: -0.389648; jump=0.7917 m
+new global best: -0.389939; jump=0.7954 m
+new global best: -0.396415; jump=0.8152 m
+new global best: -0.397911; jump=0.8126 m
+new global best: -0.399207; jump=0.8051 m
+new global best: -0.399831; jump=0.8216 m
+new global best: -0.403124; jump=0.8296 m
+new global best: -0.404636; jump=0.8289 m
+new global best: -0.404992; jump=0.8229 m
+new global best: -0.407365; jump=0.8324 m
+new global best: -0.407545; jump=0.8315 m
+new global best: -0.408277; jump=0.8291 m
+new global best: -0.409379; jump=0.8378 m
+new global best: -0.410759; jump=0.8353 m
+new global best: -0.410904; jump=0.8376 m
+new global best: -0.412201; jump=0.8411 m
+new global best: -0.414186; jump=0.8478 m
+new global best: -0.415465; jump=0.8521 m
+new global best: -0.415500; jump=0.8582 m
+new global best: -0.415582; jump=0.8589 m
+new global best: -0.415707; jump=0.8585 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.858523 m
+Absolute apex height:       0.970401 m
+Initial height:             0.111877 m
+Mechanical energy:          29.135018 J
+Hip mechanical work:        6.076928 J
+Knee mechanical work:       23.444121 J
+Best cost:                  -0.415707
+Peak power:                 494.401892 W
+Takeoff time:               0.1210000000000001 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -1.570795 rad (-90.000 deg)
+Theta2:     2.692235 rad (154.254 deg)
+
+Payload
+-------
+1.000000 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 6.533601; Efficiency: 0.700000
+Mass: 0.547000 kg; Torque limit: 10.539969 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 8.696021; Efficiency: 0.700000
+Mass: 0.648000 kg; Torque limit: 14.028373 Nm
+
+Controller
+----------
+ori_l: 0.394556 m; ori_theta: -0.074165 rad (-4.249 deg)
+K: 2941.392155; C: 8.720879; T_gain: 49.998492; Thrust time: 0.249071 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.195000 kg
+Moving carriage mass: 2.445000 kg
+Toe/rail min clearance: 0.004392 m
+Toe/hip min clearance: 0.004117 m
+Link/rail min clearance: 0.085699 m
+Valid: YES
+============================================================
+
+Results: /home/rishika/monoped/repo/single_axis_2bar_codesign/results/seed_study_minapex_2026-10-18_19-12-10/seed6

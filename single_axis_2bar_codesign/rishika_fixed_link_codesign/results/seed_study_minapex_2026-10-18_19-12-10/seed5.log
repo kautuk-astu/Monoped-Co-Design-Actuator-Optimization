@@ -1,0 +1,90 @@
+fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+(8_w,16)-aCMA-ES (mu_w=4.8,w_1=32%) in dimension 11 (seed=5, Sun Oct 18 19:12:12 2026)
+new global best: -0.033574; jump=0.0649 m
+new global best: -0.034600; jump=0.0624 m
+new global best: -0.034902; jump=0.0931 m
+new global best: -0.036496; jump=0.0651 m
+new global best: -0.037804; jump=0.0727 m
+new global best: -0.041087; jump=0.0770 m
+new global best: -0.043074; jump=0.0809 m
+new global best: -0.066163; jump=0.1190 m
+new global best: -0.066888; jump=0.1235 m
+new global best: -0.079405; jump=0.1456 m
+new global best: -0.086640; jump=0.1598 m
+new global best: -0.088733; jump=0.1646 m
+new global best: -0.089632; jump=0.1658 m
+new global best: -0.089900; jump=0.1672 m
+new global best: -0.094539; jump=0.1746 m
+new global best: -0.095814; jump=0.1797 m
+new global best: -0.097242; jump=0.1772 m
+new global best: -0.097692; jump=0.1871 m
+new global best: -0.098980; jump=0.1825 m
+new global best: -0.100020; jump=0.1820 m
+new global best: -0.101174; jump=0.1845 m
+new global best: -0.101598; jump=0.1874 m
+new global best: -0.101609; jump=0.1879 m
+new global best: -0.102231; jump=0.1881 m
+new global best: -0.102651; jump=0.1947 m
+new global best: -0.102879; jump=0.1929 m
+new global best: -0.102946; jump=0.1917 m
+new global best: -0.103144; jump=0.1940 m
+new global best: -0.103454; jump=0.1923 m
+new global best: -0.103770; jump=0.1917 m
+new global best: -0.103880; jump=0.1918 m
+new global best: -0.104069; jump=0.1930 m
+new global best: -0.104156; jump=0.1928 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.192797 m
+Absolute apex height:       0.417909 m
+Initial height:             0.225112 m
+Mechanical energy:          5.868029 J
+Hip mechanical work:        4.232186 J
+Knee mechanical work:       1.677264 J
+Best cost:                  -0.104156
+Peak power:                 81.432853 W
+Takeoff time:               0.10300000000000008 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -1.570180 rad (-89.965 deg)
+Theta2:     1.580883 rad (90.578 deg)
+
+Payload
+-------
+1.000000 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 7.509006; Efficiency: 0.700000
+Mass: 0.576000 kg; Torque limit: 12.113488 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 7.929242; Efficiency: 0.700000
+Mass: 0.574000 kg; Torque limit: 12.791409 Nm
+
+Controller
+----------
+ori_l: 0.394176 m; ori_theta: -0.127403 rad (-7.300 deg)
+K: 1179.005619; C: 5.646466; T_gain: 15.853334; Thrust time: 0.091510 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.150000 kg
+Moving carriage mass: 2.400000 kg
+Toe/rail min clearance: 0.086998 m
+Toe/hip min clearance: 0.007756 m
+Link/rail min clearance: 0.092000 m
+Valid: YES
+============================================================
+
+Results: /home/rishika/monoped/repo/single_axis_2bar_codesign/results/seed_study_minapex_2026-10-18_19-12-10/seed5

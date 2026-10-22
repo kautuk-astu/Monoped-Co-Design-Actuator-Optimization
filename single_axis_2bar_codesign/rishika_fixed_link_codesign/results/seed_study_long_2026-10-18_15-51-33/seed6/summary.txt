@@ -1,0 +1,51 @@
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.838499 m
+Absolute apex height:       0.950288 m
+Initial height:             0.111789 m
+Mechanical energy:          28.664051 J
+Hip mechanical work:        5.058174 J
+Knee mechanical work:       23.882075 J
+Best cost:                  -0.404395
+Peak power:                 469.751411 W
+Takeoff time:               0.12600000000000008 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -1.569948 rad (-89.951 deg)
+Theta2:     2.692817 rad (154.287 deg)
+
+Payload
+-------
+1.000000 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 8.569606; Efficiency: 0.700000
+Mass: 0.628000 kg; Torque limit: 13.824441 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 8.649785; Efficiency: 0.700000
+Mass: 0.628000 kg; Torque limit: 13.953785 Nm
+
+Controller
+----------
+ori_l: 0.394007 m; ori_theta: -0.065228 rad (-3.737 deg)
+K: 2997.880203; C: 3.743661; T_gain: 43.507876; Thrust time: 0.207470 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.256000 kg
+Moving carriage mass: 2.506000 kg
+Toe/rail min clearance: 0.005243 m
+Toe/hip min clearance: 0.004004 m
+Link/rail min clearance: 0.088808 m
+Valid: YES
+============================================================

@@ -1,0 +1,98 @@
+(8_w,16)-aCMA-ES (mu_w=4.8,w_1=32%) in dimension 11 (seed=6, Sun Oct 18 21:24:25 2026)
+new global best: -0.015928; jump=0.1010 m
+new global best: -0.035811; jump=0.0954 m
+new global best: -0.040309; jump=0.1094 m
+new global best: -0.043110; jump=0.1392 m
+new global best: -0.046604; jump=0.1440 m
+new global best: -0.048320; jump=0.1141 m
+new global best: -0.053001; jump=0.1792 m
+new global best: -0.066386; jump=0.1756 m
+new global best: -0.070631; jump=0.1767 m
+new global best: -0.077292; jump=0.1866 m
+new global best: -0.079840; jump=0.1856 m
+new global best: -0.080612; jump=0.1837 m
+new global best: -0.080646; jump=0.2021 m
+new global best: -0.084237; jump=0.1904 m
+new global best: -0.086323; jump=0.1933 m
+new global best: -0.086351; jump=0.1994 m
+new global best: -0.086387; jump=0.1937 m
+new global best: -0.086486; jump=0.1972 m
+new global best: -0.086502; jump=0.1968 m
+new global best: -0.086591; jump=0.1958 m
+new global best: -0.086601; jump=0.1962 m
+new global best: -0.086613; jump=0.1957 m
+new global best: -0.086626; jump=0.1961 m
+new global best: -0.086632; jump=0.1963 m
+new global best: -0.086634; jump=0.1964 m
+new global best: -0.086650; jump=0.1963 m
+new global best: -0.086660; jump=0.1958 m
+new global best: -0.086661; jump=0.1963 m
+new global best: -0.086661; jump=0.1962 m
+new global best: -0.086663; jump=0.1962 m
+new global best: -0.086663; jump=0.1963 m
+new global best: -0.086664; jump=0.1962 m
+new global best: -0.086665; jump=0.1963 m
+new global best: -0.086665; jump=0.1963 m
+new global best: -0.086666; jump=0.1963 m
+new global best: -0.086666; jump=0.1963 m
+new global best: -0.086667; jump=0.1963 m
+new global best: -0.086667; jump=0.1963 m
+new global best: -0.086667; jump=0.1963 m
+new global best: -0.086667; jump=0.1963 m
+new global best: -0.086667; jump=0.1963 m
+new global best: -0.086668; jump=0.1963 m
+new global best: -0.086668; jump=0.1963 m
+new global best: -0.086668; jump=0.1963 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.196326 m
+Absolute apex height:       0.420764 m
+Initial height:             0.224438 m
+Mechanical energy:          7.185599 J
+Hip mechanical work:        3.076017 J
+Knee mechanical work:       4.234479 J
+Best cost:                  -0.086668
+Peak power:                 80.961516 W
+Takeoff time:               0.11200000000000009 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -1.570752 rad (-89.997 deg)
+Theta2:     1.495167 rad (85.667 deg)
+
+Payload
+-------
+1.000000 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: SSPG; Ratio: 5.398620; Efficiency: 0.700000
+Mass: 0.511000 kg; Torque limit: 8.709024 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 7.050658; Efficiency: 0.700000
+Mass: 0.557000 kg; Torque limit: 11.374082 Nm
+
+Controller
+----------
+ori_l: 0.394983 m; ori_theta: 0.034603 rad (1.983 deg)
+K: 1653.783847; C: 9.914175; T_gain: 10.035571; Thrust time: 0.242376 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.068000 kg
+Moving carriage mass: 2.318000 kg
+Toe/rail min clearance: 0.098033 m
+Toe/hip min clearance: 0.152811 m
+Link/rail min clearance: 0.092000 m
+Valid: YES
+============================================================
+
+Results: /home/rishika/monoped/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/seed_study_contact_2026-10-18_21-24-24/seed6

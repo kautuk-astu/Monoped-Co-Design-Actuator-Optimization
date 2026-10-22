@@ -1,0 +1,64 @@
+fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+(8_w,16)-aCMA-ES (mu_w=4.8,w_1=32%) in dimension 11 (seed=5, Sun Oct 18 15:51:35 2026)
+new global best: 0.015231; jump=0.0000 m
+new global best: 0.007940; jump=0.0000 m
+new global best: 0.005191; jump=0.0000 m
+new global best: 0.000094; jump=0.0000 m
+new global best: 0.000055; jump=0.0000 m
+new global best: 0.000010; jump=0.0000 m
+new global best: 0.000000; jump=0.0000 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.000000 m
+Absolute apex height:       0.304536 m
+Initial height:             0.304536 m
+Mechanical energy:          0.000000 J
+Hip mechanical work:        0.000000 J
+Knee mechanical work:       0.000000 J
+Best cost:                  0.000000
+Peak power:                 10.909479 W
+Takeoff time:               0.46400000000000036 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -1.161479 rad (-66.548 deg)
+Theta2:     1.136931 rad (65.141 deg)
+
+Payload
+-------
+1.000000 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 8.211269; Efficiency: 0.700000
+Mass: 0.577000 kg; Torque limit: 13.246374 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 8.518086; Efficiency: 0.700000
+Mass: 0.638000 kg; Torque limit: 13.741330 Nm
+
+Controller
+----------
+ori_l: 0.350426 m; ori_theta: 0.524275 rad (30.039 deg)
+K: 916.337216; C: 4.938092; T_gain: 14.323736; Thrust time: 0.215275 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.215000 kg
+Moving carriage mass: 2.465000 kg
+Toe/rail min clearance: 0.266767 m
+Toe/hip min clearance: 0.010733 m
+Link/rail min clearance: 0.092000 m
+Valid: YES
+============================================================
+
+Results: /home/rishika/monoped/repo/single_axis_2bar_codesign/results/seed_study_long_2026-10-18_15-51-33/seed5

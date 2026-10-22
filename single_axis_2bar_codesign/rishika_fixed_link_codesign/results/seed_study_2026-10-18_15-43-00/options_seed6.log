@@ -1,0 +1,59 @@
+fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 11 (seed=6, Sun Oct 18 15:43:02 2026)
+new global best: 0.010442; jump=0.0183 m
+new global best: -0.090371; jump=0.1762 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.176163 m
+Absolute apex height:       0.394147 m
+Initial height:             0.217983 m
+Mechanical energy:          4.945058 J
+Hip mechanical work:        0.029224 J
+Knee mechanical work:       5.690292 J
+Best cost:                  -0.090371
+Peak power:                 54.198255 W
+Takeoff time:               0.1390000000000001 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -0.857829 rad (-49.150 deg)
+Theta2:     2.112553 rad (121.040 deg)
+
+Payload
+-------
+0.720287 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 6.808265; Efficiency: 0.700000
+Mass: 0.610000 kg; Torque limit: 10.983055 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 7.299160; Efficiency: 0.700000
+Mass: 0.576000 kg; Torque limit: 11.774965 Nm
+
+Controller
+----------
+ori_l: 0.339587 m; ori_theta: -0.031898 rad (-1.828 deg)
+K: 751.885528; C: 4.300049; T_gain: 19.212055; Thrust time: 0.211460 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.186000 kg
+Moving carriage mass: 2.156287 kg
+Toe/rail min clearance: 0.036581 m
+Toe/hip min clearance: 0.049219 m
+Link/rail min clearance: 0.048949 m
+Valid: YES
+============================================================
+
+Results: /home/rishika/monoped/repo/single_axis_2bar_codesign/results/seed_study_2026-10-18_15-43-00/options_seed6

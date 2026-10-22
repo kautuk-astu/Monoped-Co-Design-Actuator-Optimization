@@ -1,0 +1,122 @@
+(8_w,16)-aCMA-ES (mu_w=4.8,w_1=32%) in dimension 11 (seed=7, Sun Oct 18 19:31:44 2026)
+new global best: -0.059064; jump=0.1630 m
+new global best: -0.089513; jump=0.2206 m
+new global best: -0.104301; jump=0.2454 m
+new global best: -0.111601; jump=0.2734 m
+new global best: -0.119796; jump=0.2960 m
+new global best: -0.124929; jump=0.2980 m
+new global best: -0.143484; jump=0.3308 m
+new global best: -0.151956; jump=0.3254 m
+new global best: -0.154382; jump=0.3228 m
+new global best: -0.192933; jump=0.4282 m
+new global best: -0.223681; jump=0.4800 m
+new global best: -0.224308; jump=0.5025 m
+new global best: -0.233773; jump=0.5233 m
+new global best: -0.235867; jump=0.5585 m
+new global best: -0.243119; jump=0.5296 m
+new global best: -0.272757; jump=0.5430 m
+new global best: -0.291234; jump=0.6066 m
+new global best: -0.296980; jump=0.6099 m
+new global best: -0.298252; jump=0.6075 m
+new global best: -0.316292; jump=0.6285 m
+new global best: -0.322733; jump=0.6391 m
+new global best: -0.323973; jump=0.6405 m
+new global best: -0.332404; jump=0.6447 m
+new global best: -0.334416; jump=0.6550 m
+new global best: -0.338626; jump=0.6642 m
+new global best: -0.340078; jump=0.6589 m
+new global best: -0.342519; jump=0.6678 m
+new global best: -0.343402; jump=0.6629 m
+new global best: -0.345176; jump=0.6659 m
+new global best: -0.345488; jump=0.6708 m
+new global best: -0.345831; jump=0.6695 m
+new global best: -0.346837; jump=0.6683 m
+new global best: -0.348093; jump=0.6746 m
+new global best: -0.349323; jump=0.6720 m
+new global best: -0.349673; jump=0.6734 m
+new global best: -0.350598; jump=0.6774 m
+new global best: -0.353389; jump=0.6790 m
+new global best: -0.354200; jump=0.6844 m
+new global best: -0.354501; jump=0.6861 m
+new global best: -0.354722; jump=0.6875 m
+new global best: -0.355207; jump=0.6803 m
+new global best: -0.356265; jump=0.6846 m
+new global best: -0.357246; jump=0.6856 m
+new global best: -0.357743; jump=0.6860 m
+new global best: -0.358400; jump=0.6877 m
+new global best: -0.359463; jump=0.6899 m
+new global best: -0.359886; jump=0.6925 m
+new global best: -0.360222; jump=0.6929 m
+new global best: -0.360351; jump=0.6944 m
+new global best: -0.360498; jump=0.6956 m
+new global best: -0.360513; jump=0.6958 m
+new global best: -0.360875; jump=0.6976 m
+new global best: -0.361495; jump=0.6984 m
+new global best: -0.361733; jump=0.7004 m
+new global best: -0.362329; jump=0.7020 m
+new global best: -0.362773; jump=0.7030 m
+new global best: -0.363093; jump=0.7085 m
+new global best: -0.363277; jump=0.7094 m
+new global best: -0.363302; jump=0.7079 m
+new global best: -0.363348; jump=0.7091 m
+new global best: -0.363601; jump=0.7101 m
+new global best: -0.363973; jump=0.7108 m
+new global best: -0.364215; jump=0.7129 m
+new global best: -0.364315; jump=0.7124 m
+new global best: -0.364388; jump=0.7119 m
+new global best: -0.365594; jump=0.7152 m
+new global best: -0.365648; jump=0.7157 m
+new global best: -0.365729; jump=0.7157 m
+============================================================
+BEST TWO-LINK MONOPED CO-DESIGN
+============================================================
+
+Performance
+-----------
+Vertical jump (apex gain):  0.715698 m
+Absolute apex height:       0.824709 m
+Initial height:             0.109011 m
+Mechanical energy:          21.932740 J
+Hip mechanical work:        0.463632 J
+Knee mechanical work:       22.867643 J
+Best cost:                  -0.365729
+Peak power:                 317.971654 W
+Takeoff time:               0.1230000000000001 s
+
+Morphology
+----------
+Thigh L1:   0.200000 m (200.000 mm)
+Shank L2:   0.200000 m (200.000 mm)
+Theta1:     -0.626208 rad (-35.879 deg)
+Theta2:     2.597856 rad (148.846 deg)
+
+Payload
+-------
+1.000000 kg
+
+Hip Actuator
+------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 7.793094; Efficiency: 0.700000
+Mass: 0.574000 kg; Torque limit: 12.571776 Nm
+
+Knee Actuator (physically mounted at hip)
+-----------------------------------------
+Motor: MAD_M6C12; Gearbox: CPG; Ratio: 8.648424; Efficiency: 0.700000
+Mass: 0.628000 kg; Torque limit: 13.951589 Nm
+
+Controller
+----------
+ori_l: 0.394989 m; ori_theta: -0.152095 rad (-8.714 deg)
+K: 2348.949791; C: 3.767248; T_gain: 26.870384; Thrust time: 0.209670 s
+
+System / Feasibility
+--------------------
+Total actuator mass: 1.202000 kg
+Moving carriage mass: 2.452000 kg
+Toe/rail min clearance: 0.004019 m
+Toe/hip min clearance: 0.004011 m
+Link/rail min clearance: 0.017992 m
+Valid: YES
+============================================================
+
+Results: /home/rishika/monoped/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/seed_study_orilmax_2026-10-18_19-31-42/seed7
