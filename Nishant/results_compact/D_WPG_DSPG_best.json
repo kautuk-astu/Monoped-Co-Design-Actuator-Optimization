@@ -1,0 +1,67 @@
+{
+  "candidate": "D_WPG_DSPG",
+  "ratios": [
+    24.0,
+    22.57707509881423
+  ],
+  "pd_gains": {
+    "hip_Kp": 211.9034021550621,
+    "hip_Kd": 19.758874482472592,
+    "knee_Kp": 899.6038871937135,
+    "knee_Kd": 15.492581740308207
+  },
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.147,
+      "takeoff_hip_m": 0.3776329259617157,
+      "takeoff_com_m": 0.3507844983680465,
+      "takeoff_vz_m_s": 1.4894140689741473,
+      "apex_hip_m": 0.47959312199719817,
+      "apex_com_m": 0.4512636500950747,
+      "landing_time_s": 0.432,
+      "flight_duration_s": 0.28500000000000003,
+      "hip_rise_m": 0.10196019603548245,
+      "com_rise_m": 0.1004791517270282,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.147,
+        "takeoff_hip_m": 0.3776329259617157,
+        "takeoff_com_m": 0.3507844983680465,
+        "takeoff_vz_m_s": 1.4894140689741473,
+        "apex_hip_m": 0.47959312199719817,
+        "apex_com_m": 0.4512636500950747,
+        "landing_time_s": 0.432,
+        "flight_duration_s": 0.28500000000000003,
+        "hip_rise_m": 0.10196019603548245,
+        "com_rise_m": 0.1004791517270282,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.1004791517270282,
+    "hip_rise_m": 0.10196019603548245,
+    "max_hip_m": 0.47959312199719817,
+    "max_com_m": 0.4512636500950747,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 744.8998356548535,
+    "peak_current_A": 36.2,
+    "energy_proxy_J": 67.09250364462362,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 1056,
+    "score": 0.09562452654479703,
+    "peak_motor_speed_rad_s": 842.2302741715248,
+    "overspeed_time_s": 0.003,
+    "motor_model": "UNVERIFIED placeholder motor constants; NOT MAD MC12 validated"
+  },
+  "actuator_masses_kg": [
+    0.8091453339108069,
+    0.9670565132182383
+  ],
+  "efficiencies": [
+    0.7623754702712685,
+    0.9097907207375016
+  ],
+  "motor_constants_verified": false
+}

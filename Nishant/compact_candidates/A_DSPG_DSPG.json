@@ -1,0 +1,59 @@
+{
+    "name": "A_DSPG_DSPG",
+    "robot": {
+        "type": "two_link_monoped",
+        "link_lengths_m": [
+            0.2,
+            0.2
+        ],
+        "vertical_slider": true,
+        "controller": "PD",
+        "motor": "MAD_M6C12",
+        "motor_locations": [
+            "hip",
+            "hip"
+        ],
+        "knee_drive": "remote_transmission"
+    },
+    "actuators": {
+        "hip": {
+            "gearbox_topology": "DSPG",
+            "gear_ratio": 24.327950310559007,
+            "efficiency": 0.9128210913124603,
+            "actuator_mass_kg": 1.0262044505557726,
+            "motor_mass_kg": 0.257,
+            "gearbox_structure_mass_kg": 0.7692044505557726,
+            "actuator_width_mm": 103.56478776819526,
+            "facewidths_mm": {
+                "s1_sun": 6.566060821032274,
+                "s1_planet": 8.0,
+                "s1_ring": 8.0,
+                "s2_sun": 16.564787768195263,
+                "s2_planet": 16.564787768195263,
+                "s2_ring": 16.564787768195263
+            },
+            "motor_location": "hip",
+            "driven_joint": "hip"
+        },
+        "knee": {
+            "gearbox_topology": "DSPG",
+            "gear_ratio": 22.57707509881423,
+            "efficiency": 0.9097907207375016,
+            "actuator_mass_kg": 0.9670565132182383,
+            "motor_mass_kg": 0.257,
+            "gearbox_structure_mass_kg": 0.7100565132182383,
+            "actuator_width_mm": 101.3726250121509,
+            "facewidths_mm": {
+                "s1_sun": 7.150830361658638,
+                "s1_planet": 8.0,
+                "s1_ring": 8.0,
+                "s2_sun": 15.372625012150907,
+                "s2_planet": 15.372625012150907,
+                "s2_ring": 15.372625012150907
+            },
+            "motor_location": "hip",
+            "driven_joint": "knee"
+        }
+    },
+    "total_actuator_mass_kg": 1.9932609637740109
+}

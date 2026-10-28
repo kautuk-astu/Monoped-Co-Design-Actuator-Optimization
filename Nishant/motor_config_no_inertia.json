@@ -1,0 +1,14 @@
+{
+  "kt_Nm_per_A": 0.0636619772,
+  "resistance_ohm": 0.063,
+  "max_current_A": 36.2,
+  "max_speed_rad_s": 753.9822369,
+  "bus_voltage_V": 48.0,
+  "gearbox_efficiency": 0.9,
+  "gearbox_efficiency_drop_per_ratio": 0.002,
+  "gearbox_mass_base_kg": 0.08,
+  "gearbox_mass_per_ratio_kg": 0.004,
+  "motor_rotor_inertia_kgm2": 0.0,
+  "gearbox_output_inertia_kgm2": 0.0,
+  "gearbox_output_torque_limit_Nm": 60.0
+}

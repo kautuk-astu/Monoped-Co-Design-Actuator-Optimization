@@ -1,0 +1,9 @@
+{
+  "kt_Nm_per_A": 0.0636619772,
+  "resistance_ohm": 0.063,
+  "max_current_A": 36.2,
+  "max_speed_rad_s": 753.9822369,
+  "bus_voltage_V": 48.0,
+  "gearbox_efficiency": 0.9,
+  "gear_inertia_kgm2": 0.0
+}

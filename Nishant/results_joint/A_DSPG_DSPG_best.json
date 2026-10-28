@@ -1,0 +1,78 @@
+{
+  "candidate": "A_DSPG_DSPG",
+  "strictly_feasible": true,
+  "parameters": {
+    "hip_ratio": 22.767497593109123,
+    "knee_ratio": 19.60285119201675,
+    "hip_Kp": 616.1478277699086,
+    "hip_Kd": 27.694279281103356,
+    "knee_Kp": 699.9878585452104,
+    "knee_Kd": 11.884825432007899
+  },
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.147,
+      "takeoff_hip_m": 0.372897556819034,
+      "takeoff_com_m": 0.3482707084305873,
+      "takeoff_vz_m_s": 1.0801421436672376,
+      "apex_hip_m": 0.4488925764342726,
+      "apex_com_m": 0.4226479698884443,
+      "landing_time_s": 0.378,
+      "flight_duration_s": 0.231,
+      "hip_rise_m": 0.07599501961523858,
+      "com_rise_m": 0.074377261457857,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.147,
+        "takeoff_hip_m": 0.372897556819034,
+        "takeoff_com_m": 0.3482707084305873,
+        "takeoff_vz_m_s": 1.0801421436672376,
+        "apex_hip_m": 0.4488925764342726,
+        "apex_com_m": 0.4226479698884443,
+        "landing_time_s": 0.378,
+        "flight_duration_s": 0.231,
+        "hip_rise_m": 0.07599501961523858,
+        "com_rise_m": 0.074377261457857,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.074377261457857,
+    "hip_rise_m": 0.07599501961523858,
+    "max_hip_m": 0.4488925764342726,
+    "max_com_m": 0.4226479698884443,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 883.9225799125275,
+    "peak_current_A": 36.2,
+    "energy_proxy_J": 62.22213998714164,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 1095,
+    "score": 0.07126615445849992,
+    "peak_motor_speed_rad_s": 692.546275450152,
+    "overspeed_time_s": 0.0,
+    "motor_model": "UNVERIFIED placeholder motor constants; NOT MAD MC12 validated"
+  },
+  "screening_score": 10.071266154458499,
+  "assumptions": {
+    "ratio_dependent_COMPAct_model": false,
+    "mass_efficiency": "Held constant at the original COMPAct design point while varying ratios",
+    "original_ratios": [
+      24.327950310559007,
+      22.57707509881423
+    ],
+    "actuator_masses_kg": [
+      1.0262044505557726,
+      0.9670565132182383
+    ],
+    "gearbox_efficiencies": [
+      0.9128210913124603,
+      0.9097907207375016
+    ],
+    "motor_constants_verified": false,
+    "gear_inertia_model": "No ratio-dependent gearbox inertia",
+    "strict_speed_constraint": 753.9822369,
+    "strict_current_constraint": 36.2
+  }
+}

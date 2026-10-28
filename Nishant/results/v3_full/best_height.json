@@ -1,0 +1,106 @@
+{
+  "hip_ratio": 18.42369561990606,
+  "knee_ratio": 24.63598693879383,
+  "hip_Kp": 22.3047460785701,
+  "hip_Kd": 29.77484681410497,
+  "knee_Kp": 884.9465146505884,
+  "knee_Kd": 0.13011565927193544,
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.125,
+      "takeoff_hip_m": 0.3704780158101946,
+      "takeoff_com_m": 0.3277558897744793,
+      "takeoff_vz_m_s": 1.3445979143201625,
+      "apex_hip_m": 0.4612255451105225,
+      "apex_com_m": 0.4175559044048235,
+      "landing_time_s": 0.386,
+      "flight_duration_s": 0.261,
+      "hip_rise_m": 0.09074752930032787,
+      "com_rise_m": 0.0898000146303442,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.125,
+        "takeoff_hip_m": 0.3704780158101946,
+        "takeoff_com_m": 0.3277558897744793,
+        "takeoff_vz_m_s": 1.3445979143201625,
+        "apex_hip_m": 0.4612255451105225,
+        "apex_com_m": 0.4175559044048235,
+        "landing_time_s": 0.386,
+        "flight_duration_s": 0.261,
+        "hip_rise_m": 0.09074752930032787,
+        "com_rise_m": 0.0898000146303442,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.0898000146303442,
+    "hip_rise_m": 0.09074752930032787,
+    "max_hip_m": 0.4612255451105225,
+    "max_com_m": 0.4175559044048235,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 307.2917756117504,
+    "peak_push_off_force_N": 144.08860251292134,
+    "peak_post_landing_force_N": 307.2917756117504,
+    "peak_push_off_torque_Nm": [
+      36.987900845983084,
+      48.754453818118755
+    ],
+    "peak_post_landing_torque_Nm": [
+      36.987900845983084,
+      48.754453818118755
+    ],
+    "peak_current_A": 36.2,
+    "peak_applied_voltage_V": 48.0,
+    "peak_motor_speed_rad_s_each": [
+      174.81466529015864,
+      807.4710994560959
+    ],
+    "speed_exceeded_steps_each": [
+      0,
+      22
+    ],
+    "electrical_infeasible_steps_each": [
+      0,
+      7
+    ],
+    "voltage_saturated_steps_each": [
+      0,
+      37
+    ],
+    "current_saturated_steps_each": [
+      239,
+      746
+    ],
+    "electrical_energy_proxy_J": 381.10521873435084,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 357,
+    "score": 0.07074475369362666,
+    "gearbox_mass_kg_each": [
+      0.15369478247962426,
+      0.17854394775517535
+    ],
+    "gearbox_efficiency_each": [
+      0.8711526087601879,
+      0.8587280261224124
+    ],
+    "gearbox_torque_limit_Nm": 60.0,
+    "model_status": "Exploratory drive and gearbox model; open-circuit over-speed approximation; unverified hardware parameters"
+  },
+  "motor_parameters": {
+    "kt_Nm_per_A": 0.0636619772,
+    "resistance_ohm": 0.063,
+    "max_current_A": 36.2,
+    "max_speed_rad_s": 753.9822369,
+    "bus_voltage_V": 48.0,
+    "gearbox_efficiency": 0.9,
+    "gearbox_efficiency_drop_per_ratio": 0.002,
+    "gearbox_mass_base_kg": 0.08,
+    "gearbox_mass_per_ratio_kg": 0.004,
+    "motor_rotor_inertia_kgm2": 2e-05,
+    "gearbox_output_inertia_kgm2": 0.0001,
+    "gearbox_output_torque_limit_Nm": 60.0
+  },
+  "model_status": "Exploratory V3; not hardware validated"
+}

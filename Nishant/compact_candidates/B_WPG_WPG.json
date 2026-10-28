@@ -1,0 +1,57 @@
+{
+    "name": "B_WPG_WPG",
+    "robot": {
+        "type": "two_link_monoped",
+        "link_lengths_m": [
+            0.2,
+            0.2
+        ],
+        "vertical_slider": true,
+        "controller": "PD",
+        "motor": "MAD_M6C12",
+        "motor_locations": [
+            "hip",
+            "hip"
+        ],
+        "knee_drive": "remote_transmission"
+    },
+    "actuators": {
+        "hip": {
+            "gearbox_topology": "WPG",
+            "gear_ratio": 24.0,
+            "efficiency": 0.7623754702712685,
+            "actuator_mass_kg": 0.8091453339108069,
+            "motor_mass_kg": 0.257,
+            "gearbox_structure_mass_kg": 0.5521453339108069,
+            "actuator_width_mm": 105.90690283227858,
+            "facewidths_mm": {
+                "sun": 1.5798354712739588,
+                "planet_big": 17.39738824855497,
+                "planet_small": 20.0095145837236,
+                "ring_big": 17.39738824855497,
+                "ring_small": 20.0095145837236
+            },
+            "motor_location": "hip",
+            "driven_joint": "hip"
+        },
+        "knee": {
+            "gearbox_topology": "WPG",
+            "gear_ratio": 22.153846153846153,
+            "efficiency": 0.7650988192433826,
+            "actuator_mass_kg": 0.8457851113844098,
+            "motor_mass_kg": 0.257,
+            "gearbox_structure_mass_kg": 0.5887851113844098,
+            "actuator_width_mm": 100.25229920799468,
+            "facewidths_mm": {
+                "sun": 1.3032771591627632,
+                "planet_big": 14.764901813042568,
+                "planet_small": 16.98739739495211,
+                "ring_big": 14.764901813042568,
+                "ring_small": 16.98739739495211
+            },
+            "motor_location": "hip",
+            "driven_joint": "knee"
+        }
+    },
+    "total_actuator_mass_kg": 1.6549304452952167
+}

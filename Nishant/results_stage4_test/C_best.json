@@ -1,0 +1,81 @@
+{
+  "configuration": "C",
+  "strictly_feasible": true,
+  "gearboxes": {
+    "hip": {
+      "ratio": 18.81818181818182,
+      "mass": 1.009,
+      "efficiency": 0.913,
+      "width_mm": 95.65988282032177,
+      "peak_torque_Nm": 43.368
+    },
+    "knee": {
+      "ratio": 20.0,
+      "mass": 0.8,
+      "efficiency": 0.787,
+      "width_mm": 88.05985899442109,
+      "peak_torque_Nm": 46.091
+    }
+  },
+  "actuator_mass_total_kg": 1.809,
+  "estimated_robot_mass_kg": 2.519,
+  "pd_gains": {
+    "hip_Kp": 296.8987350386657,
+    "hip_Kd": 23.888697002661726,
+    "knee_Kp": 568.7794693751492,
+    "knee_Kd": 14.67711770001687
+  },
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.149,
+      "takeoff_hip_m": 0.3703412382966237,
+      "takeoff_com_m": 0.3439698770433878,
+      "takeoff_vz_m_s": 0.9122905978308008,
+      "apex_hip_m": 0.4208994240407092,
+      "apex_com_m": 0.39296619951168854,
+      "landing_time_s": 0.387,
+      "flight_duration_s": 0.23800000000000002,
+      "hip_rise_m": 0.05055818574408549,
+      "com_rise_m": 0.04899632246830077,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.149,
+        "takeoff_hip_m": 0.3703412382966237,
+        "takeoff_com_m": 0.3439698770433878,
+        "takeoff_vz_m_s": 0.9122905978308008,
+        "apex_hip_m": 0.4208994240407092,
+        "apex_com_m": 0.39296619951168854,
+        "landing_time_s": 0.387,
+        "flight_duration_s": 0.23800000000000002,
+        "hip_rise_m": 0.05055818574408549,
+        "com_rise_m": 0.04899632246830077,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.04899632246830077,
+    "hip_rise_m": 0.05055818574408549,
+    "max_hip_m": 0.4208994240407092,
+    "max_com_m": 0.39296619951168854,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 767.2031822165316,
+    "peak_current_A": 36.2,
+    "energy_proxy_J": 130.36135984593557,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 724,
+    "score": 0.04247825447600399,
+    "peak_motor_speed_rad_s": 570.091182989018,
+    "overspeed_time_s": 0.0,
+    "motor_model": "UNVERIFIED placeholder motor constants; NOT MAD MC12 validated"
+  },
+  "limitations": [
+    "Motor electrical constants not independently verified",
+    "Gearbox rotational inertia not fully modelled",
+    "Remote knee transmission not explicitly modelled",
+    "Actuator mass assumed to include motor",
+    "Energy result is a proxy",
+    "Optimisation is local and not proof of global optimum"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "hip_ratio": 23.893904979597522,
+  "knee_ratio": 24.991588037878067,
+  "hip_Kp": 381.0503182372201,
+  "hip_Kd": 16.156154531172678,
+  "knee_Kp": 634.0792294851633,
+  "knee_Kd": 29.498021423569625,
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.17,
+      "takeoff_hip_m": 0.3374544090199201,
+      "takeoff_com_m": 0.28582890446798387,
+      "takeoff_vz_m_s": 3.6105896764576184,
+      "apex_hip_m": 1.1174186491961071,
+      "apex_com_m": 1.0662010637423065,
+      "landing_time_s": 0.976,
+      "flight_duration_s": 0.8059999999999999,
+      "hip_rise_m": 0.779964240176187,
+      "com_rise_m": 0.7803721592743227,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.17,
+        "takeoff_hip_m": 0.3374544090199201,
+        "takeoff_com_m": 0.28582890446798387,
+        "takeoff_vz_m_s": 3.6105896764576184,
+        "apex_hip_m": 1.1174186491961071,
+        "apex_com_m": 1.0662010637423065,
+        "landing_time_s": 0.976,
+        "flight_duration_s": 0.8059999999999999,
+        "hip_rise_m": 0.779964240176187,
+        "com_rise_m": 0.7803721592743227,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.7803721592743227,
+    "hip_rise_m": 0.779964240176187,
+    "max_hip_m": 1.1174186491961071,
+    "max_com_m": 1.0662010637423065,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 544.2926478709173,
+    "peak_current_A": 36.2,
+    "energy_proxy_J": 242.94040391309423,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 68,
+    "score": 0.768225139078668,
+    "motor_model": "UNVERIFIED placeholder motor constants; NOT MAD MC12 validated"
+  },
+  "motor_parameters": {
+    "kt_Nm_per_A": 0.0636619772,
+    "resistance_ohm": 0.063,
+    "max_current_A": 36.2,
+    "max_speed_rad_s": 753.9822369,
+    "bus_voltage_V": 48.0,
+    "gearbox_efficiency": 0.9,
+    "gear_inertia_kgm2": 0.0
+  },
+  "model_status": "Research prototype; MAD MC12 parameters UNVERIFIED"
+}

@@ -1,0 +1,7 @@
+{
+  "candidate": "B_hip",
+  "module": "Opt_wolfromPlanetaryGBOptimization",
+  "requested_ratio": 24.0,
+  "motor": "MAD_M6C12",
+  "status": "requested"
+}

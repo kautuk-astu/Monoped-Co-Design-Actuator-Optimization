@@ -1,0 +1,96 @@
+"""Single PD-powered jump diagnostic. Uses UNVERIFIED placeholder motor parameters."""
+import argparse, csv, json, math
+from pathlib import Path
+import numpy as np
+import mujoco
+
+ROOT=Path(__file__).resolve().parent
+
+def run(args):
+    cfg=json.loads((ROOT/'motor_config.json').read_text())
+    model=mujoco.MjModel.from_xml_path(str(ROOT/'monoped.xml'))
+    data=mujoco.MjData(model)
+    # Geometry-consistent crouch: 1 mm foot-floor penetration.
+    crouch=np.array([0.6,-1.2])
+    hip_height=0.2*math.cos(crouch[0])+0.2*math.cos(crouch.sum())+0.022-0.001
+    data.qpos[:]=[hip_height-0.36,*crouch]
+    data.qvel[:]=0
+    mujoco.mj_forward(model,data)
+    foot=model.geom('foot').id;floor=model.geom('floor').id
+    carriage=model.body('carriage').id
+    def foot_contacts():
+        return [data.contact[j] for j in range(data.ncon) if {data.contact[j].geom1,data.contact[j].geom2}=={foot,floor}]
+    if not foot_contacts():
+        raise RuntimeError('No initial foot-floor contact. Check XML and slider limits.')
+    ratios=np.array([args.hip_ratio,args.knee_ratio])
+    kp=np.array([args.hip_kp,args.knee_kp]);kd=np.array([args.hip_kd,args.knee_kd])
+    dt=model.opt.timestep
+    prev_contact=True; ever_stance=False; takeoff=None; apex=None; landing=None
+    peak_grf=0.; peak_i=0.; energy=0.; rows=[]; min_foot=1e9
+    for i in range(round(args.duration/dt)):
+        t=i*dt
+        # A short hold followed by a rapid commanded extension; flight target is bent.
+        if t<args.hold:
+            target=crouch
+        elif t<args.hold+args.push:
+            s=(t-args.hold)/args.push
+            target=crouch+(np.array([0.05,-0.10])-crouch)*s
+        else:
+            target=np.array([0.35,-0.70])
+        q=data.qpos[1:3].copy();dq=data.qvel[1:3].copy()
+        requested=kp*(target-q)-kd*dq
+        kt=cfg['kt_Nm_per_A'];R=cfg['resistance_ohm'];V=cfg['bus_voltage_V']
+        # Symmetric speed-dependent current envelope; approximate motoring-only model.
+        omega=np.abs(dq*ratios)
+        available=np.minimum(cfg['max_current_A'],np.maximum(0,(V-kt*omega)/max(R,1e-9)))
+        available=np.where(omega<=cfg['max_speed_rad_s'],available,0.)
+        max_torque=ratios*cfg['gearbox_efficiency']*kt*available
+        applied=np.clip(requested,-max_torque,max_torque)
+        data.ctrl[:]=applied
+        current=np.abs(applied)/(ratios*cfg['gearbox_efficiency']*max(kt,1e-9))
+        peak_i=max(peak_i,float(np.max(current)))
+        energy+=float(np.sum(current**2*R+np.abs(applied*dq)/cfg['gearbox_efficiency'])*dt)
+        mujoco.mj_step(model,data)
+        contacts=foot_contacts();contact=bool(contacts)
+        grf=0.
+        for c in contacts:
+            force=np.zeros(6);mujoco.mj_contactForce(model,data,c.id,force)
+            # normal force magnitude (contact frame)
+            grf+=max(0.,float(force[0]))
+        peak_grf=max(peak_grf,grf)
+        z=float(data.xpos[carriage,2]);vz=float(data.qvel[0]);min_foot=min(min_foot,float(data.geom_xpos[foot,2]))
+        if contact:ever_stance=True
+        if prev_contact and not contact and ever_stance and takeoff is None and t>=args.hold and vz>0.05:
+            takeoff={'time_s':t,'hip_height_m':z,'vertical_velocity_m_s':vz};apex=z
+        if takeoff is not None and landing is None:
+            apex=max(apex,z)
+            if contact and not prev_contact:landing=t
+        prev_contact=contact
+        if i%10==0:
+            rows.append([t,z,vz,float(q[0]),float(q[1]),float(target[0]),float(target[1]),float(applied[0]),float(applied[1]),float(current[0]),float(current[1]),int(contact),grf])
+        if not np.all(np.isfinite(data.qpos)):
+            raise RuntimeError(f'Nonfinite state at t={t:.4f}s')
+    rise=max(0.,apex-takeoff['hip_height_m']) if takeoff is not None else 0.
+    result={'jump_detected':takeoff is not None,'takeoff':takeoff,'apex_hip_m':apex,
+            'rise_above_takeoff_m':rise,'landing_time_s':landing,'peak_ground_normal_force_N':peak_grf,
+            'peak_current_A':peak_i,'energy_proxy_J':energy,'final_hip_height_m':z,
+            'initial_hip_height_m':hip_height,'hip_ratio':args.hip_ratio,'knee_ratio':args.knee_ratio,
+            'motor_model':'UNVERIFIED placeholders, not validated MAD MC12 specifications'}
+    out=ROOT/'results';out.mkdir(exist_ok=True)
+    print(json.dumps(result,indent=2))
+    print('Saved results/first_jump.csv and results/first_jump.json')
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser()
+    p.add_argument('--duration',type=float,default=1.4)
+    p.add_argument('--hold',type=float,default=0.10)
+    p.add_argument('--push',type=float,default=0.16)
+    p.add_argument('--hip-ratio',type=float,default=10.)
+    p.add_argument('--knee-ratio',type=float,default=10.)
+    p.add_argument('--hip-kp',type=float,default=350.)
+    p.add_argument('--hip-kd',type=float,default=12.)
+    p.add_argument('--knee-kp',type=float,default=350.)
+    p.add_argument('--knee-kd',type=float,default=12.)
+    args=p.parse_args()
+    if not (4<=args.hip_ratio<=25 and 4<=args.knee_ratio<=25):p.error('Both ratios must be between 4 and 25')
+    run(args)

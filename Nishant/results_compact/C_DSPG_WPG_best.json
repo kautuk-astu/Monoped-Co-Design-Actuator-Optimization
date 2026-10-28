@@ -1,0 +1,67 @@
+{
+  "candidate": "C_DSPG_WPG",
+  "ratios": [
+    24.327950310559007,
+    22.153846153846153
+  ],
+  "pd_gains": {
+    "hip_Kp": 619.8406126962896,
+    "hip_Kd": 27.661602311515733,
+    "knee_Kp": 847.8473053306848,
+    "knee_Kd": 11.809691817334242
+  },
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.14,
+      "takeoff_hip_m": 0.37037639883279816,
+      "takeoff_com_m": 0.34475033774677133,
+      "takeoff_vz_m_s": 1.1281153536987507,
+      "apex_hip_m": 0.4517972503641423,
+      "apex_com_m": 0.424388324346876,
+      "landing_time_s": 0.418,
+      "flight_duration_s": 0.27799999999999997,
+      "hip_rise_m": 0.08142085153134415,
+      "com_rise_m": 0.07963798660010468,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.14,
+        "takeoff_hip_m": 0.37037639883279816,
+        "takeoff_com_m": 0.34475033774677133,
+        "takeoff_vz_m_s": 1.1281153536987507,
+        "apex_hip_m": 0.4517972503641423,
+        "apex_com_m": 0.424388324346876,
+        "landing_time_s": 0.418,
+        "flight_duration_s": 0.27799999999999997,
+        "hip_rise_m": 0.08142085153134415,
+        "com_rise_m": 0.07963798660010468,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.07963798660010468,
+    "hip_rise_m": 0.08142085153134415,
+    "max_hip_m": 0.4517972503641423,
+    "max_com_m": 0.424388324346876,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 900.9677773083675,
+    "peak_current_A": 36.2,
+    "energy_proxy_J": 73.73220512614333,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 1035,
+    "score": 0.07495137634379752,
+    "peak_motor_speed_rad_s": 841.0822662525045,
+    "overspeed_time_s": 0.002,
+    "motor_model": "UNVERIFIED placeholder motor constants; NOT MAD MC12 validated"
+  },
+  "actuator_masses_kg": [
+    1.0262044505557726,
+    0.8457851113844098
+  ],
+  "efficiencies": [
+    0.9128210913124603,
+    0.7650988192433826
+  ],
+  "motor_constants_verified": false
+}

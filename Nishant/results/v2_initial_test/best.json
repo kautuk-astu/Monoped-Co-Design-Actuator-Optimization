@@ -1,0 +1,75 @@
+{
+  "hip_ratio": 14.295115014638078,
+  "knee_ratio": 14.858372575876281,
+  "hip_Kp": 341.175926604495,
+  "hip_Kd": 27.208152128201455,
+  "knee_Kp": 774.6044339087988,
+  "knee_Kd": 13.596639113297325,
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.127,
+      "takeoff_hip_m": 0.3609092548365894,
+      "takeoff_com_m": 0.3178775637283345,
+      "takeoff_vz_m_s": 0.6569944370875642,
+      "apex_hip_m": 0.41333534312031966,
+      "apex_com_m": 0.3643828211669904,
+      "landing_time_s": 0.319,
+      "flight_duration_s": 0.192,
+      "hip_rise_m": 0.05242608828373024,
+      "com_rise_m": 0.04650525743865591,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.127,
+        "takeoff_hip_m": 0.3609092548365894,
+        "takeoff_com_m": 0.3178775637283345,
+        "takeoff_vz_m_s": 0.6569944370875642,
+        "apex_hip_m": 0.41333534312031966,
+        "apex_com_m": 0.3643828211669904,
+        "landing_time_s": 0.319,
+        "flight_duration_s": 0.192,
+        "hip_rise_m": 0.05242608828373024,
+        "com_rise_m": 0.04650525743865591,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.04650525743865591,
+    "hip_rise_m": 0.05242608828373024,
+    "max_hip_m": 0.41333534312031966,
+    "max_com_m": 0.3643828211669904,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 300.7386815210265,
+    "peak_current_A": 36.2,
+    "electrical_energy_proxy_J": 47.93052015891272,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 1081,
+    "score": 0.04410873143071028,
+    "gearbox_mass_kg_each": [
+      0.1371804600585523,
+      0.13943349030350513
+    ],
+    "gearbox_efficiency_each": [
+      0.8794097699707238,
+      0.8782832548482474
+    ],
+    "gearbox_torque_limit_Nm": 60.0,
+    "model_status": "Assumed gearbox mass/inertia/efficiency; unvalidated rotor inertia and transmission"
+  },
+  "motor_parameters": {
+    "kt_Nm_per_A": 0.0636619772,
+    "resistance_ohm": 0.063,
+    "max_current_A": 36.2,
+    "max_speed_rad_s": 753.9822369,
+    "bus_voltage_V": 48.0,
+    "gearbox_efficiency": 0.9,
+    "gearbox_efficiency_drop_per_ratio": 0.002,
+    "gearbox_mass_base_kg": 0.08,
+    "gearbox_mass_per_ratio_kg": 0.004,
+    "motor_rotor_inertia_kgm2": 2e-05,
+    "gearbox_output_inertia_kgm2": 0.0001,
+    "gearbox_output_torque_limit_Nm": 60.0
+  },
+  "model_status": "Exploratory gearbox and actuator assumptions; not hardware validated"
+}

@@ -1,0 +1,4 @@
+numpy>=1.24
+mujoco>=3.2,<4
+cma>=4.0
+matplotlib>=3.5

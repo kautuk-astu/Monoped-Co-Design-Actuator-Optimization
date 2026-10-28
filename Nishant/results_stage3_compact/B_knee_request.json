@@ -1,0 +1,7 @@
+{
+  "candidate": "B_knee",
+  "module": "Opt_wolfromPlanetaryGBOptimization",
+  "requested_ratio": 16.916162279837167,
+  "motor": "MAD_M6C12",
+  "status": "requested"
+}

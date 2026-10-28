@@ -1,0 +1,58 @@
+{
+  "valid_jump": true,
+  "selected_flight": {
+    "takeoff_time_s": 0.257,
+    "takeoff_hip_m": 0.40692551685380585,
+    "takeoff_com_m": 0.34063641211768897,
+    "takeoff_vz_m_s": 0.779313314692474,
+    "apex_hip_m": 0.4370144908702085,
+    "apex_com_m": 0.3743280130996305,
+    "landing_time_s": 0.455,
+    "flight_duration_s": 0.198,
+    "hip_rise_m": 0.030088974016402648,
+    "com_rise_m": 0.033691600981941516,
+    "qualified": true
+  },
+  "flight_events": [
+    {
+      "takeoff_time_s": 0.183,
+      "takeoff_hip_m": 0.3873149887309409,
+      "takeoff_com_m": 0.32445387028332595,
+      "takeoff_vz_m_s": 0.4496962170021505,
+      "apex_hip_m": 0.40441044559115297,
+      "apex_com_m": 0.3384636603960157,
+      "landing_time_s": 0.25,
+      "flight_duration_s": 0.067,
+      "hip_rise_m": 0.017095456860212077,
+      "com_rise_m": 0.014009790112689768,
+      "qualified": false
+    },
+    {
+      "takeoff_time_s": 0.257,
+      "takeoff_hip_m": 0.40692551685380585,
+      "takeoff_com_m": 0.34063641211768897,
+      "takeoff_vz_m_s": 0.779313314692474,
+      "apex_hip_m": 0.4370144908702085,
+      "apex_com_m": 0.3743280130996305,
+      "landing_time_s": 0.455,
+      "flight_duration_s": 0.198,
+      "hip_rise_m": 0.030088974016402648,
+      "com_rise_m": 0.033691600981941516,
+      "qualified": true
+    }
+  ],
+  "com_rise_m": 0.033691600981941516,
+  "hip_rise_m": 0.030088974016402648,
+  "max_hip_m": 0.4370144908702085,
+  "max_com_m": 0.3743280130996305,
+  "initial_hip_m": 0.3511342459638714,
+  "peak_ground_normal_force_N": 367.7560997510486,
+  "peak_current_A": 36.2,
+  "energy_proxy_J": 187.6020587783372,
+  "joint_limit_duration_s": 0.0,
+  "contact_steps": 358,
+  "score": 0.024311498043024654,
+  "peak_motor_speed_rad_s": 252.97761364699537,
+  "overspeed_time_s": 0.0,
+  "motor_model": "UNVERIFIED placeholder motor constants; NOT MAD MC12 validated"
+}

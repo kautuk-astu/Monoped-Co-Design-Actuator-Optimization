@@ -1,0 +1,61 @@
+{
+  "hip_ratio": 23.331589413657525,
+  "knee_ratio": 9.376828623508127,
+  "hip_Kp": 521.8326233433025,
+  "hip_Kd": 17.296503149815045,
+  "knee_Kp": 666.4320813832445,
+  "knee_Kd": 24.43190898593116,
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.15,
+      "takeoff_hip_m": 0.3480549555339519,
+      "takeoff_com_m": 0.2898777974387229,
+      "takeoff_vz_m_s": 2.9524544455646695,
+      "apex_hip_m": 0.7011624370675933,
+      "apex_com_m": 0.636901507517297,
+      "landing_time_s": 0.658,
+      "flight_duration_s": 0.508,
+      "hip_rise_m": 0.3531074815336414,
+      "com_rise_m": 0.34702371007857413,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.15,
+        "takeoff_hip_m": 0.3480549555339519,
+        "takeoff_com_m": 0.2898777974387229,
+        "takeoff_vz_m_s": 2.9524544455646695,
+        "apex_hip_m": 0.7011624370675933,
+        "apex_com_m": 0.636901507517297,
+        "landing_time_s": 0.658,
+        "flight_duration_s": 0.508,
+        "hip_rise_m": 0.3531074815336414,
+        "com_rise_m": 0.34702371007857413,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.34702371007857413,
+    "hip_rise_m": 0.3531074815336414,
+    "max_hip_m": 0.7011624370675933,
+    "max_com_m": 0.636901507517297,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 513.8906638077071,
+    "peak_current_A": 30.0,
+    "energy_proxy_J": 460.3498550943629,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 115,
+    "score": 0.324006217323856,
+    "motor_model": "UNVERIFIED placeholder motor constants; NOT MAD MC12 validated"
+  },
+  "motor_parameters": {
+    "kt_Nm_per_A": 0.1,
+    "resistance_ohm": 0.25,
+    "max_current_A": 30.0,
+    "max_speed_rad_s": 450.0,
+    "bus_voltage_V": 24.0,
+    "gearbox_efficiency": 0.9,
+    "gear_inertia_kgm2": 0.0
+  },
+  "model_status": "Research prototype; MAD MC12 parameters UNVERIFIED"
+}

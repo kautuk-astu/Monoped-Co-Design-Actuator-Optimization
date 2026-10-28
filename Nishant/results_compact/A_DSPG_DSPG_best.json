@@ -1,0 +1,67 @@
+{
+  "candidate": "A_DSPG_DSPG",
+  "ratios": [
+    24.327950310559007,
+    22.57707509881423
+  ],
+  "pd_gains": {
+    "hip_Kp": 507.1697661464147,
+    "hip_Kd": 28.69195173311292,
+    "knee_Kp": 681.9639732737567,
+    "knee_Kd": 14.668539649342296
+  },
+  "metrics": {
+    "valid_jump": true,
+    "selected_flight": {
+      "takeoff_time_s": 0.156,
+      "takeoff_hip_m": 0.38113321213914947,
+      "takeoff_com_m": 0.3563562073058604,
+      "takeoff_vz_m_s": 1.3785756454699465,
+      "apex_hip_m": 0.4708103592612858,
+      "apex_com_m": 0.4468940884490683,
+      "landing_time_s": 0.437,
+      "flight_duration_s": 0.281,
+      "hip_rise_m": 0.08967714712213631,
+      "com_rise_m": 0.09053788114320793,
+      "qualified": true
+    },
+    "flight_events": [
+      {
+        "takeoff_time_s": 0.156,
+        "takeoff_hip_m": 0.38113321213914947,
+        "takeoff_com_m": 0.3563562073058604,
+        "takeoff_vz_m_s": 1.3785756454699465,
+        "apex_hip_m": 0.4708103592612858,
+        "apex_com_m": 0.4468940884490683,
+        "landing_time_s": 0.437,
+        "flight_duration_s": 0.281,
+        "hip_rise_m": 0.08967714712213631,
+        "com_rise_m": 0.09053788114320793,
+        "qualified": true
+      }
+    ],
+    "com_rise_m": 0.09053788114320793,
+    "hip_rise_m": 0.08967714712213631,
+    "max_hip_m": 0.4708103592612858,
+    "max_com_m": 0.4468940884490683,
+    "initial_hip_m": 0.3511342459638714,
+    "peak_ground_normal_force_N": 808.834454853282,
+    "peak_current_A": 36.2,
+    "energy_proxy_J": 193.08615169772332,
+    "joint_limit_duration_s": 0.0,
+    "contact_steps": 370,
+    "score": 0.07988357355832176,
+    "peak_motor_speed_rad_s": 857.2779137370501,
+    "overspeed_time_s": 0.002,
+    "motor_model": "UNVERIFIED placeholder motor constants; NOT MAD MC12 validated"
+  },
+  "actuator_masses_kg": [
+    1.0262044505557726,
+    0.9670565132182383
+  ],
+  "efficiencies": [
+    0.9128210913124603,
+    0.9097907207375016
+  ],
+  "motor_constants_verified": false
+}
