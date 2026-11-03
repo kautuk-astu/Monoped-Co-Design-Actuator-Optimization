@@ -101,6 +101,10 @@ python optimize_aligned.py --maxiter 1 --popsize 4 --seed 5 \
 python optimize_aligned.py --maxiter 100 --popsize 8 --seed 5
 python replay_aligned.py results/aligned/<run-directory>
 python replay_aligned.py results/aligned/<run-directory> --video
+
+# Requested long end-to-end study: popsize=8, seed=5, 1000 generations,
+# 10 seconds per candidate, followed by exact best-candidate replay.
+./run_aligned_end_to_end.sh
 ```
 
 Each run saves metadata with parameter names, bounds, fixed values, objective

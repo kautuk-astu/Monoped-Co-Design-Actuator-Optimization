@@ -1,4 +1,8 @@
-# Additional dependency used by the repository's existing optimization API.
+# End-to-end aligned-controller simulation, optimization, plotting, and replay.
+numpy>=1.23
+pandas>=1.5
+matplotlib>=3.7
+mujoco>=3.0
 cma>=4.0
 imageio>=2.30
 imageio-ffmpeg>=0.4
