@@ -1,0 +1,13 @@
+Running test suite...
+test_fixed_candidate_qualifies_and_respects_applied_torque_limits (test_aligned_controller.AlignedControllerTests) ... ok
+test_analytical_jacobian_matches_finite_difference (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_horizontal_feedback_has_correct_sign_and_virtual_work (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_vertical_ik_and_unreachable_rejection (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_authors_objective_uses_height_and_total_energy (test_fixed_link_motor.FixedLinkMotorConfigurationTests) ... ok
+test_hardware_is_fixed_and_uses_sspg (test_fixed_link_motor.FixedLinkMotorConfigurationTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.239s
+
+OK
+Starting CMA-ES optimization...
