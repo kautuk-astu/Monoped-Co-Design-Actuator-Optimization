@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-11-03T14:26:17.262159",
+  "git_commit": "8e8a9c90147973d4fce4f6266fa5463a8f4c4492",
+  "python_version": "3.12.2 | packaged by conda-forge | (main, Feb 16 2024, 20:50:58) [GCC 12.3.0]",
+  "controller": "aligned_jump",
+  "seed": 5,
+  "popsize": 8,
+  "maxiter": 10,
+  "simulation_duration_s": 0.8,
+  "parameter_names": [
+    "crouch_length",
+    "payload_mass",
+    "hip_motor_idx",
+    "knee_motor_idx",
+    "hip_gear_ratio",
+    "knee_gear_ratio",
+    "ori_l",
+    "K",
+    "C",
+    "thrust_time",
+    "Kx",
+    "Dx"
+  ],
+  "bounds": {
+    "crouch_length": [
+      0.24,
+      0.33
+    ],
+    "payload_mass": [
+      0.25,
+      3.0
+    ],
+    "hip_motor_idx": [
+      1.0,
+      6.0
+    ],
+    "knee_motor_idx": [
+      1.0,
+      6.0
+    ],
+    "hip_gear_ratio": [
+      4.0,
+      25.0
+    ],
+    "knee_gear_ratio": [
+      4.0,
+      25.0
+    ],
+    "ori_l": [
+      0.34,
+      0.395
+    ],
+    "K": [
+      100.0,
+      1000.0
+    ],
+    "C": [
+      0.0,
+      20.0
+    ],
+    "thrust_time": [
+      0.06,
+      0.25
+    ],
+    "Kx": [
+      50.0,
+      800.0
+    ],
+    "Dx": [
+      0.0,
+      30.0
+    ]
+  },
+  "fixed_parameters": {
+    "l1_m": 0.2,
+    "l2_m": 0.2,
+    "flight_leg_length_m": 0.24,
+    "landing_leg_length_m": 0.31,
+    "prepare_time_s": 0.05,
+    "joint_kp": 100.0,
+    "joint_kd": 10.0,
+    "contact_debounce_s": 0.005,
+    "minimum_flight_s": 0.08
+  },
+  "objective": "-ballistic_height + lambda_x*MSE(ex) + lambda_landing*ex_prelanding^2 + lambda_energy*positive_mechanical_work",
+  "penalties": {
+    "lambda_x": 200.0,
+    "lambda_landing": 400.0,
+    "lambda_energy": 0.002
+  },
+  "energy_note": "Objective E is existing non-regenerative positive joint mechanical work [J]. joule_loss_proxy_j remains the legacy unverified proxy.",
+  "mujoco_version": "3.16.0",
+  "cma_version": "4.5.0"
+}

@@ -7,6 +7,7 @@ import numpy as np
 
 
 MIN_LEG_LENGTH_M = 1e-8
+DEFAULT_IK_MARGIN_RAD = 0.03
 
 
 def toe_relative_position(q1: float, q2: float, l1: float, l2: float) -> np.ndarray:
@@ -25,6 +26,74 @@ def two_link_jacobian(q1: float, q2: float, l1: float, l2: float) -> np.ndarray:
         [-l1 * math.cos(q1) - l2 * math.cos(q12), -l2 * math.cos(q12)],
         [l1 * math.sin(q1) + l2 * math.sin(q12), l2 * math.sin(q12)],
     ])
+
+
+def vertical_leg_ik(
+    separation: float,
+    l1: float,
+    l2: float,
+    *,
+    knee_branch: int = 1,
+    singularity_margin: float = 0.005,
+    hip_limits: tuple[float, float] = (-math.pi / 2.0, math.pi / 2.0),
+    knee_limits: tuple[float, float] = (DEFAULT_IK_MARGIN_RAD, math.pi - DEFAULT_IK_MARGIN_RAD),
+) -> np.ndarray:
+    """Return a joint pose whose toe is ``separation`` directly below the hip.
+
+    ``knee_branch=1`` is the model's normal crouch (negative hip angle and
+    positive relative-knee angle).  The opposite branch is available for
+    kinematic checks, but its negative knee angle is outside the default
+    physical reference limits.  The workspace is inset at both singularities.
+    """
+    if knee_branch not in (-1, 1):
+        raise ValueError("knee_branch must be -1 or 1")
+    if not all(math.isfinite(value) and value > 0.0 for value in (separation, l1, l2)):
+        raise ValueError("separation and link lengths must be finite and positive")
+    lower, upper = reachable_length_bounds(l1, l2, singularity_margin)
+    if not lower <= separation <= upper:
+        raise ValueError(f"vertical separation outside reachable interval [{lower:.6f}, {upper:.6f}]")
+
+    # The desired hip-to-toe vector is [0, -separation].  alpha and beta are
+    # the two link angles away from that vector from the law of cosines.
+    cos_alpha = np.clip((l1 * l1 + separation * separation - l2 * l2) / (2.0 * l1 * separation), -1.0, 1.0)
+    cos_beta = np.clip((l2 * l2 + separation * separation - l1 * l1) / (2.0 * l2 * separation), -1.0, 1.0)
+    alpha = math.acos(float(cos_alpha))
+    beta = math.acos(float(cos_beta))
+    q = np.array([-knee_branch * alpha, knee_branch * (alpha + beta)])
+    if not hip_limits[0] <= q[0] <= hip_limits[1]:
+        raise ValueError(f"IK hip angle {q[0]:.6f} outside limits {hip_limits}")
+    branch_knee_limits = knee_limits if knee_branch > 0 else (-knee_limits[1], -knee_limits[0])
+    if not branch_knee_limits[0] <= q[1] <= branch_knee_limits[1]:
+        raise ValueError(f"IK knee angle {q[1]:.6f} outside limits {branch_knee_limits}")
+    return q
+
+
+def cartesian_vmc_torques(
+    q1: float,
+    q2: float,
+    qdot1: float,
+    qdot2: float,
+    l1: float,
+    l2: float,
+    rest_length: float,
+    stiffness: float,
+    damping: float,
+    horizontal_stiffness: float,
+    horizontal_damping: float,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return ``(J.T @ [Fx, Fz], [Fx, Fz])`` for aligned stance VMC.
+
+    Horizontal error and velocity are the toe values relative to the hip.
+    The vertical component retains the existing radial spring/damper command;
+    only its world-z component is used so horizontal regulation is explicit.
+    """
+    p, jacobian, length, length_rate, _ = virtual_leg_state(q1, q2, qdot1, qdot2, l1, l2)
+    relative_velocity = jacobian @ np.array([qdot1, qdot2])
+    radial_force = stiffness * (rest_length - length) - damping * length_rate
+    fx = -horizontal_stiffness * p[0] - horizontal_damping * relative_velocity[0]
+    fz = radial_force * p[1] / length
+    force = np.array([fx, fz])
+    return jacobian.T @ force, force
 
 
 def wrap_to_pi(angle: float) -> float:

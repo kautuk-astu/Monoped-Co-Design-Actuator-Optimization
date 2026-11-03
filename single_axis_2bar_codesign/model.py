@@ -29,6 +29,10 @@ class Actuator:
     mass: float
     efficiency: float
     continuous_output_torque: float
+    kv_rpm_per_volt: float = float("nan")
+    rated_voltage: float = float("nan")
+    resistance_ohm: float = float("nan")
+    max_continuous_current: float = float("nan")
 
 
 @dataclass(frozen=True)
@@ -46,12 +50,26 @@ class Design:
     C: float
     T_gain: float
     thrust_time: float
+    # Aligned-controller parameters.  Defaults preserve compatibility with
+    # saved legacy studies that predate horizontal Cartesian stabilization.
+    Kx: float = 250.0
+    Dx: float = 8.0
+    prepare_time: float = 0.05
+    flight_leg_length: float = 0.24
+    landing_leg_length: float = 0.31
+    joint_kp: float = 100.0
+    joint_kd: float = 10.0
 
 
 def _continuous_motor_torque(motor: str) -> float:
     with MOTOR_CONFIG.open() as stream:
         spec = json.load(stream)["Motors"][f"Motor{motor}_framed"]
     return 60.0 / (2.0 * 3.141592653589793 * float(spec["Kv"])) * float(spec["maxContinuousCurrent"])
+
+
+def _motor_spec(motor: str) -> dict[str, float]:
+    with MOTOR_CONFIG.open() as stream:
+        return json.load(stream)["Motors"][f"Motor{motor}_framed"]
 
 
 def actuator_for(motor: str, ratio: float) -> Actuator:
@@ -69,6 +87,7 @@ def actuator_for(motor: str, ratio: float) -> Actuator:
     row = options.loc[(options["target_ratio"] - requested).abs().idxmin()]
     if row["gearbox"] != "SSPG":
         raise ValueError("2R co-design requires SSPG gearbox entries")
+    spec = _motor_spec(motor)
     return Actuator(
         motor=motor,
         ratio=float(ratio),
@@ -76,6 +95,9 @@ def actuator_for(motor: str, ratio: float) -> Actuator:
         mass=float(row["mass"]),
         efficiency=float(row["efficiency"]),
         continuous_output_torque=_continuous_motor_torque(motor) * float(ratio),
+        kv_rpm_per_volt=float(spec["Kv"]), rated_voltage=float(spec["ratedVoltage"]),
+        resistance_ohm=float(spec["Resistance"]),
+        max_continuous_current=float(spec["maxContinuousCurrent"]),
     )
 
 

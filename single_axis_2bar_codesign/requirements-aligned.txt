@@ -1,0 +1,4 @@
+# Additional dependency used by the repository's existing optimization API.
+cma>=4.0
+imageio>=2.30
+imageio-ffmpeg>=0.4

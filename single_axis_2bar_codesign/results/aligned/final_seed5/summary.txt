@@ -1,0 +1,7 @@
+Ballistic COM height: 0.065629 m
+Crouch-to-apex COM rise: 0.134236 m
+RMS / max alignment error: 0.007583 / 0.016700 m
+Pre-landing alignment error: 0.000584 m
+Positive mechanical work: 3.907620 J
+Qualified first flight: True; duration: 0.274000 s
+Cost: -0.046176
