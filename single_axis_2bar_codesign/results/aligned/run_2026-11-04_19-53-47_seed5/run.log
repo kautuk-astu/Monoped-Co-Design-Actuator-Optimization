@@ -1,0 +1,59 @@
+Running test suite...
+test_fixed_candidate_qualifies_and_respects_applied_torque_limits (test_aligned_controller.AlignedControllerTests) ... ok
+test_t_gain_changes_aligned_stance_torque (test_aligned_controller.AlignedControllerTests) ... ok
+test_unavailable_sspg_request_uses_table_actual_ratio (test_aligned_controller.AlignedControllerTests) ... ok
+test_analytical_jacobian_matches_finite_difference (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_horizontal_feedback_has_correct_sign_and_virtual_work (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_vertical_ik_and_unreachable_rejection (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_authors_objective_uses_height_and_total_energy (test_fixed_link_motor.FixedLinkMotorConfigurationTests) ... ok
+test_hardware_is_fixed_and_uses_sspg (test_fixed_link_motor.FixedLinkMotorConfigurationTests) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.098s
+
+OK
+Starting CMA-ES optimization...
+/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/utilities/utils.py:372: UserWarning: 
+        geno-pheno transformation introduced based on the
+        current covariance matrix with condition 1.1e+12 -> 1.0e+00,
+        injected solutions become "invalid" in this iteration (time=Nov  4 20:03:05 2026 class=CMAEvolutionStrategy method=alleviate_conditioning iteration=760)
+  warnings.warn(msg + ' (time={}'.format(time.asctime()[4:]) +
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 5 (seed=5, Wed Nov  4 19:53:49 2026)
+new global best: cost=0.174370, ballistic=0.0388 m, rms=11.35 mm
+new global best: cost=0.161628, ballistic=0.0384 m, rms=10.93 mm
+new global best: cost=0.130907, ballistic=0.0416 m, rms=10.75 mm
+new global best: cost=0.101292, ballistic=0.0402 m, rms=9.97 mm
+new global best: cost=0.100017, ballistic=0.0412 m, rms=10.13 mm
+new global best: cost=0.095149, ballistic=0.0500 m, rms=11.12 mm
+new global best: cost=0.057939, ballistic=0.0488 m, rms=10.28 mm
+new global best: cost=0.053128, ballistic=0.0453 m, rms=10.11 mm
+new global best: cost=0.042964, ballistic=0.0452 m, rms=9.49 mm
+new global best: cost=0.035739, ballistic=0.0468 m, rms=9.32 mm
+new global best: cost=0.018748, ballistic=0.0548 m, rms=10.60 mm
+new global best: cost=0.011929, ballistic=0.0601 m, rms=9.90 mm
+new global best: cost=-0.023030, ballistic=0.0615 m, rms=9.02 mm
+new global best: cost=-0.024252, ballistic=0.0589 m, rms=8.22 mm
+new global best: cost=-0.033150, ballistic=0.0563 m, rms=6.98 mm
+new global best: cost=-0.034461, ballistic=0.0588 m, rms=7.48 mm
+new global best: cost=-0.035542, ballistic=0.0586 m, rms=7.10 mm
+new global best: cost=-0.036495, ballistic=0.0586 m, rms=6.97 mm
+new global best: cost=-0.036819, ballistic=0.0586 m, rms=6.95 mm
+new global best: cost=-0.036924, ballistic=0.0590 m, rms=6.94 mm
+new global best: cost=-0.037759, ballistic=0.0597 m, rms=6.99 mm
+Ballistic COM height: 0.059732 m
+Crouch-to-apex COM rise: 0.134730 m
+RMS / max alignment error: 0.006985 / 0.016009 m
+Pre-landing alignment error: -0.000630 m
+Positive mechanical work: 6.027569 J
+Qualified first flight: True; duration: 0.262000 s
+Cost: -0.037759
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned/run_2026-11-04_19-53-47_seed5
+Replaying the exact saved winner...
+Ballistic COM height: 0.059732 m
+RMS / max alignment: 0.006985 / 0.016009 m
+Qualified flight: True; violation: None
+Rendering the exact saved winner...
+Ballistic COM height: 0.059732 m
+RMS / max alignment: 0.006985 / 0.016009 m
+Qualified flight: True; violation: None

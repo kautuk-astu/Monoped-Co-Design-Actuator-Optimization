@@ -1,8 +1,8 @@
 """CMA-ES study for controller-enforced vertical toe alignment.
 
 The fixed 0.20 m links retain the repository's existing actuator co-design.
-Initial joint angles are derived from one optimized crouch length, so CMA-ES
-cannot select a pose inconsistent with the vertical IK constraint.
+Initial joint angles are derived from one fixed base height, so every actuator
+candidate starts from exactly the same vertically aligned pose and payload.
 """
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ import uuid
 import numpy as np
 
 from kinematics import vertical_leg_ik
-from model import Actuator, CARRIAGE_BASE_MASS_KG, Design, MOTORS, actuator_for, write_xml
+from model import Actuator, CARRIAGE_BASE_MASS_KG, Design, actuator_for, write_xml
 from simulate import (
     CONTACT_DEBOUNCE_S, INFEASIBILITY_COST, MIN_FLIGHT_S, JumpResult, run_jump,
 )
@@ -29,6 +29,16 @@ from simulate import (
 HERE = Path(__file__).resolve().parent
 RESULTS = HERE / "results" / "aligned"
 FIXED_L1_M = FIXED_L2_M = 0.20
+FOOT_RADIUS_M = 0.025
+FIXED_INITIAL_BASE_HEIGHT_M = 0.305
+FIXED_CROUCH_LENGTH_M = FIXED_INITIAL_BASE_HEIGHT_M - FOOT_RADIUS_M
+FIXED_PAYLOAD_MASS_KG = 1.0
+FIXED_HIP_MOTOR = "MAD_M6C12"
+FIXED_KNEE_MOTOR = "MAD_M6C12"
+FIXED_ORI_L_M = 0.38
+FIXED_THRUST_TIME_S = 0.15
+FIXED_KX_N_M = 300.0
+FIXED_DX_N_S_M = 10.0
 FLIGHT_LEG_LENGTH_M = 0.24
 LANDING_LEG_LENGTH_M = 0.31
 PREPARE_TIME_S = 0.05
@@ -36,17 +46,15 @@ JOINT_KP = 100.0
 JOINT_KD = 10.0
 
 PARAMETER_NAMES = (
-    "crouch_length", "payload_mass", "hip_motor_idx", "knee_motor_idx",
-    "hip_gear_ratio", "knee_gear_ratio", "ori_l", "K", "C",
-    "thrust_time", "Kx", "Dx",
+    "hip_gear_ratio", "knee_gear_ratio", "K", "C", "T_gain",
 )
 BOUNDS = np.array([
-    [0.24, 0.33], [0.25, 3.0], [1, 6], [1, 6], [4, 25], [4, 25],
-    [0.34, 0.395], [100, 1000], [0, 20], [0.06, 0.25], [50, 800], [0, 30],
+    [4.4, 6.1], [4.4, 6.1], [100, 1000], [0, 20], [0, 20],
 ], dtype=float)
 DEFAULT_LAMBDA_X = 200.0
 DEFAULT_LAMBDA_LANDING = 400.0
 DEFAULT_LAMBDA_ENERGY = 0.002
+CMA_INITIAL_SIGMA = 0.04
 
 
 def _git_commit() -> str | None:
@@ -67,20 +75,16 @@ def denormalize(vector: np.ndarray) -> np.ndarray:
     return BOUNDS[:, 0] + vector * (BOUNDS[:, 1] - BOUNDS[:, 0])
 
 
-def _motor_name(value: float) -> str:
-    return MOTORS[int(np.clip(round(value), 1, len(MOTORS))) - 1]
-
-
 def design_from_vector(vector: np.ndarray) -> Design:
     p = denormalize(vector)
-    q = vertical_leg_ik(float(p[0]), FIXED_L1_M, FIXED_L2_M)
+    q = vertical_leg_ik(FIXED_CROUCH_LENGTH_M, FIXED_L1_M, FIXED_L2_M)
     return Design(
-        thigh=FIXED_L1_M, shank=FIXED_L2_M, payload_mass=float(p[1]),
-        hip=actuator_for(_motor_name(p[2]), float(p[4])),
-        knee=actuator_for(_motor_name(p[3]), float(p[5])),
-        theta1=float(q[0]), theta2=float(q[1]), ori_l=float(p[6]), ori_theta=0.0,
-        K=float(p[7]), C=float(p[8]), T_gain=0.0, thrust_time=float(p[9]),
-        Kx=float(p[10]), Dx=float(p[11]), prepare_time=PREPARE_TIME_S,
+        thigh=FIXED_L1_M, shank=FIXED_L2_M, payload_mass=FIXED_PAYLOAD_MASS_KG,
+        hip=actuator_for(FIXED_HIP_MOTOR, float(p[0])),
+        knee=actuator_for(FIXED_KNEE_MOTOR, float(p[1])),
+        theta1=float(q[0]), theta2=float(q[1]), ori_l=FIXED_ORI_L_M, ori_theta=0.0,
+        K=float(p[2]), C=float(p[3]), T_gain=float(p[4]), thrust_time=FIXED_THRUST_TIME_S,
+        Kx=FIXED_KX_N_M, Dx=FIXED_DX_N_S_M, prepare_time=PREPARE_TIME_S,
         flight_leg_length=FLIGHT_LEG_LENGTH_M, landing_leg_length=LANDING_LEG_LENGTH_M,
         joint_kp=JOINT_KP, joint_kd=JOINT_KD,
     )
@@ -104,7 +108,8 @@ def design_from_record(record: dict[str, object]) -> Design:
         payload_mass=float(record["payload_mass_kg"]), hip=actuator("hip"), knee=actuator("knee"),
         theta1=float(record["theta1_rad"]), theta2=float(record["theta2_rad"]),
         ori_l=float(record["ori_l_m"]), ori_theta=0.0, K=float(record["K_n_m"]),
-        C=float(record["C_n_s_m"]), T_gain=0.0, thrust_time=float(record["thrust_time_s"]),
+        C=float(record["C_n_s_m"]), T_gain=float(record.get("T_gain_nm_rad", 0.0)),
+        thrust_time=float(record["thrust_time_s"]),
         Kx=float(record["Kx_n_m"]), Dx=float(record["Dx_n_s_m"]),
         prepare_time=float(record["prepare_time_s"]),
         flight_leg_length=float(record["flight_leg_length_m"]),
@@ -180,6 +185,7 @@ def _record(
         "knee_max_continuous_current_a": design.knee.max_continuous_current,
         "moving_carriage_mass_kg": CARRIAGE_BASE_MASS_KG + design.payload_mass + design.hip.mass + design.knee.mass,
         "ori_l_m": design.ori_l, "K_n_m": design.K, "C_n_s_m": design.C,
+        "T_gain_nm_rad": design.T_gain,
         "thrust_time_s": design.thrust_time, "Kx_n_m": design.Kx, "Dx_n_s_m": design.Dx,
         "prepare_time_s": design.prepare_time, "flight_leg_length_m": design.flight_leg_length,
         "landing_leg_length_m": design.landing_leg_length,
@@ -256,6 +262,71 @@ def replay_record(record: dict[str, object], output_dir: Path, duration: float) 
     return result
 
 
+def write_compact_log(
+    output_dir: Path, best: dict[str, object] | None, result: JumpResult | None,
+    *, seed: int, popsize: int, maxiter: int, simulation_duration: float,
+    lambda_x: float, lambda_landing: float, lambda_energy: float,
+) -> None:
+    """Write the small review-facing log; detailed diagnostics stay separate."""
+    variables = None if best is None else {
+        "hip_gear_ratio": float(best["hip_gear_ratio"]),
+        "knee_gear_ratio": float(best["knee_gear_ratio"]),
+        "K_n_per_m": float(best["K_n_m"]),
+        "C_n_s_per_m": float(best["C_n_s_m"]),
+        "T_gain_n_m_per_rad": float(best["T_gain_nm_rad"]),
+    }
+    key_results: dict[str, object] = {"valid_jump": False}
+    if best is not None and result is not None:
+        takeoff_sample = next((sample for sample in result.telemetry if sample.takeoff_event), None)
+        takeoff_base_height = None if takeoff_sample is None else float(takeoff_sample.hip_z)
+        maximum_base_height = (
+            max(float(sample.hip_z) for sample in result.telemetry)
+            if result.telemetry else float(result.apex_height)
+        )
+        key_results = {
+            "valid_jump": bool(result.qualified_flight and result.constraint_violation is None),
+            "cost": float(best["cost"]),
+            "initial_base_height_m": float(result.initial_height),
+            "takeoff_base_height_m": takeoff_base_height,
+            "maximum_base_height_m": maximum_base_height,
+            "total_base_rise_m": maximum_base_height - float(result.initial_height),
+            "base_rise_after_toe_leaves_ground_m": (
+                None if takeoff_base_height is None else maximum_base_height - takeoff_base_height
+            ),
+            "toe_off_ground_duration_s": float(result.flight_duration),
+            "toe_horizontal_error_rms_m": float(result.alignment_rms),
+            "toe_horizontal_error_max_m": float(result.maximum_alignment_error),
+            "toe_horizontal_error_before_landing_m": (
+                None if result.prelanding_alignment_error is None
+                else float(result.prelanding_alignment_error)
+            ),
+            "positive_mechanical_work_j": float(result.positive_work),
+            "hip_torque_saturation_fraction": float(result.hip_saturation_fraction),
+            "knee_torque_saturation_fraction": float(result.knee_saturation_fraction),
+        }
+    compact_log = {
+        "optimization_variables": variables,
+        "hyperparameters": {
+            "bounds": dict(zip(PARAMETER_NAMES, BOUNDS.tolist())),
+            "seed": seed,
+            "population_size": popsize,
+            "generations": maxiter,
+            "total_candidate_evaluations": popsize * maxiter,
+            "simulation_duration_s": simulation_duration,
+            "cma_initial_sigma_normalized": CMA_INITIAL_SIGMA,
+            "cost_weights": {
+                "toe_horizontal_error": lambda_x,
+                "toe_error_before_landing": lambda_landing,
+                "positive_mechanical_work": lambda_energy,
+            },
+        },
+        "key_results": key_results,
+    }
+    (output_dir / "compact_optimization_log.json").write_text(
+        json.dumps(compact_log, indent=2, allow_nan=False) + "\n"
+    )
+
+
 def main() -> None:
     import cma
     parser = argparse.ArgumentParser(description=__doc__)
@@ -276,6 +347,12 @@ def main() -> None:
         "maxiter": args.maxiter, "simulation_duration_s": args.simulation_duration,
         "parameter_names": PARAMETER_NAMES, "bounds": dict(zip(PARAMETER_NAMES, BOUNDS.tolist())),
         "fixed_parameters": {"l1_m": FIXED_L1_M, "l2_m": FIXED_L2_M,
+                             "initial_base_height_m": FIXED_INITIAL_BASE_HEIGHT_M,
+                             "crouch_length_m": FIXED_CROUCH_LENGTH_M,
+                             "payload_mass_kg": FIXED_PAYLOAD_MASS_KG,
+                             "hip_motor": FIXED_HIP_MOTOR, "knee_motor": FIXED_KNEE_MOTOR,
+                             "ori_l_m": FIXED_ORI_L_M, "thrust_time_s": FIXED_THRUST_TIME_S,
+                             "Kx_n_m": FIXED_KX_N_M, "Dx_n_s_m": FIXED_DX_N_S_M,
                              "flight_leg_length_m": FLIGHT_LEG_LENGTH_M,
                              "landing_leg_length_m": LANDING_LEG_LENGTH_M,
                              "prepare_time_s": PREPARE_TIME_S, "joint_kp": JOINT_KP, "joint_kd": JOINT_KD,
@@ -292,9 +369,9 @@ def main() -> None:
         metadata["mujoco_version"] = metadata["cma_version"] = None
     (output_dir / "metadata.json").write_text(json.dumps(metadata, indent=2))
 
-    x0_physical = np.array([.28, 1.0, 6, 6, 15, 15, .38, 800, 8, .15, 300, 10])
+    x0_physical = np.array([6, 6, 800, 8, 10])
     x0 = (x0_physical - BOUNDS[:, 0]) / (BOUNDS[:, 1] - BOUNDS[:, 0])
-    es = cma.CMAEvolutionStrategy(x0, 0.04, {
+    es = cma.CMAEvolutionStrategy(x0, CMA_INITIAL_SIGMA, {
         "bounds": [np.zeros(len(PARAMETER_NAMES)), np.ones(len(PARAMETER_NAMES))],
         "maxiter": args.maxiter, "popsize": args.popsize, "seed": args.seed,
         "verb_disp": 1, "tolflatfitness": args.maxiter + 1,
@@ -332,7 +409,11 @@ def main() -> None:
                     best = record.copy()
                     shutil.copy2(candidate_xml, output_dir / "best_design.xml")
                     (output_dir / "best_design.json").write_text(json.dumps(best, indent=2, default=float))
-                    print(f"new global best: cost={cost:.6f}, ballistic={result.ballistic_height:.4f} m, rms={result.alignment_rms*1000:.2f} mm")
+                    print(
+                        f"new global best: cost={cost:.6f}, "
+                        f"total base rise={result.apex_gain:.4f} m, "
+                        f"toe alignment rms={result.alignment_rms*1000:.2f} mm"
+                    )
             valid_records = [record for record in records if record["valid"]]
             if valid_records:
                 generation_writer.writerow(min(valid_records, key=lambda item: float(item["cost"])))
@@ -342,17 +423,28 @@ def main() -> None:
     if best is None:
         (output_dir / "best_design.json").write_text(json.dumps({"best_valid_candidate": None}, indent=2))
         summary = "No completed qualified first flight was found; see all_candidates.csv.\n"
+        replay = None
     else:
         replay = replay_record(best, output_dir, args.simulation_duration)
+        maximum_base_height = (
+            max(float(sample.hip_z) for sample in replay.telemetry)
+            if replay.telemetry else replay.apex_height
+        )
         summary = (
-            f"Ballistic COM height: {replay.ballistic_height:.6f} m\n"
-            f"Crouch-to-apex COM rise: {replay.crouch_to_apex_height:.6f} m\n"
-            f"RMS / max alignment error: {replay.alignment_rms:.6f} / {replay.maximum_alignment_error:.6f} m\n"
-            f"Pre-landing alignment error: {replay.prelanding_alignment_error:.6f} m\n"
+            f"Initial base height: {replay.initial_height:.6f} m\n"
+            f"Maximum base height: {maximum_base_height:.6f} m\n"
+            f"Total base rise: {maximum_base_height - replay.initial_height:.6f} m\n"
+            f"Toe alignment RMS / maximum error: {replay.alignment_rms:.6f} / {replay.maximum_alignment_error:.6f} m\n"
+            f"Toe alignment error before landing: {replay.prelanding_alignment_error:.6f} m\n"
             f"Positive mechanical work: {replay.positive_work:.6f} J\n"
-            f"Qualified first flight: {replay.qualified_flight}; duration: {replay.flight_duration:.6f} s\n"
+            f"Valid jump: {replay.qualified_flight}; toe off-ground duration: {replay.flight_duration:.6f} s\n"
             f"Cost: {float(best['cost']):.6f}\n"
         )
+    write_compact_log(
+        output_dir, best, replay, seed=args.seed, popsize=args.popsize, maxiter=args.maxiter,
+        simulation_duration=args.simulation_duration, lambda_x=args.lambda_x,
+        lambda_landing=args.lambda_landing, lambda_energy=args.lambda_energy,
+    )
     (output_dir / "summary.txt").write_text(summary)
     print(summary)
     print(f"Results: {output_dir}")

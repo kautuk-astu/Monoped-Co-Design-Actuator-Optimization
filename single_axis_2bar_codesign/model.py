@@ -88,13 +88,18 @@ def actuator_for(motor: str, ratio: float) -> Actuator:
     if row["gearbox"] != "SSPG":
         raise ValueError("2R co-design requires SSPG gearbox entries")
     spec = _motor_spec(motor)
+    # The optimizer requests a target ratio, but the SSPG table contains the
+    # actual realizable ratio.  Never propagate the unconstrained request into
+    # the physical model (doing so previously reported e.g. an impossible
+    # 11.3:1 MAD_M6C12 while using the mass/efficiency of its nearest 6:1 SSPG).
+    actual_ratio = float(row["actual_ratio"])
     return Actuator(
         motor=motor,
-        ratio=float(ratio),
+        ratio=actual_ratio,
         gearbox=str(row["gearbox"]),
         mass=float(row["mass"]),
         efficiency=float(row["efficiency"]),
-        continuous_output_torque=_continuous_motor_torque(motor) * float(ratio),
+        continuous_output_torque=_continuous_motor_torque(motor) * actual_ratio,
         kv_rpm_per_volt=float(spec["Kv"]), rated_voltage=float(spec["ratedVoltage"]),
         resistance_ohm=float(spec["Resistance"]),
         max_continuous_current=float(spec["maxContinuousCurrent"]),

@@ -117,11 +117,16 @@ class JumpResult:
 def aligned_vmc_joint_torques(
     design: Design, q1: float, q2: float, qdot1: float, qdot2: float,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Cartesian stance controller with explicit horizontal stabilization."""
-    return cartesian_vmc_torques(
+    """Cartesian stance controller plus the virtual-leg orientation spring."""
+    cartesian_torque, cartesian_force = cartesian_vmc_torques(
         q1, q2, qdot1, qdot2, design.thigh, design.shank, design.ori_l,
         design.K, design.C, design.Kx, design.Dx,
     )
+    orientation_torque = vmc_torques(
+        q1, q2, qdot1, qdot2, design.thigh, design.shank, design.ori_l,
+        design.ori_theta, 0.0, 0.0, design.T_gain,
+    )
+    return cartesian_torque + orientation_torque, cartesian_force
 
 
 def _motor_diagnostics(actuator: object, applied_torque: float, joint_velocity: float) -> tuple[float, float, float]:
@@ -408,7 +413,14 @@ def _run_aligned_jump(
             # during stance so timing cannot silently become an inactive CMA variable.
             if data.time >= design.prepare_time + design.thrust_time:
                 cartesian_force[1] = 0.0
-                raw_torque = two_link_jacobian(q[0], q[1], design.thigh, design.shank).T @ cartesian_force
+                orientation_torque = vmc_torques(
+                    q[0], q[1], qdot[0], qdot[1], design.thigh, design.shank,
+                    design.ori_l, design.ori_theta, 0.0, 0.0, design.T_gain,
+                )
+                raw_torque = (
+                    two_link_jacobian(q[0], q[1], design.thigh, design.shank).T @ cartesian_force
+                    + orientation_torque
+                )
         else:
             reference = flight_reference if phase == "FLIGHT" else landing_reference
             raw_torque = design.joint_kp * (reference - q) - design.joint_kd * qdot

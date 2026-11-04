@@ -12,9 +12,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from kinematics import (  # noqa: E402
     cartesian_vmc_torques, toe_relative_position, two_link_jacobian, vertical_leg_ik,
 )
-from model import write_xml  # noqa: E402
-from optimize_aligned import PARAMETER_NAMES, design_from_vector  # noqa: E402
-from simulate import run_jump  # noqa: E402
+from model import actuator_for, write_xml  # noqa: E402
+from optimize_aligned import (  # noqa: E402
+    FIXED_INITIAL_BASE_HEIGHT_M, FIXED_PAYLOAD_MASS_KG, PARAMETER_NAMES, design_from_vector,
+)
+from simulate import aligned_vmc_joint_torques, run_jump  # noqa: E402
 
 
 class AlignedKinematicsTests(unittest.TestCase):
@@ -48,14 +50,31 @@ class AlignedKinematicsTests(unittest.TestCase):
 
 
 class AlignedControllerTests(unittest.TestCase):
+    def test_unavailable_sspg_request_uses_table_actual_ratio(self) -> None:
+        actuator = actuator_for("MAD_M6C12", 11.275)
+        self.assertEqual(actuator.gearbox, "SSPG")
+        self.assertEqual(actuator.ratio, 6.0)
+
     def test_fixed_candidate_qualifies_and_respects_applied_torque_limits(self) -> None:
         # This is the optimizer's deterministic center seed.
-        physical = np.array([.28, 1.0, 6, 6, 15, 15, .38, 800, 8, .15, 300, 10])
+        physical = np.array([6, 6, 800, 8, 10])
         from optimize_aligned import BOUNDS
         vector = (physical - BOUNDS[:, 0]) / (BOUNDS[:, 1] - BOUNDS[:, 0])
         design = design_from_vector(vector)
         self.assertNotIn("theta1", PARAMETER_NAMES)
         self.assertNotIn("theta2", PARAMETER_NAMES)
+        self.assertNotIn("payload_mass", PARAMETER_NAMES)
+        self.assertNotIn("crouch_length", PARAMETER_NAMES)
+        self.assertNotIn("hip_motor_idx", PARAMETER_NAMES)
+        self.assertNotIn("knee_motor_idx", PARAMETER_NAMES)
+        self.assertEqual(PARAMETER_NAMES, ("hip_gear_ratio", "knee_gear_ratio", "K", "C", "T_gain"))
+        self.assertEqual(design.payload_mass, FIXED_PAYLOAD_MASS_KG)
+        self.assertEqual(design.hip.motor, "MAD_M6C12")
+        self.assertEqual(design.knee.motor, "MAD_M6C12")
+        self.assertEqual(design.T_gain, 10.0)
+        self.assertAlmostEqual(0.025 + 0.28, FIXED_INITIAL_BASE_HEIGHT_M)
+        self.assertLessEqual(design.hip.ratio, 7.2)
+        self.assertLessEqual(design.knee.ratio, 7.2)
         with tempfile.TemporaryDirectory() as temporary:
             xml_path = Path(temporary) / "aligned.xml"
             write_xml(design, xml_path)
@@ -75,6 +94,16 @@ class AlignedControllerTests(unittest.TestCase):
         self.assertLessEqual(result.peak_hip_motor_speed, 1.05 * hip_speed_limit)
         self.assertLessEqual(result.peak_knee_motor_speed, 1.05 * knee_speed_limit)
         self.assertTrue({"PREPARE", "STANCE", "FLIGHT", "LANDING"}.issubset({sample.phase for sample in result.telemetry}))
+
+    def test_t_gain_changes_aligned_stance_torque(self) -> None:
+        from optimize_aligned import BOUNDS
+        zero_t = np.array([6, 6, 800, 8, 0])
+        nonzero_t = np.array([6, 6, 800, 8, 20])
+        designs = [design_from_vector((physical - BOUNDS[:, 0]) / (BOUNDS[:, 1] - BOUNDS[:, 0]))
+                   for physical in (zero_t, nonzero_t)]
+        torques = [aligned_vmc_joint_torques(design, -0.55, 1.35, 0.2, -0.1)[0]
+                   for design in designs]
+        self.assertFalse(np.allclose(torques[0], torques[1]))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-11-04T19:53:49.622770",
+  "git_commit": "47d9fecfcc3e4b7b83019294379f19260ec624c2",
+  "python_version": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+  "controller": "aligned_jump",
+  "seed": 5,
+  "popsize": 8,
+  "maxiter": 1000,
+  "simulation_duration_s": 10.0,
+  "parameter_names": [
+    "hip_gear_ratio",
+    "knee_gear_ratio",
+    "K",
+    "C",
+    "T_gain"
+  ],
+  "bounds": {
+    "hip_gear_ratio": [
+      4.4,
+      6.1
+    ],
+    "knee_gear_ratio": [
+      4.4,
+      6.1
+    ],
+    "K": [
+      100.0,
+      1000.0
+    ],
+    "C": [
+      0.0,
+      20.0
+    ],
+    "T_gain": [
+      0.0,
+      20.0
+    ]
+  },
+  "fixed_parameters": {
+    "l1_m": 0.2,
+    "l2_m": 0.2,
+    "initial_base_height_m": 0.305,
+    "crouch_length_m": 0.27999999999999997,
+    "payload_mass_kg": 1.0,
+    "hip_motor": "MAD_M6C12",
+    "knee_motor": "MAD_M6C12",
+    "ori_l_m": 0.38,
+    "thrust_time_s": 0.15,
+    "Kx_n_m": 300.0,
+    "Dx_n_s_m": 10.0,
+    "flight_leg_length_m": 0.24,
+    "landing_leg_length_m": 0.31,
+    "prepare_time_s": 0.05,
+    "joint_kp": 100.0,
+    "joint_kd": 10.0,
+    "contact_debounce_s": 0.005,
+    "minimum_flight_s": 0.08
+  },
+  "objective": "-ballistic_height + lambda_x*MSE(ex) + lambda_landing*ex_prelanding^2 + lambda_energy*positive_mechanical_work",
+  "penalties": {
+    "lambda_x": 200.0,
+    "lambda_landing": 400.0,
+    "lambda_energy": 0.002
+  },
+  "energy_note": "Objective E is existing non-regenerative positive joint mechanical work [J]. joule_loss_proxy_j remains the legacy unverified proxy.",
+  "mujoco_version": "3.14.0",
+  "cma_version": "4.5.0"
+}

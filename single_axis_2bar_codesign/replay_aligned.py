@@ -8,7 +8,7 @@ import argparse
 import json
 from pathlib import Path
 
-from optimize_aligned import design_from_record, write_telemetry
+from optimize_aligned import design_from_record, write_compact_log, write_telemetry
 from model import write_xml
 from simulate import run_jump
 
@@ -61,9 +61,19 @@ def main() -> None:
         if renderer is not None:
             renderer.close()
     write_telemetry(args.run_dir, result)
-    print(f"Ballistic COM height: {result.ballistic_height:.6f} m")
-    print(f"RMS / max alignment: {result.alignment_rms:.6f} / {result.maximum_alignment_error:.6f} m")
-    print(f"Qualified flight: {result.qualified_flight}; violation: {result.constraint_violation}")
+    penalties = metadata["penalties"]
+    write_compact_log(
+        args.run_dir, record, result, seed=int(metadata["seed"]),
+        popsize=int(metadata["popsize"]), maxiter=int(metadata["maxiter"]),
+        simulation_duration=duration, lambda_x=float(penalties["lambda_x"]),
+        lambda_landing=float(penalties["lambda_landing"]),
+        lambda_energy=float(penalties["lambda_energy"]),
+    )
+    maximum_base_height = max(float(sample.hip_z) for sample in result.telemetry)
+    print(f"Initial / maximum base height: {result.initial_height:.6f} / {maximum_base_height:.6f} m")
+    print(f"Total base rise: {maximum_base_height - result.initial_height:.6f} m")
+    print(f"Toe alignment RMS / maximum error: {result.alignment_rms:.6f} / {result.maximum_alignment_error:.6f} m")
+    print(f"Valid jump: {result.qualified_flight}; violation: {result.constraint_violation}")
 
 
 if __name__ == "__main__":

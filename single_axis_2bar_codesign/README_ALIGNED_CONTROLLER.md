@@ -51,27 +51,28 @@ crouch-to-apex metric includes stance extension.
 
 ## CMA-ES vector and objective
 
-`optimize_aligned.py` reuses the installed `cma` implementation. Fixed values
-are `l1=l2=0.20 m`, flight/landing references, preparation interval, and flight
+`optimize_aligned.py` reuses the installed `cma` implementation. Every design
+uses a fixed 0.305 m initial base height (0.280 m vertical hip-to-toe distance
+plus the 0.025 m foot radius), a fixed 1.0 kg payload, and the same IK-derived
+joint pose. Both joints use the fixed `MAD_M6C12` motor. Other fixed values are
+`l1=l2=0.20 m`, flight/landing references, preparation interval, and flight
 joint-PD gains. Its active vector is:
 
 | Variable                    |        Bounds |
 | --------------------------- | ------------: |
-| crouch length               |  0.24–0.33 m |
-| payload mass                |  0.25–3.0 kg |
-| hip motor index             |          1–6 |
-| knee motor index            |          1–6 |
-| hip ratio                   |         4–25 |
-| knee ratio                  |         4–25 |
-| reachable VMC rest length   | 0.34–0.395 m |
+| hip SSPG target ratio       |     4.4–6.1 |
+| knee SSPG target ratio      |     4.4–6.1 |
 | vertical stiffness `K`    | 100–1000 N/m |
 | vertical damping `C`      |   0–20 N s/m |
-| thrust time                 |  0.06–0.25 s |
-| horizontal stiffness `Kx` |   50–800 N/m |
-| horizontal damping `Dx`   |   0–30 N s/m |
+| orientation gain `T_gain` |   0–20 N m/rad |
 
-Initial angles are derived by IK and are not CMA variables. Orientation and
-orientation gain are absent because the new Cartesian x loop replaces them.
+Initial angles, initial base height, and payload are fixed rather than CMA
+variables; both motor selections are fixed as well. A requested SSPG ratio is
+snapped to the nearest table entry and the physical model uses that entry's
+`actual_ratio`; it never treats an unavailable requested ratio as real
+hardware. The VMC rest length (0.38 m), thrust duration (0.15 s), horizontal
+stiffness (300 N/m), and horizontal damping (10 N s/m) are fixed. `T_gain`
+adds the paper-style virtual orientation spring to the aligned controller.
 
 The minimized objective is
 
@@ -110,7 +111,9 @@ python replay_aligned.py results/aligned/<run-directory> --video
 Each run saves metadata with parameter names, bounds, fixed values, objective
 weights, and duration; every candidate; the exact best design/XML; replayed
 validation metrics; full telemetry CSV; alignment-error/phase plot; and an
-optional MP4. Telemetry includes world-frame hip/toe position, alignment error
+optional MP4. `compact_optimization_log.json` is the short review-facing file:
+it contains only the five winning variables, optimizer hyperparameters, and
+key base/toe results. Telemetry includes world-frame hip/toe position, alignment error
 and velocity, joint state, requested/applied torque, saturation, phase,
 contact, COM state, and takeoff/apex/landing events.
 

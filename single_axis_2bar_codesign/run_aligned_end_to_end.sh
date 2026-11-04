@@ -90,6 +90,7 @@ echo "This is a long run: 8,000 candidates at a 1 ms MuJoCo timestep."
 
 echo "Complete."
 echo "  Summary:    ${RUN_DIR}/summary.txt"
+echo "  Compact log: ${RUN_DIR}/compact_optimization_log.json"
 echo "  Best design: ${RUN_DIR}/best_design.json"
 echo "  Validation:  ${RUN_DIR}/best_validation.json"
 echo "  Telemetry:   ${RUN_DIR}/best_jump_telemetry.csv"

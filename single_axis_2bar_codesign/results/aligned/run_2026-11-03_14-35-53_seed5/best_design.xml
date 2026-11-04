@@ -16,7 +16,7 @@
          what strictly constrains the carriage to vertical translation. -->
     <geom name="vertical_pole" type="capsule" fromto="-0.14 0 0 -0.14 0 2.5" size="0.03"
           mass="0" contype="0" conaffinity="0" rgba="0.28 0.30 0.34 1"/>
-    <body name="carriage" pos="0 0 0.293695952670626">
+    <body name="carriage" pos="0 0 0.26850273376194966">
       <joint name="pole_slide" type="slide" axis="0 0 1"/>
       <!-- This massless slider block visibly wraps the guide pole. -->
       <geom name="guide_bracket" type="box" pos="-0.14 0 0" size="0.05 0.05 0.065"
@@ -35,7 +35,7 @@
       <geom name="knee_motor_cover" type="sphere" pos="0.105 0 0" size="0.05" mass="0.525"
             rgba="0.18 0.45 0.84 1"/>
       <geom name="payload" type="box" pos="0.075 0 0" size="0.035 0.045 0.045"
-            mass="0.5468253986323145" rgba="0.2 0.6 1 1"/>
+            mass="0.38257106990321343" rgba="0.2 0.6 1 1"/>
       <body name="thigh" pos="0 0 0">
         <joint name="hip" type="hinge" axis="0 1 0"/>
         <geom name="thigh_link" type="capsule" fromto="0 0 0 0 0 -0.2" size="0.018" mass="0.142502642766833" rgba="0.9 0.25 0.2 1"/>
@@ -52,7 +52,7 @@
     </body>
   </worldbody>
   <actuator>
-    <motor name="hip_motor" joint="hip" ctrlrange="-36.04921466934781 36.04921466934781"/>
-    <motor name="knee_motor" joint="knee" ctrlrange="-34.513927182814726 34.513927182814726"/>
+    <motor name="hip_motor" joint="hip" ctrlrange="-24.866771458985383 24.866771458985383"/>
+    <motor name="knee_motor" joint="knee" ctrlrange="-34.434754794734005 34.434754794734005"/>
   </actuator>
 </mujoco>
