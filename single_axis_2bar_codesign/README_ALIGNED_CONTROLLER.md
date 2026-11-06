@@ -54,23 +54,26 @@ crouch-to-apex metric includes stance extension.
 `optimize_aligned.py` reuses the installed `cma` implementation. Every design
 uses a fixed 0.305 m initial base height (0.280 m vertical hip-to-toe distance
 plus the 0.025 m foot radius), a fixed 1.0 kg payload, and the same IK-derived
-joint pose. Both joints use the fixed `MAD_M6C12` motor. Other fixed values are
+joint pose. Both joints use the fixed `MAD_M6C12_KV170` motor. Four separate
+CMA-ES runs compare SSPG, CPG, WPG, and DSPG; within each run, both joints use
+the same fixed gearbox topology. Other fixed values are
 `l1=l2=0.20 m`, flight/landing references, preparation interval, and flight
 joint-PD gains. Its active vector is:
 
 | Variable                    |        Bounds |
 | --------------------------- | ------------: |
-| hip SSPG target ratio       |     4.4–6.1 |
-| knee SSPG target ratio      |     4.4–6.1 |
+| hip target ratio            | feasible catalogue span for the selected topology |
+| knee target ratio           | feasible catalogue span for the selected topology |
 | vertical stiffness `K`    | 100–1000 N/m |
 | vertical damping `C`      |   0–20 N s/m |
 | orientation gain `T_gain` |   0–20 N m/rad |
 
 Initial angles, initial base height, and payload are fixed rather than CMA
-variables; both motor selections are fixed as well. A requested SSPG ratio is
-snapped to the nearest table entry and the physical model uses that entry's
-`actual_ratio`; it never treats an unavailable requested ratio as real
-hardware. The VMC rest length (0.38 m), thrust duration (0.15 s), horizontal
+variables; both motor selections and the per-run gearbox topology are fixed as
+well. A requested ratio is snapped to the nearest feasible row for that
+topology, and the physical model uses the row's `actual_ratio`; it never treats
+an unavailable requested ratio as real hardware. The VMC rest length (0.38 m),
+thrust duration (0.15 s), horizontal
 stiffness (300 N/m), and horizontal damping (10 N s/m) are fixed. `T_gain`
 adds the paper-style virtual orientation spring to the aligned controller.
 

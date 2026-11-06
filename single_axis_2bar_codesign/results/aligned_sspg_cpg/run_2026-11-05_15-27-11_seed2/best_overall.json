@@ -1,0 +1,28 @@
+{
+  "best_overall": {
+    "gearbox": "CPG",
+    "valid_candidate": true,
+    "cost": -0.017951403524605888,
+    "hip_actual_ratio": 4.0,
+    "knee_actual_ratio": 6.199275362318841,
+    "run_directory": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-11_seed2/cpg"
+  },
+  "all_gearboxes": [
+    {
+      "gearbox": "SSPG",
+      "valid_candidate": true,
+      "cost": -0.015131804965155652,
+      "hip_actual_ratio": 5.7,
+      "knee_actual_ratio": 6.0,
+      "run_directory": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-11_seed2/sspg"
+    },
+    {
+      "gearbox": "CPG",
+      "valid_candidate": true,
+      "cost": -0.017951403524605888,
+      "hip_actual_ratio": 4.0,
+      "knee_actual_ratio": 6.199275362318841,
+      "run_directory": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-11_seed2/cpg"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "best_overall": {
+    "gearbox": "SSPG",
+    "valid_candidate": true,
+    "cost": -0.017866518551117296,
+    "hip_actual_ratio": 4.5,
+    "knee_actual_ratio": 6.0,
+    "hip_actuator_mass_kg": 0.486,
+    "knee_actuator_mass_kg": 0.602,
+    "maximum_base_height_m": 0.38713468233953363,
+    "total_base_rise_m": 0.08213468233953364,
+    "toe_horizontal_error_rms_m": 0.003421166427687188,
+    "run_directory": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_four_gearboxes/run_2026-11-05_15-20-23_seed9/sspg"
+  },
+  "all_gearboxes": [
+    {
+      "gearbox": "SSPG",
+      "valid_candidate": true,
+      "cost": -0.017866518551117296,
+      "hip_actual_ratio": 4.5,
+      "knee_actual_ratio": 6.0,
+      "hip_actuator_mass_kg": 0.486,
+      "knee_actuator_mass_kg": 0.602,
+      "maximum_base_height_m": 0.38713468233953363,
+      "total_base_rise_m": 0.08213468233953364,
+      "toe_horizontal_error_rms_m": 0.003421166427687188,
+      "run_directory": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_four_gearboxes/run_2026-11-05_15-20-23_seed9/sspg"
+    },
+    {
+      "gearbox": "CPG",
+      "valid_candidate": true,
+      "cost": 0.004707143733111709,
+      "hip_actual_ratio": 9.086021505376344,
+      "knee_actual_ratio": 10.575289575289574,
+      "hip_actuator_mass_kg": 0.703,
+      "knee_actuator_mass_kg": 0.708,
+      "maximum_base_height_m": 0.3694049104408308,
+      "total_base_rise_m": 0.0644049104408308,
+      "toe_horizontal_error_rms_m": 0.0035098428915068657,
+      "run_directory": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_four_gearboxes/run_2026-11-05_15-20-23_seed9/cpg"
+    },
+    {
+      "gearbox": "WPG",
+      "valid_candidate": true,
+      "cost": 0.0029232522731058195,
+      "hip_actual_ratio": 34.22222222222222,
+      "knee_actual_ratio": 32.30769230769231,
+      "hip_actuator_mass_kg": 0.978,
+      "knee_actuator_mass_kg": 1.297,
+      "maximum_base_height_m": 0.3697408497986601,
+      "total_base_rise_m": 0.06474084979866013,
+      "toe_horizontal_error_rms_m": 0.0028858059818754663,
+      "run_directory": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_four_gearboxes/run_2026-11-05_15-20-23_seed9/wpg"
+    },
+    {
+      "gearbox": "DSPG",
+      "valid_candidate": true,
+      "cost": 0.0031679978313565193,
+      "hip_actual_ratio": 33.45454545454545,
+      "knee_actual_ratio": 22.17391304347826,
+      "hip_actuator_mass_kg": 1.188,
+      "knee_actuator_mass_kg": 1.002,
+      "maximum_base_height_m": 0.36433138208078064,
+      "total_base_rise_m": 0.05933138208078065,
+      "toe_horizontal_error_rms_m": 0.002510734434308247,
+      "run_directory": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_four_gearboxes/run_2026-11-05_15-20-23_seed9/dspg"
+    }
+  ]
+}

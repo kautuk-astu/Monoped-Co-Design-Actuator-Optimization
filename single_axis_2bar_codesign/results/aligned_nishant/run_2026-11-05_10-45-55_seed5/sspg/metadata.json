@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-11-05T10:45:57.574844",
+  "git_commit": "3a8410f596b8fe420605c90a036c8937b31aa387",
+  "python_version": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+  "controller": "aligned_jump_nishant_catalogue",
+  "source_catalogue": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/data/actuator_selection_nishant.csv",
+  "adapted_catalogue": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_nishant/run_2026-11-05_10-45-55_seed5/adapted_nishant_catalogue.csv",
+  "source_motor_label": "MAD_M6C12",
+  "simulation_motor": "MAD_M6C12_KV170",
+  "motor_config": "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/COMPAct/config_files/motors.json",
+  "gearbox": "SSPG",
+  "seed": 5,
+  "popsize": 8,
+  "maxiter": 100,
+  "simulation_duration_s": 10.0,
+  "parameter_names": [
+    "hip_gear_ratio",
+    "knee_gear_ratio",
+    "K",
+    "C",
+    "T_gain"
+  ],
+  "active_cma_variables": [
+    "hip_gear_ratio",
+    "knee_gear_ratio",
+    "K",
+    "C",
+    "T_gain"
+  ],
+  "fixed_catalogue_ratio": false,
+  "bounds": {
+    "hip_gear_ratio": [
+      4.0,
+      7.3
+    ],
+    "knee_gear_ratio": [
+      4.0,
+      7.3
+    ],
+    "K": [
+      100.0,
+      1000.0
+    ],
+    "C": [
+      0.0,
+      20.0
+    ],
+    "T_gain": [
+      0.0,
+      20.0
+    ]
+  },
+  "penalties": {
+    "lambda_x": 200.0,
+    "lambda_landing": 400.0,
+    "lambda_energy": 0.002
+  }
+}

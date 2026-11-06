@@ -1,0 +1,28 @@
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 5 (seed=1, Thu Nov  5 15:27:14 2026)
+new global best: cost=0.026932, total base rise=0.0544 m, toe alignment rms=3.16 mm
+new global best: cost=0.013532, total base rise=0.0657 m, toe alignment rms=3.69 mm
+new global best: cost=0.013251, total base rise=0.0536 m, toe alignment rms=2.60 mm
+new global best: cost=0.000632, total base rise=0.0696 m, toe alignment rms=3.40 mm
+new global best: cost=-0.005004, total base rise=0.0677 m, toe alignment rms=3.20 mm
+new global best: cost=-0.013254, total base rise=0.0676 m, toe alignment rms=2.67 mm
+new global best: cost=-0.016280, total base rise=0.0755 m, toe alignment rms=3.05 mm
+new global best: cost=-0.016629, total base rise=0.0815 m, toe alignment rms=3.34 mm
+new global best: cost=-0.016878, total base rise=0.0819 m, toe alignment rms=3.44 mm
+new global best: cost=-0.016927, total base rise=0.0811 m, toe alignment rms=3.27 mm
+new global best: cost=-0.017089, total base rise=0.0818 m, toe alignment rms=3.40 mm
+new global best: cost=-0.017612, total base rise=0.0817 m, toe alignment rms=3.32 mm
+new global best: cost=-0.017824, total base rise=0.0823 m, toe alignment rms=3.44 mm
+new global best: cost=-0.017936, total base rise=0.0826 m, toe alignment rms=3.42 mm
+new global best: cost=-0.017938, total base rise=0.0825 m, toe alignment rms=3.42 mm
+new global best: cost=-0.018021, total base rise=0.0826 m, toe alignment rms=3.42 mm
+new global best: cost=-0.018115, total base rise=0.0825 m, toe alignment rms=3.45 mm
+Initial base height: 0.305000 m
+Maximum base height: 0.387503 m
+Total base rise: 0.082503 m
+Toe alignment RMS / maximum error: 0.003451 / 0.009940 m
+Toe alignment error before landing: 0.001108 m
+Positive mechanical work: 3.420096 J
+Valid jump: True; toe off-ground duration: 0.186000 s
+Cost: -0.018115
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-10_seed1/sspg

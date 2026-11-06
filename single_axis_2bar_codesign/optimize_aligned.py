@@ -19,6 +19,7 @@ import tempfile
 import uuid
 
 import numpy as np
+import pandas as pd
 
 from kinematics import vertical_leg_ik
 from model import Actuator, CARRIAGE_BASE_MASS_KG, Design, actuator_for, write_xml
@@ -33,8 +34,9 @@ FOOT_RADIUS_M = 0.025
 FIXED_INITIAL_BASE_HEIGHT_M = 0.305
 FIXED_CROUCH_LENGTH_M = FIXED_INITIAL_BASE_HEIGHT_M - FOOT_RADIUS_M
 FIXED_PAYLOAD_MASS_KG = 1.0
-FIXED_HIP_MOTOR = "MAD_M6C12"
-FIXED_KNEE_MOTOR = "MAD_M6C12"
+FIXED_HIP_MOTOR = "MAD_M6C12_KV170"
+FIXED_KNEE_MOTOR = "MAD_M6C12_KV170"
+GEARBOX_TYPES = ("SSPG", "CPG", "WPG", "DSPG")
 FIXED_ORI_L_M = 0.38
 FIXED_THRUST_TIME_S = 0.15
 FIXED_KX_N_M = 300.0
@@ -66,22 +68,53 @@ def _git_commit() -> str | None:
         return None
 
 
-def denormalize(vector: np.ndarray) -> np.ndarray:
+def bounds_for_catalogue(catalogue: Path, gearbox: str) -> np.ndarray:
+    """Use the requested-ratio span containing feasible rows for one topology."""
+    table = pd.read_csv(catalogue)
+    required = {"gearbox_type", "requested_ratio", "feasibility_status"}
+    missing = required.difference(table.columns)
+    if missing:
+        raise ValueError(f"Catalogue {catalogue} is missing columns: {sorted(missing)}")
+    rows = table[
+        (table["gearbox_type"].str.upper() == gearbox.upper())
+        & (table["feasibility_status"].str.lower() == "feasible")
+    ].copy()
+    ratios = pd.to_numeric(rows["requested_ratio"], errors="coerce").dropna()
+    if ratios.empty:
+        raise ValueError(f"Catalogue contains no feasible {gearbox} ratios: {catalogue}")
+    bounds = BOUNDS.copy()
+    bounds[0] = bounds[1] = [float(ratios.min()), float(ratios.max())]
+    return bounds
+
+
+def denormalize(vector: np.ndarray, bounds: np.ndarray = BOUNDS) -> np.ndarray:
     vector = np.asarray(vector, dtype=float)
     if vector.shape != (len(PARAMETER_NAMES),) or not np.isfinite(vector).all():
         raise ValueError(f"normalized vector must be finite and length {len(PARAMETER_NAMES)}")
     if np.any(vector < 0.0) or np.any(vector > 1.0):
         raise ValueError("normalized vector must lie in [0, 1]")
-    return BOUNDS[:, 0] + vector * (BOUNDS[:, 1] - BOUNDS[:, 0])
+    return bounds[:, 0] + vector * (bounds[:, 1] - bounds[:, 0])
 
 
-def design_from_vector(vector: np.ndarray) -> Design:
-    p = denormalize(vector)
+def design_from_vector(
+    vector: np.ndarray,
+    *,
+    gearbox: str = "SSPG",
+    actuator_catalogue: Path | None = None,
+    motor_config: Path | None = None,
+    bounds: np.ndarray = BOUNDS,
+) -> Design:
+    p = denormalize(vector, bounds)
     q = vertical_leg_ik(FIXED_CROUCH_LENGTH_M, FIXED_L1_M, FIXED_L2_M)
+    actuator_kwargs = {"gearbox": gearbox}
+    if actuator_catalogue is not None:
+        actuator_kwargs["actuator_table"] = actuator_catalogue
+    if motor_config is not None:
+        actuator_kwargs["motor_config"] = motor_config
     return Design(
         thigh=FIXED_L1_M, shank=FIXED_L2_M, payload_mass=FIXED_PAYLOAD_MASS_KG,
-        hip=actuator_for(FIXED_HIP_MOTOR, float(p[0])),
-        knee=actuator_for(FIXED_KNEE_MOTOR, float(p[1])),
+        hip=actuator_for(FIXED_HIP_MOTOR, float(p[0]), **actuator_kwargs),
+        knee=actuator_for(FIXED_KNEE_MOTOR, float(p[1]), **actuator_kwargs),
         theta1=float(q[0]), theta2=float(q[1]), ori_l=FIXED_ORI_L_M, ori_theta=0.0,
         K=float(p[2]), C=float(p[3]), T_gain=float(p[4]), thrust_time=FIXED_THRUST_TIME_S,
         Kx=FIXED_KX_N_M, Dx=FIXED_DX_N_S_M, prepare_time=PREPARE_TIME_S,
@@ -266,6 +299,7 @@ def write_compact_log(
     output_dir: Path, best: dict[str, object] | None, result: JumpResult | None,
     *, seed: int, popsize: int, maxiter: int, simulation_duration: float,
     lambda_x: float, lambda_landing: float, lambda_energy: float,
+    bounds: np.ndarray = BOUNDS,
 ) -> None:
     """Write the small review-facing log; detailed diagnostics stay separate."""
     variables = None if best is None else {
@@ -307,7 +341,7 @@ def write_compact_log(
     compact_log = {
         "optimization_variables": variables,
         "hyperparameters": {
-            "bounds": dict(zip(PARAMETER_NAMES, BOUNDS.tolist())),
+            "bounds": dict(zip(PARAMETER_NAMES, bounds.tolist())),
             "seed": seed,
             "population_size": popsize,
             "generations": maxiter,
@@ -337,20 +371,33 @@ def main() -> None:
     parser.add_argument("--lambda-x", type=float, default=DEFAULT_LAMBDA_X)
     parser.add_argument("--lambda-landing", type=float, default=DEFAULT_LAMBDA_LANDING)
     parser.add_argument("--lambda-energy", type=float, default=DEFAULT_LAMBDA_ENERGY)
+    parser.add_argument("--gearbox", required=True, choices=GEARBOX_TYPES)
+    parser.add_argument("--actuator-catalogue", required=True, type=Path)
+    parser.add_argument("--motor-config", required=True, type=Path,
+                        help="COMPAct config_files/motors.json")
     parser.add_argument("--output-dir", type=Path)
     args = parser.parse_args()
+    if not args.actuator_catalogue.is_file():
+        parser.error(f"actuator catalogue does not exist: {args.actuator_catalogue}")
+    if not args.motor_config.is_file():
+        parser.error(f"motor configuration does not exist: {args.motor_config}")
+    bounds = bounds_for_catalogue(args.actuator_catalogue, args.gearbox)
     output_dir = args.output_dir or RESULTS / (datetime.now().strftime("run_%Y-%m-%d_%H-%M-%S") + f"_seed{args.seed}")
     output_dir.mkdir(parents=True, exist_ok=True)
     metadata = {
         "timestamp": datetime.now().isoformat(), "git_commit": _git_commit(), "python_version": sys.version,
         "controller": "aligned_jump", "seed": args.seed, "popsize": args.popsize,
         "maxiter": args.maxiter, "simulation_duration_s": args.simulation_duration,
-        "parameter_names": PARAMETER_NAMES, "bounds": dict(zip(PARAMETER_NAMES, BOUNDS.tolist())),
+        "parameter_names": PARAMETER_NAMES, "bounds": dict(zip(PARAMETER_NAMES, bounds.tolist())),
+        "gearbox": args.gearbox,
+        "actuator_catalogue": str(args.actuator_catalogue.resolve()),
+        "motor_config": str(args.motor_config.resolve()),
         "fixed_parameters": {"l1_m": FIXED_L1_M, "l2_m": FIXED_L2_M,
                              "initial_base_height_m": FIXED_INITIAL_BASE_HEIGHT_M,
                              "crouch_length_m": FIXED_CROUCH_LENGTH_M,
                              "payload_mass_kg": FIXED_PAYLOAD_MASS_KG,
                              "hip_motor": FIXED_HIP_MOTOR, "knee_motor": FIXED_KNEE_MOTOR,
+                             "hip_gearbox": args.gearbox, "knee_gearbox": args.gearbox,
                              "ori_l_m": FIXED_ORI_L_M, "thrust_time_s": FIXED_THRUST_TIME_S,
                              "Kx_n_m": FIXED_KX_N_M, "Dx_n_s_m": FIXED_DX_N_S_M,
                              "flight_leg_length_m": FLIGHT_LEG_LENGTH_M,
@@ -369,8 +416,9 @@ def main() -> None:
         metadata["mujoco_version"] = metadata["cma_version"] = None
     (output_dir / "metadata.json").write_text(json.dumps(metadata, indent=2))
 
-    x0_physical = np.array([6, 6, 800, 8, 10])
-    x0 = (x0_physical - BOUNDS[:, 0]) / (BOUNDS[:, 1] - BOUNDS[:, 0])
+    initial_ratio = float(np.mean(bounds[0]))
+    x0_physical = np.array([initial_ratio, initial_ratio, 800, 8, 10])
+    x0 = (x0_physical - bounds[:, 0]) / (bounds[:, 1] - bounds[:, 0])
     es = cma.CMAEvolutionStrategy(x0, CMA_INITIAL_SIGMA, {
         "bounds": [np.zeros(len(PARAMETER_NAMES)), np.ones(len(PARAMETER_NAMES))],
         "maxiter": args.maxiter, "popsize": args.popsize, "seed": args.seed,
@@ -388,7 +436,11 @@ def main() -> None:
             for sample in samples:
                 evaluation_index += 1
                 candidate_id = uuid.uuid4().hex[:10]
-                design = design_from_vector(np.asarray(sample))
+                design = design_from_vector(
+                    np.asarray(sample), gearbox=args.gearbox,
+                    actuator_catalogue=args.actuator_catalogue,
+                    motor_config=args.motor_config, bounds=bounds,
+                )
                 try:
                     write_xml(design, candidate_xml)
                     result = run_jump(candidate_xml, design, duration=args.simulation_duration, controller_mode="aligned_jump")
@@ -444,6 +496,7 @@ def main() -> None:
         output_dir, best, replay, seed=args.seed, popsize=args.popsize, maxiter=args.maxiter,
         simulation_duration=args.simulation_duration, lambda_x=args.lambda_x,
         lambda_landing=args.lambda_landing, lambda_energy=args.lambda_energy,
+        bounds=bounds,
     )
     (output_dir / "summary.txt").write_text(summary)
     print(summary)

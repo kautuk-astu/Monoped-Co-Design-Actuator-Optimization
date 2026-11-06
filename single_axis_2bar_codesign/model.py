@@ -11,12 +11,9 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-# The 2R study deliberately uses only SSPG entries.  Keeping this lookup
-# alongside the optimizer makes the fixed-design run independent of the 5R
-# actuator-selection data and prevents a different gearbox from being chosen.
 ACTUATOR_TABLE = HERE / "data" / "sspg_actuator_selection.csv"
 MOTOR_CONFIG = HERE / "data" / "motor_config.json"
-MOTORS = ("U8", "U10", "U12", "MN8014", "VT8020", "MAD_M6C12")
+MOTORS = ("U8", "U10", "U12", "MN8014", "VT8020", "MAD_M6C12", "MAD_M6C12_KV170")
 CARRIAGE_BASE_MASS_KG = 0.25
 KNEE_PIVOT_MASS_KG = 0.01
 
@@ -61,45 +58,96 @@ class Design:
     joint_kd: float = 10.0
 
 
-def _continuous_motor_torque(motor: str) -> float:
-    with MOTOR_CONFIG.open() as stream:
-        spec = json.load(stream)["Motors"][f"Motor{motor}_framed"]
-    return 60.0 / (2.0 * 3.141592653589793 * float(spec["Kv"])) * float(spec["maxContinuousCurrent"])
+def _motor_spec(motor: str, motor_config: Path = MOTOR_CONFIG) -> dict[str, float]:
+    """Normalize either the legacy motor file or COMPAct's motors.json."""
+    with Path(motor_config).open() as stream:
+        data = json.load(stream)
+    if "motors" in data:
+        if motor not in data["motors"]:
+            raise ValueError(f"No motor configuration for {motor!r} in {motor_config}")
+        entry = data["motors"][motor]
+        electrical = entry["electrical"]
+        kv = float(electrical["kv_rpm_per_V"])
+        rated_current = float(electrical["rated_current_A"])
+        rated_voltage = float(data.get("system_voltage_V", 48.0))
+        rated_speed = float(electrical["rated_speed_rpm"])
+        resistance = max(0.0, (rated_voltage - rated_speed / kv) / rated_current)
+        return {
+            "Kv": kv,
+            "ratedVoltage": rated_voltage,
+            "Resistance": resistance,
+            "maxContinuousCurrent": rated_current,
+            # Keep the simulation's established Kt=60/(2*pi*Kv) convention
+            # consistent with its motor-current diagnostic.
+            "continuousTorque": 60.0 / (2.0 * math.pi * kv) * rated_current,
+        }
+    key = f"Motor{motor}_framed"
+    if key not in data.get("Motors", {}):
+        raise ValueError(f"No motor configuration for {motor!r} in {motor_config}")
+    spec = data["Motors"][key]
+    return {
+        **spec,
+        "continuousTorque": (
+            60.0 / (2.0 * math.pi * float(spec["Kv"]))
+            * float(spec["maxContinuousCurrent"])
+        ),
+    }
 
 
-def _motor_spec(motor: str) -> dict[str, float]:
-    with MOTOR_CONFIG.open() as stream:
-        return json.load(stream)["Motors"][f"Motor{motor}_framed"]
-
-
-def actuator_for(motor: str, ratio: float) -> Actuator:
-    """Choose the nearest available SSPG actuator for a fixed motor."""
+def actuator_for(
+    motor: str,
+    ratio: float,
+    gearbox: str | None = None,
+    actuator_table: Path = ACTUATOR_TABLE,
+    motor_config: Path = MOTOR_CONFIG,
+) -> Actuator:
+    """Choose the nearest feasible catalogue actuator for a motor/topology."""
     if motor not in MOTORS:
         raise ValueError(f"Unknown motor {motor!r}; choose one of {', '.join(MOTORS)}")
-    if not ACTUATOR_TABLE.is_file():
-        raise FileNotFoundError(f"Actuator lookup missing: {ACTUATOR_TABLE}")
+    actuator_table = Path(actuator_table)
+    if not actuator_table.is_file():
+        raise FileNotFoundError(f"Actuator lookup missing: {actuator_table}")
 
-    table = pd.read_csv(ACTUATOR_TABLE)
-    options = table[table["motor"] == motor]
+    table = pd.read_csv(actuator_table)
+    compact_catalogue = "gearbox_type" in table.columns
+    if compact_catalogue:
+        required = {
+            "gearbox_type", "requested_ratio", "actual_ratio", "mass_kg",
+            "efficiency", "feasibility_status",
+        }
+        missing = required.difference(table.columns)
+        if missing:
+            raise ValueError(f"Catalogue {actuator_table} is missing columns: {sorted(missing)}")
+        if gearbox is None:
+            raise ValueError("gearbox must be specified for a multi-topology COMPAct catalogue")
+        options = table[
+            (table["gearbox_type"].str.upper() == gearbox.upper())
+            & (table["feasibility_status"].str.lower() == "feasible")
+        ].copy()
+        target_column, mass_column, gearbox_column = "requested_ratio", "mass_kg", "gearbox_type"
+    else:
+        options = table[table["motor"] == motor].copy()
+        if gearbox is not None:
+            options = options[options["gearbox"].str.upper() == gearbox.upper()]
+        target_column, mass_column, gearbox_column = "target_ratio", "mass", "gearbox"
     if options.empty:
-        raise ValueError(f"No actuator-table entries for motor {motor}")
+        raise ValueError(f"No feasible {gearbox or ''} catalogue entries for motor {motor}")
+    for column in (target_column, "actual_ratio", mass_column, "efficiency"):
+        options[column] = pd.to_numeric(options[column], errors="coerce")
+    options = options.dropna(subset=[target_column, "actual_ratio", mass_column, "efficiency"])
+    if options.empty:
+        raise ValueError(f"No numeric feasible rows for {gearbox or motor} in {actuator_table}")
     requested = round(float(ratio), 1)
-    row = options.loc[(options["target_ratio"] - requested).abs().idxmin()]
-    if row["gearbox"] != "SSPG":
-        raise ValueError("2R co-design requires SSPG gearbox entries")
-    spec = _motor_spec(motor)
-    # The optimizer requests a target ratio, but the SSPG table contains the
-    # actual realizable ratio.  Never propagate the unconstrained request into
-    # the physical model (doing so previously reported e.g. an impossible
-    # 11.3:1 MAD_M6C12 while using the mass/efficiency of its nearest 6:1 SSPG).
+    row = options.loc[(options[target_column] - requested).abs().idxmin()]
+    spec = _motor_spec(motor, Path(motor_config))
     actual_ratio = float(row["actual_ratio"])
     return Actuator(
         motor=motor,
         ratio=actual_ratio,
-        gearbox=str(row["gearbox"]),
-        mass=float(row["mass"]),
+        gearbox=str(row[gearbox_column]).upper(),
+        mass=float(row[mass_column]),
         efficiency=float(row["efficiency"]),
-        continuous_output_torque=_continuous_motor_torque(motor) * actual_ratio,
+        continuous_output_torque=float(spec["continuousTorque"]) * actual_ratio,
         kv_rpm_per_volt=float(spec["Kv"]), rated_voltage=float(spec["ratedVoltage"]),
         resistance_ohm=float(spec["Resistance"]),
         max_continuous_current=float(spec["maxContinuousCurrent"]),

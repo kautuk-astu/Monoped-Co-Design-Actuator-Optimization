@@ -8,6 +8,8 @@ import argparse
 import json
 from pathlib import Path
 
+import numpy as np
+
 from optimize_aligned import design_from_record, write_compact_log, write_telemetry
 from model import write_xml
 from simulate import run_jump
@@ -68,6 +70,7 @@ def main() -> None:
         simulation_duration=duration, lambda_x=float(penalties["lambda_x"]),
         lambda_landing=float(penalties["lambda_landing"]),
         lambda_energy=float(penalties["lambda_energy"]),
+        bounds=np.asarray([metadata["bounds"][name] for name in metadata["parameter_names"]], dtype=float),
     )
     maximum_base_height = max(float(sample.hip_z) for sample in result.telemetry)
     print(f"Initial / maximum base height: {result.initial_height:.6f} / {maximum_base_height:.6f} m")

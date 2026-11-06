@@ -1,0 +1,3 @@
+gearbox,valid_candidate,cost,hip_actual_ratio,knee_actual_ratio,run_directory
+SSPG,True,-0.01811510286576791,4.5,6.0,/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-10_seed1/sspg
+CPG,True,0.003881605349985339,4.0,10.862068965517242,/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-10_seed1/cpg

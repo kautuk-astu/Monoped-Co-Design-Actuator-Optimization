@@ -1,0 +1,39 @@
+/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/utilities/utils.py:372: UserWarning: 
+        geno-pheno transformation introduced based on the
+        current covariance matrix with condition 1.2e+12 -> 1.0e+00,
+        injected solutions become "invalid" in this iteration (time=Nov  5 16:23:55 2026 class=CMAEvolutionStrategy method=alleviate_conditioning iteration=935)
+  warnings.warn(msg + ' (time={}'.format(time.asctime()[4:]) +
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 5 (seed=2, Thu Nov  5 15:58:31 2026)
+new global best: cost=0.102536, total base rise=0.0857 m, toe alignment rms=6.23 mm
+new global best: cost=0.072696, total base rise=0.0797 m, toe alignment rms=5.29 mm
+new global best: cost=0.072446, total base rise=0.0798 m, toe alignment rms=5.28 mm
+new global best: cost=0.030757, total base rise=0.0709 m, toe alignment rms=3.96 mm
+new global best: cost=0.019864, total base rise=0.0651 m, toe alignment rms=3.50 mm
+new global best: cost=0.009879, total base rise=0.0627 m, toe alignment rms=2.94 mm
+new global best: cost=0.006263, total base rise=0.0605 m, toe alignment rms=2.93 mm
+new global best: cost=0.004608, total base rise=0.0636 m, toe alignment rms=3.14 mm
+new global best: cost=0.003337, total base rise=0.0751 m, toe alignment rms=4.35 mm
+new global best: cost=-0.004524, total base rise=0.0788 m, toe alignment rms=4.25 mm
+new global best: cost=-0.008766, total base rise=0.0657 m, toe alignment rms=3.36 mm
+new global best: cost=-0.010716, total base rise=0.0592 m, toe alignment rms=2.65 mm
+new global best: cost=-0.011849, total base rise=0.0684 m, toe alignment rms=3.17 mm
+new global best: cost=-0.012488, total base rise=0.0650 m, toe alignment rms=2.73 mm
+new global best: cost=-0.013020, total base rise=0.0654 m, toe alignment rms=2.82 mm
+new global best: cost=-0.013489, total base rise=0.0647 m, toe alignment rms=2.77 mm
+new global best: cost=-0.014711, total base rise=0.0685 m, toe alignment rms=2.89 mm
+new global best: cost=-0.015951, total base rise=0.0729 m, toe alignment rms=3.01 mm
+new global best: cost=-0.017222, total base rise=0.0791 m, toe alignment rms=3.32 mm
+new global best: cost=-0.017497, total base rise=0.0790 m, toe alignment rms=3.36 mm
+new global best: cost=-0.017593, total base rise=0.0792 m, toe alignment rms=3.26 mm
+new global best: cost=-0.017880, total base rise=0.0792 m, toe alignment rms=3.23 mm
+new global best: cost=-0.017951, total base rise=0.0792 m, toe alignment rms=3.23 mm
+Initial base height: 0.305000 m
+Maximum base height: 0.384185 m
+Total base rise: 0.079185 m
+Toe alignment RMS / maximum error: 0.003228 / 0.009299 m
+Toe alignment error before landing: 0.000977 m
+Positive mechanical work: 3.319415 J
+Valid jump: True; toe off-ground duration: 0.182000 s
+Cost: -0.017951
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-11_seed2/cpg

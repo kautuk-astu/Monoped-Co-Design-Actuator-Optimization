@@ -1,0 +1,9 @@
+Starting SSPG CMA-ES optimization...
+Traceback (most recent call last):
+  File "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/optimize_aligned.py", line 507, in <module>
+    main()
+  File "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/optimize_aligned.py", line 384, in main
+    bounds = bounds_for_catalogue(args.actuator_catalogue, args.gearbox)
+  File "/mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/optimize_aligned.py", line 77, in bounds_for_catalogue
+    raise ValueError(f"Catalogue {catalogue} is missing columns: {sorted(missing)}")
+ValueError: Catalogue /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/data/actuator_selection_nishant.csv is missing columns: ['feasibility_status', 'gearbox_type', 'requested_ratio']

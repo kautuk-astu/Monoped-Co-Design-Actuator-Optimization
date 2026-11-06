@@ -1,0 +1,8 @@
+Initial base height: 0.305000 m
+Maximum base height: 0.384185 m
+Total base rise: 0.079185 m
+Toe alignment RMS / maximum error: 0.003228 / 0.009299 m
+Toe alignment error before landing: 0.000977 m
+Positive mechanical work: 3.319415 J
+Valid jump: True; toe off-ground duration: 0.182000 s
+Cost: -0.017951

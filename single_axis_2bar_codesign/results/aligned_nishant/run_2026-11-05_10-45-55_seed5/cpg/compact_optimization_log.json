@@ -1,0 +1,60 @@
+{
+  "optimization_variables": {
+    "hip_gear_ratio": 5.904214559386972,
+    "knee_gear_ratio": 5.904214559386972,
+    "K_n_per_m": 858.6206289660735,
+    "C_n_s_per_m": 8.480152141347677,
+    "T_gain_n_m_per_rad": 11.374598035596525
+  },
+  "hyperparameters": {
+    "bounds": {
+      "hip_gear_ratio": [
+        5.9,
+        5.9
+      ],
+      "knee_gear_ratio": [
+        5.9,
+        5.9
+      ],
+      "K": [
+        100.0,
+        1000.0
+      ],
+      "C": [
+        0.0,
+        20.0
+      ],
+      "T_gain": [
+        0.0,
+        20.0
+      ]
+    },
+    "seed": 5,
+    "population_size": 8,
+    "generations": 100,
+    "total_candidate_evaluations": 800,
+    "simulation_duration_s": 10.0,
+    "cma_initial_sigma_normalized": 0.04,
+    "cost_weights": {
+      "toe_horizontal_error": 200.0,
+      "toe_error_before_landing": 400.0,
+      "positive_mechanical_work": 0.002
+    }
+  },
+  "key_results": {
+    "valid_jump": true,
+    "cost": 0.009245774541650063,
+    "initial_base_height_m": 0.305,
+    "takeoff_base_height_m": 0.3587112777077901,
+    "maximum_base_height_m": 0.36349070457986343,
+    "total_base_rise_m": 0.05849070457986344,
+    "base_rise_after_toe_leaves_ground_m": 0.0047794268720733335,
+    "toe_off_ground_duration_s": 0.11300000000000007,
+    "toe_horizontal_error_rms_m": 0.0026410742557667817,
+    "toe_horizontal_error_max_m": 0.005170843710725709,
+    "toe_horizontal_error_before_landing_m": 0.005164994454189192,
+    "positive_mechanical_work_j": 2.3460425798742848,
+    "hip_torque_saturation_fraction": 0.23303834808259588,
+    "knee_torque_saturation_fraction": 0.7522123893805309
+  }
+}

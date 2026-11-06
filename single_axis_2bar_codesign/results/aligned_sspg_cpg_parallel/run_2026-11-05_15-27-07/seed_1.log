@@ -1,0 +1,276 @@
+Using existing combined catalogue: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/compact_catalogue_generation/outputs/run_2026-11-04_18-03-31_UTC/combined_MAD_M6C12_KV170_catalogue.csv
+Aligned-monoped SSPG/CPG study
+  output:              /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-10_seed1
+  catalogue:           /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/compact_catalogue_generation/outputs/run_2026-11-04_18-03-31_UTC/combined_MAD_M6C12_KV170_catalogue.csv
+  motor:               MAD_M6C12_KV170
+  gearboxes:           SSPG CPG
+  CMA-ES generations:  1000
+  population:          8
+  seed:                1
+  simulation duration: 10 s per candidate
+  evaluations:         8000 per gearbox
+  total evaluations:   16000
+Starting SSPG CMA-ES optimization...
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 5 (seed=1, Thu Nov  5 15:27:14 2026)
+new global best: cost=0.026932, total base rise=0.0544 m, toe alignment rms=3.16 mm
+new global best: cost=0.013532, total base rise=0.0657 m, toe alignment rms=3.69 mm
+new global best: cost=0.013251, total base rise=0.0536 m, toe alignment rms=2.60 mm
+new global best: cost=0.000632, total base rise=0.0696 m, toe alignment rms=3.40 mm
+new global best: cost=-0.005004, total base rise=0.0677 m, toe alignment rms=3.20 mm
+new global best: cost=-0.013254, total base rise=0.0676 m, toe alignment rms=2.67 mm
+new global best: cost=-0.016280, total base rise=0.0755 m, toe alignment rms=3.05 mm
+new global best: cost=-0.016629, total base rise=0.0815 m, toe alignment rms=3.34 mm
+new global best: cost=-0.016878, total base rise=0.0819 m, toe alignment rms=3.44 mm
+new global best: cost=-0.016927, total base rise=0.0811 m, toe alignment rms=3.27 mm
+new global best: cost=-0.017089, total base rise=0.0818 m, toe alignment rms=3.40 mm
+new global best: cost=-0.017612, total base rise=0.0817 m, toe alignment rms=3.32 mm
+new global best: cost=-0.017824, total base rise=0.0823 m, toe alignment rms=3.44 mm
+new global best: cost=-0.017936, total base rise=0.0826 m, toe alignment rms=3.42 mm
+new global best: cost=-0.017938, total base rise=0.0825 m, toe alignment rms=3.42 mm
+new global best: cost=-0.018021, total base rise=0.0826 m, toe alignment rms=3.42 mm
+new global best: cost=-0.018115, total base rise=0.0825 m, toe alignment rms=3.45 mm
+Initial base height: 0.305000 m
+Maximum base height: 0.387503 m
+Total base rise: 0.082503 m
+Toe alignment RMS / maximum error: 0.003451 / 0.009940 m
+Toe alignment error before landing: 0.001108 m
+Positive mechanical work: 3.420096 J
+Valid jump: True; toe off-ground duration: 0.186000 s
+Cost: -0.018115
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-10_seed1/sspg
+Starting CPG CMA-ES optimization...
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 5 (seed=1, Thu Nov  5 15:58:29 2026)
+new global best: cost=0.251013, total base rise=0.0934 m, toe alignment rms=9.06 mm
+new global best: cost=0.114416, total base rise=0.0929 m, toe alignment rms=7.14 mm
+new global best: cost=0.101724, total base rise=0.0924 m, toe alignment rms=6.66 mm
+new global best: cost=0.067515, total base rise=0.0875 m, toe alignment rms=5.87 mm
+new global best: cost=0.058565, total base rise=0.0783 m, toe alignment rms=5.23 mm
+new global best: cost=0.014141, total base rise=0.0628 m, toe alignment rms=3.16 mm
+new global best: cost=0.004752, total base rise=0.0612 m, toe alignment rms=3.07 mm
+new global best: cost=0.004555, total base rise=0.0646 m, toe alignment rms=3.60 mm
+new global best: cost=0.004495, total base rise=0.0591 m, toe alignment rms=3.01 mm
+new global best: cost=0.004464, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004353, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004341, total base rise=0.0636 m, toe alignment rms=3.66 mm
+new global best: cost=0.004340, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004339, total base rise=0.0627 m, toe alignment rms=3.69 mm
+new global best: cost=0.004337, total base rise=0.0627 m, toe alignment rms=3.70 mm
+new global best: cost=0.004333, total base rise=0.0627 m, toe alignment rms=3.69 mm
+new global best: cost=0.004330, total base rise=0.0627 m, toe alignment rms=3.70 mm
+new global best: cost=0.004329, total base rise=0.0627 m, toe alignment rms=3.69 mm
+new global best: cost=0.004328, total base rise=0.0627 m, toe alignment rms=3.70 mm
+new global best: cost=0.004323, total base rise=0.0627 m, toe alignment rms=3.68 mm
+new global best: cost=0.004318, total base rise=0.0627 m, toe alignment rms=3.69 mm
+new global best: cost=0.004318, total base rise=0.0628 m, toe alignment rms=3.71 mm
+new global best: cost=0.004299, total base rise=0.0627 m, toe alignment rms=3.69 mm
+new global best: cost=0.004289, total base rise=0.0627 m, toe alignment rms=3.69 mm
+new global best: cost=0.004283, total base rise=0.0627 m, toe alignment rms=3.68 mm
+new global best: cost=0.004277, total base rise=0.0627 m, toe alignment rms=3.70 mm
+new global best: cost=0.004270, total base rise=0.0628 m, toe alignment rms=3.70 mm
+new global best: cost=0.004230, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004211, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004209, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004209, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004209, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004209, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004209, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004208, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004205, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004204, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004203, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004203, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004203, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004203, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004202, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004201, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004201, total base rise=0.0627 m, toe alignment rms=3.67 mm
+new global best: cost=0.004200, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004199, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004199, total base rise=0.0627 m, toe alignment rms=3.66 mm
+new global best: cost=0.004198, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004197, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004197, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004196, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004195, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004193, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004192, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004191, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004190, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004188, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004186, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004186, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004185, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004183, total base rise=0.0626 m, toe alignment rms=3.65 mm
+new global best: cost=0.004182, total base rise=0.0626 m, toe alignment rms=3.66 mm
+new global best: cost=0.004177, total base rise=0.0626 m, toe alignment rms=3.65 mm
+new global best: cost=0.004174, total base rise=0.0626 m, toe alignment rms=3.65 mm
+new global best: cost=0.004174, total base rise=0.0626 m, toe alignment rms=3.65 mm
+new global best: cost=0.004171, total base rise=0.0626 m, toe alignment rms=3.65 mm
+new global best: cost=0.004169, total base rise=0.0626 m, toe alignment rms=3.65 mm
+new global best: cost=0.004164, total base rise=0.0625 m, toe alignment rms=3.65 mm
+new global best: cost=0.004162, total base rise=0.0625 m, toe alignment rms=3.64 mm
+new global best: cost=0.004156, total base rise=0.0625 m, toe alignment rms=3.64 mm
+new global best: cost=0.004154, total base rise=0.0625 m, toe alignment rms=3.64 mm
+new global best: cost=0.004153, total base rise=0.0625 m, toe alignment rms=3.63 mm
+new global best: cost=0.004139, total base rise=0.0625 m, toe alignment rms=3.62 mm
+new global best: cost=0.004139, total base rise=0.0624 m, toe alignment rms=3.62 mm
+new global best: cost=0.004137, total base rise=0.0624 m, toe alignment rms=3.62 mm
+new global best: cost=0.004135, total base rise=0.0624 m, toe alignment rms=3.61 mm
+new global best: cost=0.004132, total base rise=0.0624 m, toe alignment rms=3.62 mm
+new global best: cost=0.004126, total base rise=0.0624 m, toe alignment rms=3.61 mm
+new global best: cost=0.004117, total base rise=0.0624 m, toe alignment rms=3.61 mm
+new global best: cost=0.004114, total base rise=0.0624 m, toe alignment rms=3.62 mm
+new global best: cost=0.004112, total base rise=0.0624 m, toe alignment rms=3.60 mm
+new global best: cost=0.004105, total base rise=0.0624 m, toe alignment rms=3.61 mm
+new global best: cost=0.004093, total base rise=0.0623 m, toe alignment rms=3.59 mm
+new global best: cost=0.004083, total base rise=0.0623 m, toe alignment rms=3.60 mm
+new global best: cost=0.004077, total base rise=0.0622 m, toe alignment rms=3.58 mm
+new global best: cost=0.004076, total base rise=0.0623 m, toe alignment rms=3.59 mm
+new global best: cost=0.004075, total base rise=0.0623 m, toe alignment rms=3.59 mm
+new global best: cost=0.004074, total base rise=0.0622 m, toe alignment rms=3.58 mm
+new global best: cost=0.004074, total base rise=0.0623 m, toe alignment rms=3.59 mm
+new global best: cost=0.004068, total base rise=0.0622 m, toe alignment rms=3.58 mm
+new global best: cost=0.004064, total base rise=0.0622 m, toe alignment rms=3.59 mm
+new global best: cost=0.004064, total base rise=0.0622 m, toe alignment rms=3.58 mm
+new global best: cost=0.004062, total base rise=0.0622 m, toe alignment rms=3.58 mm
+new global best: cost=0.004061, total base rise=0.0622 m, toe alignment rms=3.59 mm
+new global best: cost=0.004037, total base rise=0.0622 m, toe alignment rms=3.70 mm
+new global best: cost=0.004036, total base rise=0.0622 m, toe alignment rms=3.70 mm
+new global best: cost=0.004034, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.004033, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.004029, total base rise=0.0622 m, toe alignment rms=3.70 mm
+new global best: cost=0.004026, total base rise=0.0622 m, toe alignment rms=3.70 mm
+new global best: cost=0.004026, total base rise=0.0622 m, toe alignment rms=3.70 mm
+new global best: cost=0.004024, total base rise=0.0622 m, toe alignment rms=3.70 mm
+new global best: cost=0.004023, total base rise=0.0622 m, toe alignment rms=3.70 mm
+new global best: cost=0.004003, total base rise=0.0622 m, toe alignment rms=3.69 mm
+new global best: cost=0.003991, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003991, total base rise=0.0622 m, toe alignment rms=3.69 mm
+new global best: cost=0.003976, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.003975, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.003973, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003964, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003964, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003964, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.003957, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.003945, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003941, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.003938, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.003937, total base rise=0.0621 m, toe alignment rms=3.70 mm
+new global best: cost=0.003936, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003935, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003931, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003929, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003929, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003927, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003926, total base rise=0.0621 m, toe alignment rms=3.69 mm
+new global best: cost=0.003920, total base rise=0.0622 m, toe alignment rms=3.69 mm
+new global best: cost=0.003919, total base rise=0.0622 m, toe alignment rms=3.69 mm
+new global best: cost=0.003919, total base rise=0.0622 m, toe alignment rms=3.69 mm
+new global best: cost=0.003913, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003909, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003909, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003908, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003907, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003906, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003906, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003903, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003902, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003902, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003902, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003902, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003901, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003900, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003899, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003899, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003897, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003896, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003896, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003895, total base rise=0.0622 m, toe alignment rms=3.68 mm
+new global best: cost=0.003892, total base rise=0.0622 m, toe alignment rms=3.67 mm
+new global best: cost=0.003891, total base rise=0.0622 m, toe alignment rms=3.67 mm
+new global best: cost=0.003891, total base rise=0.0622 m, toe alignment rms=3.67 mm
+new global best: cost=0.003887, total base rise=0.0623 m, toe alignment rms=3.67 mm
+new global best: cost=0.003887, total base rise=0.0623 m, toe alignment rms=3.67 mm
+new global best: cost=0.003886, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003886, total base rise=0.0623 m, toe alignment rms=3.67 mm
+new global best: cost=0.003883, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+/home/aerodaas/miniconda3/envs/ssds/lib/python3.10/site-packages/cma/utilities/utils.py:372: UserWarning: 
+        geno-pheno transformation introduced based on the
+        current covariance matrix with condition 1.2e+12 -> 1.0e+00,
+        injected solutions become "invalid" in this iteration (time=Nov  5 16:13:11 2026 class=CMAEvolutionStrategy method=alleviate_conditioning iteration=550)
+  warnings.warn(msg + ' (time={}'.format(time.asctime()[4:]) +
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+new global best: cost=0.003882, total base rise=0.0623 m, toe alignment rms=3.66 mm
+Initial base height: 0.305000 m
+Maximum base height: 0.367311 m
+Total base rise: 0.062311 m
+Toe alignment RMS / maximum error: 0.003660 / 0.008211 m
+Toe alignment error before landing: 0.000543 m
+Positive mechanical work: 2.344631 J
+Valid jump: True; toe off-ground duration: 0.097000 s
+Cost: 0.003882
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-10_seed1/cpg
+Best gearbox: SSPG (cost=-0.018115)
+Complete.
+  Comparison: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-10_seed1/gearbox_comparison.csv
+  Best result: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_sspg_cpg/run_2026-11-05_15-27-10_seed1/best_overall.json

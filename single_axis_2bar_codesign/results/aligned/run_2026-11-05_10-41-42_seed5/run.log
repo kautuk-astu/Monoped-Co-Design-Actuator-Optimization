@@ -1,0 +1,26 @@
+Running test suite...
+test_compact_catalogue_filters_topology_and_sets_ratio_bounds (test_aligned_controller.AlignedControllerTests) ... ok
+test_fixed_candidate_qualifies_and_respects_applied_torque_limits (test_aligned_controller.AlignedControllerTests) ... ok
+test_t_gain_changes_aligned_stance_torque (test_aligned_controller.AlignedControllerTests) ... ok
+test_unavailable_sspg_request_uses_table_actual_ratio (test_aligned_controller.AlignedControllerTests) ... ok
+test_analytical_jacobian_matches_finite_difference (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_horizontal_feedback_has_correct_sign_and_virtual_work (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_vertical_ik_and_unreachable_rejection (test_aligned_controller.AlignedKinematicsTests) ... ok
+test_authors_objective_uses_height_and_total_energy (test_fixed_link_motor.FixedLinkMotorConfigurationTests) ... ok
+test_hardware_is_fixed_and_uses_sspg (test_fixed_link_motor.FixedLinkMotorConfigurationTests) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.141s
+
+OK
+Starting CMA-ES optimization...
+usage: optimize_aligned.py [-h] [--maxiter MAXITER] [--popsize POPSIZE]
+                           [--seed SEED]
+                           [--simulation-duration SIMULATION_DURATION]
+                           [--lambda-x LAMBDA_X]
+                           [--lambda-landing LAMBDA_LANDING]
+                           [--lambda-energy LAMBDA_ENERGY] --gearbox
+                           {SSPG,CPG,WPG,DSPG} --actuator-catalogue
+                           ACTUATOR_CATALOGUE --motor-config MOTOR_CONFIG
+                           [--output-dir OUTPUT_DIR]
+optimize_aligned.py: error: the following arguments are required: --gearbox, --actuator-catalogue, --motor-config

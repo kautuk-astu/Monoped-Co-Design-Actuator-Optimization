@@ -1,0 +1,6 @@
+Initial base height: 0.305000 m
+Maximum base height: 0.363491 m
+Total base rise: 0.058491 m
+Toe horizontal error RMS: 0.002641 m
+Valid jump: True
+Cost: 0.009246

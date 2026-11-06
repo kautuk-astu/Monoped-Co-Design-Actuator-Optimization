@@ -1,0 +1,27 @@
+(4_w,8)-aCMA-ES (mu_w=2.6,w_1=52%) in dimension 5 (seed=8, Thu Nov  5 16:20:03 2026)
+new global best: cost=0.081027, total base rise=0.0637 m, toe alignment rms=6.59 mm
+new global best: cost=0.043080, total base rise=0.0629 m, toe alignment rms=5.36 mm
+new global best: cost=0.026538, total base rise=0.0678 m, toe alignment rms=5.18 mm
+new global best: cost=0.024133, total base rise=0.0644 m, toe alignment rms=4.68 mm
+new global best: cost=0.008922, total base rise=0.0667 m, toe alignment rms=3.96 mm
+new global best: cost=0.007347, total base rise=0.0733 m, toe alignment rms=4.21 mm
+new global best: cost=0.006322, total base rise=0.0766 m, toe alignment rms=4.63 mm
+new global best: cost=0.006304, total base rise=0.0688 m, toe alignment rms=4.40 mm
+new global best: cost=0.004204, total base rise=0.0722 m, toe alignment rms=4.07 mm
+new global best: cost=0.003580, total base rise=0.0724 m, toe alignment rms=3.81 mm
+new global best: cost=0.003486, total base rise=0.0683 m, toe alignment rms=3.23 mm
+new global best: cost=0.003417, total base rise=0.0693 m, toe alignment rms=3.21 mm
+new global best: cost=-0.003437, total base rise=0.0654 m, toe alignment rms=3.05 mm
+NOTE (module=cma, iteration=835):  
+condition in coordinate system exceeded 1.0e+08, rescaled to 1.0e+00, 
+condition changed from 1.7e+09 to 7.8e+01
+Initial base height: 0.305000 m
+Maximum base height: 0.370427 m
+Total base rise: 0.065427 m
+Toe alignment RMS / maximum error: 0.003053 / 0.007959 m
+Toe alignment error before landing: -0.001510 m
+Positive mechanical work: 2.888193 J
+Valid jump: True; toe off-ground duration: 0.138000 s
+Cost: -0.003437
+
+Results: /mnt/aed86a51-14db-4f2b-b665-9c1d7eaf0504/aerodaas/cp214/Monoped-Co-Design-Actuator-Optimization/single_axis_2bar_codesign/results/aligned_four_gearboxes/run_2026-11-05_15-20-23_seed8/wpg
